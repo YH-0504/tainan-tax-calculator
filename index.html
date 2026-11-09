@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>台南看好房｜不動產售屋稅務與單價拆算系統 — 張英泓</title>
+  <title>永慶銘星｜不動產售屋稅務與單價拆算系統 — 張英泓</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Cinzel, Playfair Display, Noto Serif TC, Inter, Montserrat, Noto Sans TC -->
@@ -37,7 +37,7 @@
           boxShadow: {
             'luxury': '0 14px 40px -12px rgba(26, 26, 26, 0.05), 0 2px 8px -2px rgba(26, 26, 26, 0.02)',
             'luxury-hover': '0 20px 50px -12px rgba(26, 26, 26, 0.09), 0 4px 12px -2px rgba(26, 26, 26, 0.03)',
-            'hero': '0 24px 60px -15px rgba(26, 26, 26, 0.14)'
+            'hero': '0 24px 60px -15px rgba(26, 26, 26, 0.16)'
           }
         }
       }
@@ -62,7 +62,7 @@
     /* Subtle Hairline Borders */
     .luxury-card {
       background-color: #FFFFFF;
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.07);
       box-shadow: 0 14px 40px -12px rgba(26, 26, 26, 0.05), 0 2px 8px -2px rgba(26, 26, 26, 0.02);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -71,12 +71,12 @@
     .luxury-input-wrap {
       position: relative;
       background-color: #FAF9F7;
-      border-bottom: 1px solid rgba(26, 26, 26, 0.16);
+      border-bottom: 1px solid rgba(26, 26, 26, 0.18);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .luxury-input-wrap:hover {
       background-color: #F5F3EF;
-      border-bottom-color: rgba(26, 26, 26, 0.35);
+      border-bottom-color: rgba(26, 26, 26, 0.38);
     }
     .luxury-input-wrap:focus-within {
       background-color: #FFFFFF;
@@ -125,14 +125,14 @@
       background: #8E7D6B;
     }
 
-    /* Smooth Accordion & Tab Transitions */
-    .fade-enter {
-      animation: fadeSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* Step Page Transition */
+    .step-animate {
+      animation: stepFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    @keyframes fadeSlideIn {
+    @keyframes stepFadeIn {
       from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(8px);
       }
       to {
         opacity: 1;
@@ -140,7 +140,6 @@
       }
     }
 
-    /* Pulse indicator for live calculation */
     @keyframes subtlePulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.45; }
@@ -150,15 +149,16 @@
     }
   </style>
 </head>
-<body class="min-h-screen pb-16">
+<body class="min-h-screen flex flex-col justify-between bg-[#F9F9F8]">
 
-  <!-- Top Editorial Brand Bar -->
-  <header class="w-full border-b border-black/[0.06] bg-[#F9F9F8]/90 backdrop-blur-md sticky top-0 z-30">
-    <div class="max-w-[700px] mx-auto px-4 sm:px-5 py-3.5 flex items-center justify-between gap-2">
-      <!-- Brand Identity & Architectural Emblem -->
-      <div class="flex items-center gap-3">
+  <!-- =========================================================================
+       TOP EDITORIAL BRAND BAR (永慶銘星｜張英泓 + 隨時查閱圖解/法規按鈕)
+  ========================================================================== -->
+  <header class="w-full border-b border-black/[0.06] bg-[#F9F9F8]/95 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-[960px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-2">
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="restartWizard()" title="點擊回到第一頁">
         <div class="w-9 h-9 rounded-lg bg-obsidian text-white flex items-center justify-center shadow-sm border border-champagne/30 shrink-0">
-          <!-- Custom Geometric Architectural Monogram SVG -->
           <svg class="w-5 h-5 text-[#C5B8A8]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
             <path d="M16 3L6 10.5V28H26V10.5L16 3Z" stroke-linejoin="round"/>
             <path d="M16 3V28" stroke-opacity="0.6"/>
@@ -167,756 +167,1071 @@
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-serif text-xs sm:text-sm tracking-[0.2em] font-semibold text-obsidian uppercase">台南看好房</span>
+            <span class="font-serif text-xs sm:text-sm tracking-[0.2em] font-semibold text-obsidian uppercase">永慶銘星</span>
             <span class="hidden sm:inline-block text-[10px] text-champagne tracking-[0.15em] font-medium px-1.5 py-0.5 rounded bg-champagneSoft border border-champagne/20">PRIVÉ TAX ATELIER</span>
           </div>
-          <p class="text-[11px] text-mist tracking-[0.08em] mt-0.5">張英泓 <span class="mx-1 text-champagne/60">|</span> <a href="tel:0962062425" class="hover:text-obsidian transition-colors font-num">0962-062-425</a></p>
+          <p class="text-[11px] text-mist tracking-[0.08em] mt-0.5">張英泓 <span class="mx-1 text-champagne/60">|</span> <a href="tel:0962062425" onclick="event.stopPropagation()" class="hover:text-obsidian transition-colors font-num">0962-062-425</a></p>
         </div>
       </div>
 
-      <!-- Quick Reference Modal Triggers in Navbar -->
+      <!-- Quick Reference Modal Triggers (不影響試算進度) -->
       <div class="flex items-center gap-1.5">
         <button type="button" onclick="openReferenceModal('timeline')" class="group flex items-center gap-1 text-xs text-slateText hover:text-obsidian px-2.5 py-1.5 rounded-full border border-black/[0.08] hover:border-champagne bg-white transition-all shadow-2xs">
           <svg class="w-3.5 h-3.5 text-champagne" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <span class="hidden sm:inline tracking-wider font-medium">新舊制圖解</span>
+          <span class=" tracking-wider font-medium">新舊制圖解</span>
         </button>
         <button type="button" onclick="openReferenceModal('tainan')" class="group flex items-center gap-1.5 text-xs text-obsidian px-3 py-1.5 rounded-full border border-champagne/40 hover:border-obsidian bg-champagneSoft/80 hover:bg-white transition-all shadow-2xs">
           <svg class="w-3.5 h-3.5 text-champagneDark group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
-          <span class="tracking-wider font-medium">稅務名詞與法規速查</span>
+          <span class="tracking-wider font-medium">法規與名詞速查</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Container (Centered Luxury Form Layout: max-w-[700px]) -->
-  <main class="max-w-[700px] mx-auto px-4 sm:px-6 pt-8 sm:pt-11 space-y-7">
+  <!-- =========================================================================
+       MAIN WIZARD CONTAINER (單頁式跳頁表單・無須長篇滾動)
+  ========================================================================== -->
+  <main class="flex-1 w-full max-w-[920px] mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col justify-center">
 
-    <!-- Editorial Title Section -->
-    <section class="text-center space-y-3 px-2">
-      <p class="font-serif text-[11px] tracking-[0.28em] uppercase text-champagne font-medium">Real Estate Tax &amp; Unit Price Valuation</p>
-      <h1 class="font-serif text-2xl sm:text-3xl font-semibold text-obsidian tracking-[0.08em] leading-snug">
-        現在賣房・稅金與實價拆算系統
-      </h1>
-      <div class="w-10 h-[1px] bg-champagne/60 mx-auto my-2"></div>
-      <p class="text-xs sm:text-sm text-slateText font-light tracking-wide max-w-lg mx-auto leading-relaxed">
-        輸入成交總價、坪數或現值，系統即刻自動判別「舊制財產交易所得稅」或「新制房地合一稅」，並同步完成車位拆算與豪宅門檻檢核。
-      </p>
-    </section>
-
-    <!-- MODULE 1: Acquisition Timeline & Regime Selector (取得時間軸與制度切換 + 右上角雙速查按鈕) -->
-    <section class="luxury-card rounded-2xl p-6 sm:p-8 space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/[0.06] pb-4">
-        <div>
-          <span class="text-[10px] font-serif uppercase tracking-[0.22em] text-champagne block">Step 01 — Regime Selection</span>
-          <h2 class="font-serif text-lg font-medium text-obsidian tracking-wider mt-0.5">選擇不動產「取得時間」</h2>
-        </div>
-
-        <!-- Top-Right Dual Reference Buttons (不影響試算之獨立查閱彈窗) -->
-        <div class="flex flex-wrap items-center gap-2">
-          <button type="button" onclick="openReferenceModal('timeline')"
-            class="text-xs text-slateText hover:text-obsidian px-3 py-1.5 rounded-lg border border-black/[0.08] hover:border-champagne bg-[#FAF9F7] hover:bg-white flex items-center gap-1.5 transition-all shadow-2xs">
-            <svg class="w-3.5 h-3.5 text-champagne" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="font-medium tracking-wide">新舊制時間軸圖解</span>
-          </button>
-
-          <button type="button" onclick="openReferenceModal('tainan')"
-            class="text-xs text-obsidian px-3 py-1.5 rounded-lg border border-champagne/40 hover:border-obsidian bg-champagneSoft/70 hover:bg-champagneSoft flex items-center gap-1.5 transition-all shadow-2xs">
-            <svg class="w-3.5 h-3.5 text-champagneDark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-            <span class="font-medium tracking-wide">售屋稅務名詞與法規速查</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 3-Stage Interactive Timeline Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" role="radiogroup" aria-label="取得時間與課稅制度">
-        <!-- Mode 1: Pre 101/8/1 (Standard Assessment) -->
-        <button type="button" id="btn-regime-standard" onclick="setRegime('standard')"
-          class="regime-btn text-left p-4 rounded-xl border transition-all relative overflow-hidden group">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[10px] tracking-[0.12em] font-medium px-2 py-0.5 rounded bg-champagneSoft text-champagneDark">舊制・財產交易所得</span>
-            <span class="w-2 h-2 rounded-full regime-indicator"></span>
-          </div>
-          <div class="font-serif text-base font-semibold text-obsidian tracking-wide">標準認定</div>
-          <div class="text-xs font-num text-slateText mt-1">101 / 08 / 01 以前取得</div>
-          <div class="text-[11px] text-mist mt-2 pt-2 border-t border-black/[0.05] leading-relaxed">
-            實價登錄上路前取得，區分「非豪宅」與「豪宅」公式，併入個人綜所稅。
-          </div>
-        </button>
-
-        <!-- Mode 2: 101/8/1 ~ 104/12/31 (Actual Cost Assessment) -->
-        <button type="button" id="btn-regime-actual" onclick="setRegime('actual')"
-          class="regime-btn text-left p-4 rounded-xl border transition-all relative overflow-hidden group">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[10px] tracking-[0.12em] font-medium px-2 py-0.5 rounded bg-champagneSoft text-champagneDark">舊制・財產交易所得</span>
-            <span class="w-2 h-2 rounded-full regime-indicator"></span>
-          </div>
-          <div class="font-serif text-base font-semibold text-obsidian tracking-wide">核實認定</div>
-          <div class="text-xs font-num text-slateText mt-1">101/08/01 – 104/12/31</div>
-          <div class="text-[11px] text-mist mt-2 pt-2 border-t border-black/[0.05] leading-relaxed">
-            實價登錄後、房地合一前取得，依實際買賣差價乘以房地比，併入綜所稅。
-          </div>
-        </button>
-
-        <!-- Mode 3: Post 105/1/1 (House & Land Transactions Income Tax 2.0/3.0) -->
-        <button type="button" id="btn-regime-new" onclick="setRegime('new')"
-          class="regime-btn text-left p-4 rounded-xl border transition-all relative overflow-hidden group">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[10px] tracking-[0.12em] font-medium px-2 py-0.5 rounded bg-obsidian text-white">新制・分離課稅</span>
-            <span class="w-2 h-2 rounded-full regime-indicator"></span>
-          </div>
-          <div class="font-serif text-base font-semibold text-obsidian tracking-wide">房地合一稅</div>
-          <div class="text-xs font-num text-slateText mt-1">105 / 01 / 01 以後取得</div>
-          <div class="text-[11px] text-mist mt-2 pt-2 border-t border-black/[0.05] leading-relaxed">
-            房地合一上路後取得，扣除成本、費用與土增數額，依持有期間分離課稅。
-          </div>
-        </button>
-      </div>
-
-      <!-- Active Regime Formula Banner -->
-      <div id="active-formula-banner" class="rounded-xl bg-[#FAF8F5] border border-champagne/25 px-4 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div class="space-y-0.5">
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-champagne live-dot"></span>
-            <span id="banner-regime-title" class="text-xs font-medium text-champagneDark tracking-wider">目前適用公式</span>
-          </div>
-          <p id="banner-formula-text" class="text-xs sm:text-sm font-medium text-obsidian tracking-wide font-serif">
-            房屋評定現值 × 行政區核定稅率 ＝ 財產交易所得（併入個人綜合所得稅課稅）
-          </p>
-        </div>
-        <span id="banner-tax-method" class="self-start sm:self-center shrink-0 text-[11px] px-2.5 py-1 rounded-full bg-white border border-black/[0.08] text-slateText font-medium">
-          隔年5月併入綜所稅申報
+    <!-- WIZARD STEP PROGRESS BAR -->
+    <div class="mb-6">
+      <div class="flex items-center justify-between text-xs text-mist mb-2 px-1">
+        <span id="wizard-progress-label" class="font-serif tracking-[0.18em] uppercase text-champagne font-semibold">STEP 01 / 04 — 選擇取得時間與稅制</span>
+        <span id="wizard-regime-pill" class="text-[11px] px-2.5 py-0.5 rounded-full bg-champagneSoft text-champagneDark font-medium border border-champagne/20">
+          標準認定（101/8/1 以前）
         </span>
       </div>
-    </section>
+      <!-- Dynamic Step Dots Bar -->
+      <div id="wizard-progress-bars" class="grid grid-cols-4 gap-2">
+        <div class="h-1.5 rounded-full bg-obsidian transition-all"></div>
+        <div class="h-1.5 rounded-full bg-black/10 transition-all"></div>
+        <div class="h-1.5 rounded-full bg-black/10 transition-all"></div>
+        <div class="h-1.5 rounded-full bg-black/10 transition-all"></div>
+      </div>
+    </div>
 
-    <!-- MODULE 2: Core Valuation & Unit Price Split (售價與單坪拆算 / 豪宅門檻自動判別) -->
-    <section class="luxury-card rounded-2xl p-6 sm:p-8 space-y-6">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-black/[0.06] pb-4">
+    <!-- =======================================================================
+         PAGE 1 (STEP 1): 選擇不動產「取得時間與適用稅制」
+    ======================================================================== -->
+    <section id="page-step-1" class="wizard-page luxury-card rounded-2xl p-6 sm:p-9 step-animate">
+      <div class="border-b border-black/[0.06] pb-5 mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          <span class="text-[10px] font-serif uppercase tracking-[0.22em] text-champagne block">Step 02 — Valuation &amp; Unit Split</span>
-          <h2 class="font-serif text-lg font-medium text-obsidian tracking-wider mt-0.5">成交總價與實價單坪拆算</h2>
+          <span class="text-[11px] font-serif uppercase tracking-[0.24em] text-champagne block">Step 01 — Tax Regime Selection</span>
+          <h1 class="font-serif text-xl sm:text-2xl font-semibold text-obsidian tracking-wider mt-1">
+            請選擇不動產「取得時間」與課稅制度
+          </h1>
         </div>
-        <!-- Luxury Threshold Status Pill (Opens Reference Modal at 'luxury' tab) -->
-        <button type="button" onclick="openReferenceModal('luxury')" id="luxury-status-badge"
-          class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border transition-all">
-          <span class="w-2 h-2 rounded-full bg-successMuted"></span>
-          <span>未達豪宅門檻（點此看標準）</span>
+        <p class="text-xs text-mist">點選下方任一制度卡片後，點擊右下角「下一步」繼續</p>
+      </div>
+
+      <!-- 3 Selectable Luxury Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <!-- Option 1: 標準認定 -->
+        <button type="button" id="card-regime-standard" onclick="selectRegimeOnStep1('standard')"
+          class="text-left p-5 sm:p-6 rounded-2xl border-2 transition-all flex flex-col justify-between group relative">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] tracking-wider font-medium px-2.5 py-0.5 rounded-full bg-champagneSoft text-champagneDark">舊制・財產交易所得</span>
+              <span id="dot-regime-standard" class="w-3 h-3 rounded-full border-2 border-obsidian bg-obsidian"></span>
+            </div>
+            <div class="font-serif text-lg sm:text-xl font-semibold text-obsidian tracking-wide">標準認定</div>
+            <div class="text-xs font-num font-medium text-champagneDark mt-1">101 / 08 / 01 以前取得</div>
+            <p class="text-xs text-slateText mt-3 leading-relaxed">
+              實價登錄上路前取得。下一步將先協助您檢核是否達「豪宅門檻」，再依非豪宅或豪宅公式試算。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-black/[0.06] text-[11px] text-mist font-num">
+            ▸ 非豪宅：房屋現值 × 核定稅率<br>
+            ▸ 豪宅：售價 × 房地比 × 20%
+          </div>
+        </button>
+
+        <!-- Option 2: 核實認定 -->
+        <button type="button" id="card-regime-actual" onclick="selectRegimeOnStep1('actual')"
+          class="text-left p-5 sm:p-6 rounded-2xl border transition-all flex flex-col justify-between group relative">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] tracking-wider font-medium px-2.5 py-0.5 rounded-full bg-champagneSoft text-champagneDark">舊制・財產交易所得</span>
+              <span id="dot-regime-actual" class="w-3 h-3 rounded-full border border-black/25 bg-transparent"></span>
+            </div>
+            <div class="font-serif text-lg sm:text-xl font-semibold text-obsidian tracking-wide">核實認定</div>
+            <div class="text-xs font-num font-medium text-champagneDark mt-1">101/08/01 ～ 104/12/31 取得</div>
+            <p class="text-xs text-slateText mt-3 leading-relaxed">
+              實價登錄上路後、房地合一前取得。依實際買賣差價（售價減成本與費用）乘以房地比計算獲利。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-black/[0.06] text-[11px] text-mist font-num">
+            ▸ 公式：(售價－成本－費用) × 房地比
+          </div>
+        </button>
+
+        <!-- Option 3: 房地合一稅 -->
+        <button type="button" id="card-regime-new" onclick="selectRegimeOnStep1('new')"
+          class="text-left p-5 sm:p-6 rounded-2xl border transition-all flex flex-col justify-between group relative">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] tracking-wider font-medium px-2.5 py-0.5 rounded-full bg-obsidian text-white">新制・分離課稅</span>
+              <span id="dot-regime-new" class="w-3 h-3 rounded-full border border-black/25 bg-transparent"></span>
+            </div>
+            <div class="font-serif text-lg sm:text-xl font-semibold text-obsidian tracking-wide">房地合一稅 3.0</div>
+            <div class="text-xs font-num font-medium text-champagneDark mt-1">105 / 01 / 01 以後取得</div>
+            <p class="text-xs text-slateText mt-3 leading-relaxed">
+              房地合一上路後取得。扣除成本、移轉費用與土地漲價數額後，依持有期間稅率或自住優惠分離課稅。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-black/[0.06] text-[11px] text-mist font-num">
+            ▸ 公式：(售價－成本－費用－土增數額) × 稅率
+          </div>
         </button>
       </div>
 
-      <!-- Primary Row: Sale Price & Region Threshold Selector -->
-      <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
-        <!-- Total Sale Price Input -->
-        <div class="sm:col-span-7 space-y-1.5">
-          <div class="flex items-center justify-between">
-            <label for="input-sale-price" class="text-xs font-medium text-slateText tracking-wider">
-              預計成交總價（含車位）
-            </label>
-            <span id="sale-price-ntd-hint" class="text-[11px] font-num text-mist">NT$ 25,800,000</span>
-          </div>
+      <!-- Step 1 Footer Navigation -->
+      <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+        <button type="button" onclick="openReferenceModal('timeline')" class="text-xs text-slateText hover:text-obsidian underline underline-offset-4">
+          不確定選哪一個？點此看新舊制時間軸圖解
+        </button>
+        <button type="button" onclick="goNextFromStep1()"
+          class="px-7 py-3.5 rounded-xl bg-obsidian hover:bg-obsidian/90 active:scale-[0.99] text-white text-sm font-medium tracking-wider transition-all flex items-center gap-2 shadow-md">
+          <span>下一步：進入資料填寫</span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         PAGE 2A (STEP 2A - 標準認定專用): 豪宅門檻判定（全部選填）
+    ======================================================================== -->
+    <section id="page-step-2a" class="wizard-page hidden luxury-card rounded-2xl p-6 sm:p-9 step-animate">
+      <div class="border-b border-black/[0.06] pb-4 mb-6 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="text-[11px] font-serif uppercase tracking-[0.24em] text-champagne block">Step 02 — Luxury Threshold Check</span>
+          <h2 class="font-serif text-xl sm:text-2xl font-semibold text-obsidian tracking-wider mt-1">
+            標準認定・判定是否為「豪宅」（選填即可）
+          </h2>
+        </div>
+        <span class="text-xs px-3 py-1 rounded-full bg-[#FAF8F5] border border-champagne/30 text-champagneDark font-medium">
+          以下欄位皆為選填，未填寫預設為 0
+        </span>
+      </div>
+
+      <!-- Formula Banner on Page -->
+      <div class="rounded-xl bg-[#FAF8F5] border border-champagne/30 p-4 mb-6 space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-champagneDark tracking-wider">【舊制豪宅認定公式與標準】</span>
+          <button type="button" onclick="openReferenceModal('luxury')" class="text-xs text-obsidian underline">查看各縣市完整門檻表 (?)</button>
+        </div>
+        <p class="text-xs sm:text-sm font-serif text-obsidian">
+          不含車位每坪單價 ＝ (成交總價 － 車位總價) ÷ (房屋登記總坪數 － 車位坪數)
+        </p>
+        <p class="text-[11px] text-slateText">
+          ＊只要「含車位總成交價」或「不含車位每坪單價」<strong>擇一達到縣市門檻</strong>，即認定為豪宅。若確定未達標，也可不填直接按送出。
+        </p>
+      </div>
+
+      <!-- Optional Input Fields Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 mb-6">
+        <!-- 1. 總價(含車) -->
+        <div class="sm:col-span-6 space-y-1.5">
+          <label class="text-xs font-medium text-slateText tracking-wider flex justify-between">
+            <span>1. 總價（含車位，選填）</span>
+            <span id="s2a-price-hint" class="font-num text-[11px] text-mist">選填</span>
+          </label>
           <div class="luxury-input-wrap rounded-t-lg px-4 py-3 flex items-baseline justify-between">
-            <input type="number" id="input-sale-price" value="2580" step="10" min="0"
-              oninput="handleLiveInput()"
-              class="w-full bg-transparent text-2xl sm:text-3xl font-num font-semibold text-obsidian focus:outline-none"
-              placeholder="0" />
+            <input type="number" id="s2a-sale-price" placeholder="例如：2580（未填視同未達標）" step="10" min="0"
+              oninput="syncSalePrice('s2a')"
+              class="w-full bg-transparent text-xl sm:text-2xl font-num font-semibold text-obsidian focus:outline-none" />
             <span class="text-xs font-medium text-slateText ml-2 shrink-0">萬元</span>
           </div>
         </div>
 
-        <!-- County / Luxury Threshold Region Selector -->
-        <div class="sm:col-span-5 space-y-1.5">
-          <div class="flex items-center justify-between">
-            <label for="select-region" class="text-xs font-medium text-slateText tracking-wider">
-              縣市豪宅認定門檻區
-            </label>
-            <button type="button" onclick="openReferenceModal('luxury')" class="text-[11px] text-champagne hover:text-obsidian underline transition-colors">門檻說明 (?)</button>
-          </div>
+        <!-- 2. 縣市豪宅認定門檻區 -->
+        <div class="sm:col-span-6 space-y-1.5">
+          <label class="text-xs font-medium text-slateText tracking-wider block">
+            2. 選取縣市豪宅認定門檻區
+          </label>
           <div class="luxury-input-wrap rounded-t-lg px-3.5 py-3.5 flex items-center">
-            <select id="select-region" onchange="handleLiveInput()"
+            <select id="s2a-region" onchange="updateStep2ALive()"
               class="w-full bg-transparent text-sm font-medium text-obsidian focus:outline-none cursor-pointer">
-              <option value="tainan_major" selected>臺南/桃竹中高（≥3,000萬 或 單坪≥50萬）</option>
-              <option value="taipei">臺北市（≥6,000萬 或 單坪≥120萬）</option>
-              <option value="new_taipei">新北市（≥4,000萬 或 單坪≥75萬）</option>
-              <option value="other">其他地區（≥2,200萬 或 單坪≥35萬）</option>
+              <option value="tainan_major" selected>桃園/新竹/臺中/臺南/高雄（總價≥3,000萬 或 單坪≥50萬）</option>
+              <option value="taipei">臺北市（總價≥6,000萬 或 單坪≥120萬）</option>
+              <option value="new_taipei">新北市（總價≥4,000萬 或 單坪≥75萬）</option>
+              <option value="other">其他地區（總價≥2,200萬 或 單坪≥35萬）</option>
             </select>
           </div>
         </div>
+
+        <!-- 3. 總坪 -->
+        <div class="sm:col-span-4 space-y-1.5">
+          <label class="text-xs font-medium text-slateText tracking-wider block">3. 總坪數（含車位，選填）</label>
+          <div class="luxury-input-wrap rounded-t-lg px-4 py-2.5 flex items-baseline justify-between">
+            <input type="number" id="s2a-total-ping" placeholder="例如：58.5" step="0.1" min="0"
+              oninput="updateStep2ALive()"
+              class="w-full bg-transparent text-lg font-num font-semibold text-obsidian focus:outline-none" />
+            <span class="text-xs text-mist ml-2 shrink-0">坪</span>
+          </div>
+        </div>
+
+        <!-- 4. 車位總價 -->
+        <div class="sm:col-span-4 space-y-1.5">
+          <label class="text-xs font-medium text-slateText tracking-wider block">4. 車位總價（選填）</label>
+          <div class="luxury-input-wrap rounded-t-lg px-4 py-2.5 flex items-baseline justify-between">
+            <input type="number" id="s2a-parking-price" placeholder="例如：180" step="5" min="0"
+              oninput="updateStep2ALive()"
+              class="w-full bg-transparent text-lg font-num font-semibold text-obsidian focus:outline-none" />
+            <span class="text-xs text-mist ml-2 shrink-0">萬元</span>
+          </div>
+        </div>
+
+        <!-- 5. 車位坪數 -->
+        <div class="sm:col-span-4 space-y-1.5">
+          <label class="text-xs font-medium text-slateText tracking-wider block">5. 車位坪數（選填）</label>
+          <div class="luxury-input-wrap rounded-t-lg px-4 py-2.5 flex items-baseline justify-between">
+            <input type="number" id="s2a-parking-ping" placeholder="例如：10.2" step="0.1" min="0"
+              oninput="updateStep2ALive()"
+              class="w-full bg-transparent text-lg font-num font-semibold text-obsidian focus:outline-none" />
+            <span class="text-xs text-mist ml-2 shrink-0">坪</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Unit Price Split Panel (坪數與車位拆算器) -->
-      <div class="rounded-xl bg-[#FAF9F7] border border-black/[0.05] p-4 sm:p-5 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-serif font-semibold tracking-wider text-obsidian">實價單坪拆算（扣除車位）</span>
-            <span class="text-[11px] text-mist hidden sm:inline">— 自動檢核是否突破豪宅「單坪門檻」</span>
-          </div>
-          <!-- Live Unit Price Mini Display -->
-          <div class="flex items-baseline gap-1.5 bg-white px-3 py-1 rounded-lg border border-black/[0.06] shadow-2xs">
-            <span class="text-[11px] text-mist">拆算單坪：</span>
-            <span id="live-unit-price-badge" class="font-num text-sm sm:text-base font-semibold text-obsidian">48.00</span>
-            <span class="text-[11px] text-slateText">萬/坪</span>
-          </div>
+      <!-- Live Unit Split Preview Strip -->
+      <div class="rounded-xl bg-[#FAF9F7] border border-black/[0.06] p-4 mb-7 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-4 text-xs text-slateText">
+          <span>不含車位淨房價：<strong id="s2a-net-price" class="font-num text-obsidian">0.0</strong> 萬</span>
+          <span>不含車位淨建坪：<strong id="s2a-net-ping" class="font-num text-obsidian">0.00</strong> 坪</span>
+          <span>拆算單坪價格：<strong id="s2a-unit-price" class="font-num text-base text-obsidian">0.00</strong> 萬/坪</span>
         </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-          <!-- Total Area (Ping) -->
-          <div class="space-y-1">
-            <label for="input-total-ping" class="text-[11px] text-slateText tracking-wide block">權狀登記總坪數（含車位）</label>
-            <div class="luxury-input-wrap bg-white rounded-t px-3 py-2 flex items-baseline justify-between">
-              <input type="number" id="input-total-ping" value="60" step="0.1" min="0"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-lg font-num font-medium text-obsidian focus:outline-none" placeholder="0.0" />
-              <span class="text-xs text-mist ml-1 shrink-0">坪</span>
-            </div>
-          </div>
-
-          <!-- Parking Price -->
-          <div class="space-y-1">
-            <label for="input-parking-price" class="text-[11px] text-slateText tracking-wide block">車位總價（無車位填 0）</label>
-            <div class="luxury-input-wrap bg-white rounded-t px-3 py-2 flex items-baseline justify-between">
-              <input type="number" id="input-parking-price" value="180" step="5" min="0"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-lg font-num font-medium text-obsidian focus:outline-none" placeholder="0" />
-              <span class="text-xs text-mist ml-1 shrink-0">萬元</span>
-            </div>
-          </div>
-
-          <!-- Parking Area (Ping) -->
-          <div class="space-y-1">
-            <label for="input-parking-ping" class="text-[11px] text-slateText tracking-wide block">車位登記坪數（無車位填 0）</label>
-            <div class="luxury-input-wrap bg-white rounded-t px-3 py-2 flex items-baseline justify-between">
-              <input type="number" id="input-parking-ping" value="10" step="0.1" min="0"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-lg font-num font-medium text-obsidian focus:outline-none" placeholder="0.0" />
-              <span class="text-xs text-mist ml-1 shrink-0">坪</span>
-            </div>
-          </div>
+        <div id="s2a-live-verdict-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-[#EAF4EF] text-[#2E624A]">
+          目前預判：非豪宅
         </div>
+      </div>
 
-        <!-- Split Summary Bar -->
-        <div class="pt-2 border-t border-black/[0.05] flex flex-wrap items-center justify-between gap-2 text-xs text-slateText">
-          <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span>不含車位房價：<strong id="summary-net-price" class="font-num text-obsidian">2,400.0</strong> 萬</span>
-            <span>不含車位建坪：<strong id="summary-net-ping" class="font-num text-obsidian">50.00</strong> 坪</span>
-          </div>
-          <div id="luxury-reason-text" class="text-[11px] text-champagneDark font-medium">
-            總價未滿 3,000 萬 且 單坪未滿 50 萬 → 認定為「非豪宅」
-          </div>
-        </div>
+      <!-- Step 2A Footer Navigation -->
+      <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+        <button type="button" onclick="goToStep(1)"
+          class="px-5 py-3 rounded-xl border border-black/[0.12] hover:border-obsidian text-slateText hover:text-obsidian text-xs sm:text-sm font-medium tracking-wider transition-all">
+          ← 上一步（重選稅制）
+        </button>
+        <button type="button" onclick="submitLuxuryCheck()"
+          class="px-7 py-3.5 rounded-xl bg-obsidian hover:bg-obsidian/90 active:scale-[0.99] text-white text-sm font-medium tracking-wider transition-all flex items-center gap-2 shadow-md">
+          <span>送出判定並進入下一步</span>
+          <span>→</span>
+        </button>
       </div>
     </section>
 
-    <!-- MODULE 3: Dynamic Tax Parameters by Regime (依制度動態切換之稅務參數) -->
-    <section class="luxury-card rounded-2xl p-6 sm:p-8 space-y-6">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-black/[0.06] pb-4">
+    <!-- =======================================================================
+         PAGE 3A (STEP 3A - 標準認定資料填寫): 依「非豪宅」或「豪宅」動態顯示
+    ======================================================================== -->
+    <section id="page-step-3a" class="wizard-page hidden luxury-card rounded-2xl p-6 sm:p-9 step-animate">
+      <!-- Header with Manual Switcher Pill -->
+      <div class="border-b border-black/[0.06] pb-4 mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <span class="text-[10px] font-serif uppercase tracking-[0.22em] text-champagne block">Step 03 — Tax Parameters</span>
-          <h2 id="step3-heading" class="font-serif text-lg font-medium text-obsidian tracking-wider mt-0.5">課稅參數與成本費用設定</h2>
+          <span class="text-[11px] font-serif uppercase tracking-[0.24em] text-champagne block">Step 03 — Standard Assessment Data</span>
+          <h2 id="s3a-title" class="font-serif text-xl sm:text-2xl font-semibold text-obsidian tracking-wider mt-1">
+            標準認定（非豪宅）・填寫課稅資料
+          </h2>
         </div>
-        <!-- Quick Demo Presets & Reference Button -->
-        <div class="flex flex-wrap items-center gap-1.5">
-          <button type="button" onclick="loadPreset('standard_normal')" class="text-[11px] px-2.5 py-1 rounded border border-black/[0.08] hover:border-champagne text-slateText hover:text-obsidian transition-colors">
-            範例：舊制非豪宅
+        <!-- Toggle in case user wants to switch between 非豪宅 & 豪宅 directly -->
+        <div class="inline-flex rounded-lg bg-[#FAF9F7] p-1 border border-black/[0.08]">
+          <button type="button" id="s3a-switch-normal" onclick="setStandardCategory('normal')"
+            class="px-3 py-1.5 rounded-md text-xs font-medium transition-all">
+            非豪宅公式
           </button>
-          <button type="button" onclick="loadPreset('standard_luxury')" class="text-[11px] px-2.5 py-1 rounded border border-black/[0.08] hover:border-champagne text-slateText hover:text-obsidian transition-colors">
-            範例：舊制豪宅
-          </button>
-          <button type="button" onclick="loadPreset('new_self')" class="text-[11px] px-2.5 py-1 rounded border border-black/[0.08] hover:border-champagne text-slateText hover:text-obsidian transition-colors">
-            範例：房地合一自住
+          <button type="button" id="s3a-switch-luxury" onclick="setStandardCategory('luxury')"
+            class="px-3 py-1.5 rounded-md text-xs font-medium transition-all">
+            豪宅公式
           </button>
         </div>
       </div>
 
-      <!-- SUB-PANEL A: Standard Regime Mode Selector (101/8/1 以前：非豪宅 vs 豪宅切換) -->
-      <div id="panel-standard-mode" class="space-y-5 fade-enter">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-champagneSoft/60 border border-champagne/20">
+      <!-- Two-Column Layout: Left = Formula + Inputs | Right = Contextual Glossary -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-7">
+
+        <!-- LEFT COLUMN (7 cols): Formula Banner + Inputs -->
+        <div class="lg:col-span-7 space-y-5">
+
+          <!-- CASE 1: 非豪宅 (房屋評定現值 + 核定稅率) -->
+          <div id="s3a-form-normal" class="space-y-5">
+            <!-- Formula Box -->
+            <div class="rounded-xl bg-[#FAF8F5] border border-champagne/30 p-4 space-y-1">
+              <span class="text-[11px] font-semibold text-champagneDark tracking-wider">【本頁適用公式：標準認定－非豪宅】</span>
+              <p class="text-sm sm:text-base font-serif font-semibold text-obsidian">
+                房屋評定現值 × 行政區核定稅率 ＝ 課稅獲利
+              </p>
+              <p class="text-[11px] text-mist">（此獲利將併入個人綜合所得稅課稅）</p>
+            </div>
+
+            <!-- Input 1: 房屋評定現值 -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-medium text-obsidian tracking-wider">1. 房屋評定現值（萬元）</label>
+                <span id="s3a-normal-house-ntd" class="text-[11px] font-num text-mist">NT$ 800,000 元</span>
+              </div>
+              <div class="luxury-input-wrap rounded-t-lg px-4 py-3 flex items-baseline justify-between">
+                <input type="number" id="s3a-normal-house" value="80" step="1" min="0"
+                  oninput="syncField('houseAssessed', this.value)"
+                  class="w-full bg-transparent text-2xl font-num font-semibold text-obsidian focus:outline-none" placeholder="例如：80" />
+                <span class="text-xs font-medium text-slateText ml-2 shrink-0">萬元</span>
+              </div>
+            </div>
+
+            <!-- Input 2: 核定稅率 (下拉選單 + 數值) -->
+            <div class="space-y-2">
+              <label class="text-xs font-medium text-obsidian tracking-wider block">2. 核定稅率（臺南市 37 行政區下拉選單）</label>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-3">
+                <select id="s3a-district-select" onchange="onDistrictChange()"
+                  class="w-full bg-transparent text-sm font-medium text-obsidian focus:outline-none cursor-pointer">
+                  <optgroup label="① 核定稅率 32%">
+                    <option value="32" data-name="東區" selected>東區 — 房屋評定現值 × 32%</option>
+                  </optgroup>
+                  <optgroup label="② 核定稅率 30%">
+                    <option value="30" data-name="安南區">安南區 — 房屋評定現值 × 30%</option>
+                    <option value="30" data-name="北區">北區 — 房屋評定現值 × 30%</option>
+                    <option value="30" data-name="中西區">中西區 — 房屋評定現值 × 30%</option>
+                    <option value="30" data-name="安平區">安平區 — 房屋評定現值 × 30%</option>
+                  </optgroup>
+                  <optgroup label="③ 核定稅率 28%">
+                    <option value="28" data-name="永康區">永康區 — 房屋評定現值 × 28%</option>
+                    <option value="28" data-name="南區">南區 — 房屋評定現值 × 28%</option>
+                  </optgroup>
+                  <optgroup label="④ 核定稅率 26%">
+                    <option value="26" data-name="善化區">善化區 — 房屋評定現值 × 26%</option>
+                    <option value="26" data-name="新市區">新市區 — 房屋評定現值 × 26%</option>
+                  </optgroup>
+                  <optgroup label="⑤ 核定稅率 25%">
+                    <option value="25" data-name="歸仁區">歸仁區 — 房屋評定現值 × 25%</option>
+                    <option value="25" data-name="仁德區">仁德區 — 房屋評定現值 × 25%</option>
+                  </optgroup>
+                  <optgroup label="⑥ 核定稅率 24%">
+                    <option value="24" data-name="安定區">安定區 — 房屋評定現值 × 24%</option>
+                  </optgroup>
+                  <optgroup label="⑦ 核定稅率 21%">
+                    <option value="21" data-name="新營區">新營區 — 房屋評定現值 × 21%</option>
+                  </optgroup>
+                  <optgroup label="⑧ 核定稅率 20%">
+                    <option value="20" data-name="官田區">官田區 — 房屋評定現值 × 20%</option>
+                    <option value="20" data-name="西港區">西港區 — 房屋評定現值 × 20%</option>
+                  </optgroup>
+                  <optgroup label="⑨ 核定稅率 19%">
+                    <option value="19" data-name="麻豆區">麻豆區 — 房屋評定現值 × 19%</option>
+                    <option value="19" data-name="新化區">新化區 — 房屋評定現值 × 19%</option>
+                  </optgroup>
+                  <optgroup label="⑩ 核定稅率 18%">
+                    <option value="18" data-name="柳營區">柳營區 — 房屋評定現值 × 18%</option>
+                    <option value="18" data-name="佳里區">佳里區 — 房屋評定現值 × 18%</option>
+                  </optgroup>
+                  <optgroup label="⑪ 核定稅率 17%">
+                    <option value="17" data-name="關廟區">關廟區 — 房屋評定現值 × 17%</option>
+                  </optgroup>
+                  <optgroup label="⑫ 核定稅率 16%">
+                    <option value="16" data-name="鹽水區">鹽水區 — 房屋評定現值 × 16%</option>
+                    <option value="16" data-name="學甲區">學甲區 — 房屋評定現值 × 16%</option>
+                  </optgroup>
+                  <optgroup label="⑬ 核定稅率 15%">
+                    <option value="15" data-name="六甲區">六甲區 — 房屋評定現值 × 15%</option>
+                  </optgroup>
+                  <optgroup label="⑭ 核定稅率 14%">
+                    <option value="14" data-name="玉井區">玉井區 — 房屋評定現值 × 14%</option>
+                  </optgroup>
+                  <optgroup label="⑮ 核定稅率 12%">
+                    <option value="12" data-name="白河區">白河區 — 房屋評定現值 × 12%</option>
+                    <option value="12" data-name="後壁區">後壁區 — 房屋評定現值 × 12%</option>
+                    <option value="12" data-name="東山區">東山區 — 房屋評定現值 × 12%</option>
+                    <option value="12" data-name="下營區">下營區 — 房屋評定現值 × 12%</option>
+                    <option value="12" data-name="山上區">山上區 — 房屋評定現值 × 12%</option>
+                  </optgroup>
+                  <optgroup label="⑯ 核定稅率 11%">
+                    <option value="11" data-name="將軍區">將軍區 — 房屋評定現值 × 11%</option>
+                    <option value="11" data-name="七股區">七股區 — 房屋評定現值 × 11%</option>
+                  </optgroup>
+                  <optgroup label="⑰ 核定稅率 8%">
+                    <option value="8" data-name="龍崎區">龍崎區 — 房屋評定現值 × 8%</option>
+                    <option value="8" data-name="北門區">北門區 — 房屋評定現值 × 8%</option>
+                    <option value="8" data-name="左鎮區">左鎮區 — 房屋評定現值 × 8%</option>
+                    <option value="8" data-name="大內區">大內區 — 房屋評定現值 × 8%</option>
+                    <option value="8" data-name="楠西區">楠西區 — 房屋評定現值 × 8%</option>
+                    <option value="8" data-name="南化區">南化區 — 房屋評定現值 × 8%</option>
+                  </optgroup>
+                  <optgroup label="其他縣市或自訂稅率">
+                    <option value="custom" data-name="自訂稅率">手動輸入其他核定稅率 (%)</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="flex items-center justify-between pt-1">
+                <span class="text-xs text-mist">或直接微調下方核定稅率百分比：</span>
+                <div class="w-32 luxury-input-wrap rounded px-3 py-1.5 flex items-baseline justify-between">
+                  <input type="number" id="s3a-standard-rate" value="32" step="1" min="0" max="100"
+                    oninput="calculateAll()"
+                    class="w-full bg-transparent text-base font-num font-semibold text-obsidian focus:outline-none text-right" />
+                  <span class="text-xs text-slateText ml-1">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CASE 2: 豪宅 (售價、房屋評定現值、土地公告現值、土地坪數) -->
+          <div id="s3a-form-luxury" class="hidden space-y-4">
+            <!-- Formula Box -->
+            <div class="rounded-xl bg-[#FAF8F5] border border-champagne/30 p-4 space-y-1">
+              <span class="text-[11px] font-semibold text-champagneDark tracking-wider">【本頁適用公式：標準認定－豪宅】</span>
+              <p class="text-sm sm:text-base font-serif font-semibold text-obsidian">
+                售價 × 房地比 × 20% ＝ 課稅獲利
+              </p>
+              <p class="text-xs text-slateText">
+                房地比 ＝ 房屋評定現值 ÷ (房屋評定現值 ＋ 土地公告現值)
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- 1. 售價 -->
+              <div class="space-y-1">
+                <label class="text-xs font-medium text-obsidian">1. 售價（成交總價，萬元）</label>
+                <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                  <input type="number" id="s3a-lux-price" value="3500" step="10" min="0"
+                    oninput="syncSalePrice('s3a-lux')"
+                    class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                  <span class="text-xs text-slateText ml-1">萬元</span>
+                </div>
+              </div>
+
+              <!-- 2. 房屋評定現值 -->
+              <div class="space-y-1">
+                <label class="text-xs font-medium text-obsidian">2. 房屋評定現值（萬元）</label>
+                <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                  <input type="number" id="s3a-lux-house" value="150" step="5" min="0"
+                    oninput="syncField('houseAssessed', this.value)"
+                    class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                  <span class="text-xs text-slateText ml-1">萬元</span>
+                </div>
+              </div>
+
+              <!-- 3. 土地公告現值 -->
+              <div class="space-y-1">
+                <label class="text-xs font-medium text-obsidian">3. 土地公告現值總額（萬元）</label>
+                <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                  <input type="number" id="s3a-lux-land" value="450" step="5" min="0"
+                    oninput="syncField('landAssessed', this.value)"
+                    class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                  <span class="text-xs text-slateText ml-1">萬元</span>
+                </div>
+              </div>
+
+              <!-- 4. 土地坪數 -->
+              <div class="space-y-1">
+                <label class="text-xs font-medium text-obsidian">4. 土地持分坪數（坪）</label>
+                <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                  <input type="number" id="s3a-lux-land-ping" value="12.5" step="0.1" min="0"
+                    oninput="syncField('landPing', this.value)"
+                    class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                  <span class="text-xs text-slateText ml-1">坪</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Ratio Preview -->
+            <div class="rounded-xl bg-[#FAF9F7] border border-black/[0.06] px-4 py-3 flex items-center justify-between text-xs">
+              <span class="text-slateText">即時計算房地比：<strong id="s3a-lux-ratio" class="font-num text-obsidian text-sm">25.00%</strong></span>
+              <span class="text-champagneDark font-medium">預估課稅獲利：<strong id="s3a-lux-profit-preview" class="font-num text-sm">175.00</strong> 萬元</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN (5 cols): Contextual Glossary Side Panel -->
+        <div class="lg:col-span-5 rounded-xl bg-[#FAF9F7] border border-black/[0.06] p-5 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-black/[0.06] pb-2.5">
+              <span class="text-xs font-serif font-semibold text-obsidian tracking-wider">📌 本頁名詞解釋與小幫手</span>
+              <button type="button" onclick="openReferenceModal('tainan')" class="text-[11px] text-champagne hover:text-obsidian underline">展開完整表</button>
+            </div>
+
+            <div class="space-y-2.5 text-xs text-slateText leading-relaxed">
+              <div class="p-3 rounded-lg bg-white border border-black/[0.05]">
+                <strong class="text-obsidian block mb-0.5">▪ 房屋評定現值怎麼看？</strong>
+                請查閱每年 5 月的「房屋稅單」或買賣時的「契稅繳款書」上所載之課稅現值（注意單位：若稅單寫 800,000 元，請輸入 <code class="text-obsidian font-semibold">80</code> 萬元）。
+              </div>
+              <div class="p-3 rounded-lg bg-white border border-black/[0.05]">
+                <strong class="text-obsidian block mb-0.5">▪ 土地公告現值總額怎麼算？</strong>
+                可查土地謄本上的「公告土地現值（元/平方公尺）」× 3.3058 換算為每坪單價，再乘以您的「土地持分坪數」。
+              </div>
+              <div class="p-3 rounded-lg bg-white border border-black/[0.05]">
+                <strong class="text-obsidian block mb-0.5">▪ 臺南市熱門行政區核定稅率速查：</strong>
+                東區 <strong>32%</strong>｜永康、南區 <strong>28%</strong>｜安南、北區、中西、安平 <strong>30%</strong>｜善化、新市 <strong>26%</strong>｜歸仁、仁德 <strong>25%</strong>。
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-lg bg-champagneSoft/70 border border-champagne/25 text-xs flex items-center justify-between">
+            <span class="text-champagneDark font-medium">本頁即時試算獲利：</span>
+            <span id="s3a-side-profit" class="font-num text-base font-semibold text-obsidian">25.60 萬元</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Step 3A Footer Navigation -->
+      <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+        <button type="button" onclick="goToStep('2a')"
+          class="px-5 py-3 rounded-xl border border-black/[0.12] hover:border-obsidian text-slateText hover:text-obsidian text-xs sm:text-sm font-medium tracking-wider transition-all">
+          ← 上一步（豪宅門檻判定）
+        </button>
+        <button type="button" onclick="goToStep('final')"
+          class="px-7 py-3.5 rounded-xl bg-obsidian hover:bg-obsidian/90 active:scale-[0.99] text-white text-sm font-medium tracking-wider transition-all flex items-center gap-2 shadow-md">
+          <span>下一步：開始稅務試算</span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         PAGE 2B (STEP 2B - 核實認定專用): 售價、成本、費用、房屋現值、土地現值、土地坪數
+    ======================================================================== -->
+    <section id="page-step-2b" class="wizard-page hidden luxury-card rounded-2xl p-6 sm:p-9 step-animate">
+      <div class="border-b border-black/[0.06] pb-4 mb-6 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="text-[11px] font-serif uppercase tracking-[0.24em] text-champagne block">Step 02 — Actual Cost Assessment (101/8/1 ~ 104/12/31)</span>
+          <h2 class="font-serif text-xl sm:text-2xl font-semibold text-obsidian tracking-wider mt-1">
+            核實認定・填寫售價、成本費用與房地現值
+          </h2>
+        </div>
+        <span class="text-xs px-3 py-1 rounded-full bg-champagneSoft text-champagneDark font-medium">
+          舊制・併入個人綜合所得稅
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-7">
+        <!-- LEFT COLUMN (7 cols): Formula + 6 Required Inputs -->
+        <div class="lg:col-span-7 space-y-5">
+          <!-- Formula Banner -->
+          <div class="rounded-xl bg-[#FAF8F5] border border-champagne/30 p-4 space-y-1">
+            <span class="text-[11px] font-semibold text-champagneDark tracking-wider">【本頁適用公式：舊制・核實認定】</span>
+            <p class="text-sm sm:text-base font-serif font-semibold text-obsidian">
+              (售價 － 成本 － 費用) × 房地比 ＝ 課稅獲利
+            </p>
+            <p class="text-xs text-slateText">
+              房地比 ＝ 房屋評定現值 ÷ (房屋評定現值 ＋ 土地公告現值)
+            </p>
+          </div>
+
+          <!-- 6 Inputs Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- 1. 售價 -->
+            <div class="space-y-1">
+              <label class="text-xs font-medium text-obsidian">1. 售價（成交總價，萬元）</label>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2b-price" value="2580" step="10" min="0"
+                  oninput="syncSalePrice('s2b')"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 2. 成本 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-medium text-obsidian">2. 取得成本（萬元）</label>
+                <button type="button" onclick="setSideGlossary('2b', 'cost')" class="text-[11px] text-champagne hover:text-obsidian underline">可列舉項目(?)</button>
+              </div>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2b-cost" value="1800" step="10" min="0"
+                  oninput="syncField('cost', this.value)"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 3. 費用 -->
+            <div class="sm:col-span-2 space-y-1.5">
+              <div class="flex flex-wrap items-center justify-between gap-1">
+                <label class="text-xs font-medium text-obsidian">3. 移轉費用（萬元）</label>
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="applyDeemed3Percent()" class="text-[11px] px-2 py-0.5 rounded bg-champagneSoft text-champagneDark hover:bg-obsidian hover:text-white transition-colors">
+                    一鍵套用 3% 設算 (上限30萬)
+                  </button>
+                  <button type="button" onclick="setSideGlossary('2b', 'expense')" class="text-[11px] text-champagne hover:text-obsidian underline">費用說明(?)</button>
+                </div>
+              </div>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2b-expense" value="30" step="1" min="0"
+                  oninput="syncField('expense', this.value)"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 4. 房屋評定現值 -->
+            <div class="space-y-1">
+              <label class="text-xs font-medium text-obsidian">4. 房屋評定現值（萬元）</label>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2b-house" value="80" step="5" min="0"
+                  oninput="syncField('houseAssessed', this.value)"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 5. 土地公告現值 -->
+            <div class="space-y-1">
+              <label class="text-xs font-medium text-obsidian">5. 土地公告現值總額（萬元）</label>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2b-land" value="320" step="5" min="0"
+                  oninput="syncField('landAssessed', this.value)"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 6. 土地坪數 -->
+            <div class="sm:col-span-2 space-y-1">
+              <label class="text-xs font-medium text-obsidian">6. 土地坪數（持分坪數，坪）</label>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2b-land-ping" value="9.5" step="0.1" min="0"
+                  oninput="syncField('landPing', this.value)"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">坪</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (5 cols): Contextual Glossary Side Panel (即時名詞解釋) -->
+        <div class="lg:col-span-5 rounded-xl bg-[#FAF9F7] border border-black/[0.06] p-5 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-black/[0.06] pb-2">
+              <span class="text-xs font-serif font-semibold text-obsidian">📌 即時名詞解釋（點選切換）</span>
+              <div class="flex gap-1">
+                <button type="button" onclick="setSideGlossary('2b', 'cost')" id="gbtn-2b-cost" class="px-2 py-1 rounded text-[11px] bg-obsidian text-white font-medium">取得成本</button>
+                <button type="button" onclick="setSideGlossary('2b', 'expense')" id="gbtn-2b-expense" class="px-2 py-1 rounded text-[11px] bg-white text-slateText border border-black/[0.08]">移轉費用</button>
+                <button type="button" onclick="setSideGlossary('2b', 'ratio')" id="gbtn-2b-ratio" class="px-2 py-1 rounded text-[11px] bg-white text-slateText border border-black/[0.08]">房地比</button>
+              </div>
+            </div>
+
+            <!-- Glossary Content Box -->
+            <div id="gbox-2b-content" class="text-xs text-slateText space-y-2.5 leading-relaxed">
+              <!-- Populated dynamically by setSideGlossary -->
+            </div>
+          </div>
+
+          <!-- Live Calculation Mini Summary -->
+          <div class="p-3.5 rounded-xl bg-champagneSoft/80 border border-champagne/30 space-y-1 text-xs">
+            <div class="flex justify-between text-slateText">
+              <span>目前房地比：</span>
+              <strong id="s2b-live-ratio" class="font-num text-obsidian">20.00%</strong>
+            </div>
+            <div class="flex justify-between text-champagneDark font-medium pt-1 border-t border-champagne/20">
+              <span>計算得出之課稅獲利：</span>
+              <strong id="s2b-live-profit" class="font-num text-base text-obsidian">150.00 萬元</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2B Footer Navigation -->
+      <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+        <button type="button" onclick="goToStep(1)"
+          class="px-5 py-3 rounded-xl border border-black/[0.12] hover:border-obsidian text-slateText hover:text-obsidian text-xs sm:text-sm font-medium tracking-wider transition-all">
+          ← 上一步（重選稅制）
+        </button>
+        <button type="button" onclick="goToStep('final')"
+          class="px-7 py-3.5 rounded-xl bg-obsidian hover:bg-obsidian/90 active:scale-[0.99] text-white text-sm font-medium tracking-wider transition-all flex items-center gap-2 shadow-md">
+          <span>下一步：開始稅務試算</span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         PAGE 2C (STEP 2C - 房地合一稅專用): 售價、成本、費用、土地漲價數額
+    ======================================================================== -->
+    <section id="page-step-2c" class="wizard-page hidden luxury-card rounded-2xl p-6 sm:p-9 step-animate">
+      <div class="border-b border-black/[0.06] pb-4 mb-6 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="text-[11px] font-serif uppercase tracking-[0.24em] text-champagne block">Step 02 — House &amp; Land Tax 3.0 (105/1/1 以後)</span>
+          <h2 class="font-serif text-xl sm:text-2xl font-semibold text-obsidian tracking-wider mt-1">
+            房地合一稅・填寫售價、成本、費用與土地漲價數額
+          </h2>
+        </div>
+        <span class="text-xs px-3 py-1 rounded-full bg-obsidian text-white font-medium">
+          新制・過戶後 30 日內分離課稅
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-7">
+        <!-- LEFT COLUMN (7 cols): Formula + 4 Required Inputs -->
+        <div class="lg:col-span-7 space-y-5">
+          <!-- Formula Banner -->
+          <div class="rounded-xl bg-[#FAF8F5] border border-champagne/30 p-4 space-y-1">
+            <span class="text-[11px] font-semibold text-champagneDark tracking-wider">【本頁適用公式：房地合一稅 3.0】</span>
+            <p class="text-sm sm:text-base font-serif font-semibold text-obsidian">
+              (售價 － 成本 － 費用 － 土地漲價數額) ＝ 課稅獲利
+            </p>
+            <p class="text-xs text-slateText">
+              課稅獲利 × 房地合一稅率 ＝ 要繳的稅金（下一頁選擇持有期間或自住優惠稅率）
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- 1. 售價 -->
+            <div class="space-y-1">
+              <label class="text-xs font-medium text-obsidian">1. 售價（成交總價，萬元）</label>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2c-price" value="2580" step="10" min="0"
+                  oninput="syncSalePrice('s2c')"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 2. 成本 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-medium text-obsidian">2. 取得成本（萬元）</label>
+                <button type="button" onclick="setSideGlossary('2c', 'cost')" class="text-[11px] text-champagne hover:text-obsidian underline">可列舉項目(?)</button>
+              </div>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2c-cost" value="1800" step="10" min="0"
+                  oninput="syncField('cost', this.value)"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 3. 費用 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-medium text-obsidian">3. 移轉費用（萬元）</label>
+                <button type="button" onclick="applyDeemed3Percent()" class="text-[10px] px-2 py-0.5 rounded bg-champagneSoft text-champagneDark hover:bg-obsidian hover:text-white transition-colors">
+                  設算 3% (上限30萬)
+                </button>
+              </div>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2c-expense" value="30" step="1" min="0"
+                  oninput="syncField('expense', this.value)"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+
+            <!-- 4. 土地漲價數額 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-medium text-obsidian">4. 土地漲價數額（萬元）</label>
+                <button type="button" onclick="setSideGlossary('2c', 'land')" class="text-[11px] text-champagne hover:text-obsidian underline">上限算法(?)</button>
+              </div>
+              <div class="luxury-input-wrap rounded-t-lg px-3.5 py-2.5 flex items-baseline justify-between">
+                <input type="number" id="s2c-land-inc" value="40" step="5" min="0"
+                  oninput="calculateAll()"
+                  class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
+                <span class="text-xs text-slateText ml-1">萬元</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Helper for Land Value Increment Cap -->
+          <div class="rounded-xl bg-[#FAF9F7] border border-black/[0.06] p-3.5 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-medium text-obsidian">💡 土地漲價總數額上限快速計算器（當年度公告現值 － 前次移轉現值）</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <input type="number" id="s2c-helper-cur" placeholder="當年度公告土地現值(萬)" oninput="calcLandIncHelper()"
+                class="bg-white border border-black/[0.08] rounded-lg px-3 py-1.5 text-xs font-num text-obsidian focus:outline-none focus:border-champagne" />
+              <input type="number" id="s2c-helper-prev" placeholder="前次移轉現值(萬)" oninput="calcLandIncHelper()"
+                class="bg-white border border-black/[0.08] rounded-lg px-3 py-1.5 text-xs font-num text-obsidian focus:outline-none focus:border-champagne" />
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (5 cols): Contextual Glossary Side Panel -->
+        <div class="lg:col-span-5 rounded-xl bg-[#FAF9F7] border border-black/[0.06] p-5 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-black/[0.06] pb-2">
+              <span class="text-xs font-serif font-semibold text-obsidian">📌 即時名詞解釋（點選切換）</span>
+              <div class="flex gap-1">
+                <button type="button" onclick="setSideGlossary('2c', 'cost')" id="gbtn-2c-cost" class="px-2 py-1 rounded text-[11px] bg-obsidian text-white font-medium">取得成本</button>
+                <button type="button" onclick="setSideGlossary('2c', 'expense')" id="gbtn-2c-expense" class="px-2 py-1 rounded text-[11px] bg-white text-slateText border border-black/[0.08]">移轉費用</button>
+                <button type="button" onclick="setSideGlossary('2c', 'land')" id="gbtn-2c-land" class="px-2 py-1 rounded text-[11px] bg-white text-slateText border border-black/[0.08]">土地漲價</button>
+              </div>
+            </div>
+
+            <div id="gbox-2c-content" class="text-xs text-slateText space-y-2.5 leading-relaxed">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-champagneSoft/80 border border-champagne/30 flex items-center justify-between text-xs">
+            <span class="text-champagneDark font-medium">扣除後課稅獲利（所得）：</span>
+            <strong id="s2c-live-profit" class="font-num text-base text-obsidian">710.00 萬元</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2C Footer Navigation -->
+      <div class="flex items-center justify-between pt-4 border-t border-black/[0.06]">
+        <button type="button" onclick="goToStep(1)"
+          class="px-5 py-3 rounded-xl border border-black/[0.12] hover:border-obsidian text-slateText hover:text-obsidian text-xs sm:text-sm font-medium tracking-wider transition-all">
+          ← 上一步（重選稅制）
+        </button>
+        <button type="button" onclick="goToStep('final')"
+          class="px-7 py-3.5 rounded-xl bg-obsidian hover:bg-obsidian/90 active:scale-[0.99] text-white text-sm font-medium tracking-wider transition-all flex items-center gap-2 shadow-md">
+          <span>下一步：開始稅務試算</span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         FINAL PAGE: 稅率選擇（綜所稅級距 / 房地合一優惠稅率）與黑金試算結果卡
+    ======================================================================== -->
+    <section id="page-step-final" class="wizard-page hidden space-y-6 step-animate">
+
+      <!-- Top Control Card: Select Tax Bracket or Holding Rate (即時同步下方結果) -->
+      <div class="luxury-card rounded-2xl p-6 sm:p-8 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-black/[0.06] pb-4">
           <div>
-            <div class="text-xs font-medium text-obsidian flex items-center gap-2">
-              <span>101/8/1 以前「標準認定」適用身分</span>
-              <span id="auto-detect-tag" class="text-[10px] px-2 py-0.5 rounded bg-obsidian text-white font-normal">系統依門檻自動判別</span>
-            </div>
-            <p class="text-[11px] text-slateText mt-0.5">系統會依上方「成交總價」與「不含車位單坪」自動切換，您亦可手動點擊強制指定：</p>
+            <span class="text-[11px] font-serif uppercase tracking-[0.24em] text-champagne block">Final Step — Tax Rate &amp; Exemption</span>
+            <h2 id="final-step-heading" class="font-serif text-xl font-semibold text-obsidian tracking-wider mt-0.5">
+              選擇適用稅率級距・同步試算最終應納稅金
+            </h2>
           </div>
-          <div class="inline-flex rounded-lg bg-white p-1 border border-black/[0.08] shrink-0 self-start sm:self-center">
-            <button type="button" id="btn-std-normal" onclick="setStandardSubMode('normal')"
-              class="px-3.5 py-1.5 rounded-md text-xs font-medium transition-all">
-              非豪宅（核定稅率）
-            </button>
-            <button type="button" id="btn-std-luxury" onclick="setStandardSubMode('luxury')"
-              class="px-3.5 py-1.5 rounded-md text-xs font-medium transition-all">
-              豪宅（房地比×20%）
-            </button>
-          </div>
+          <span id="final-formula-pill" class="text-xs px-3 py-1 rounded-full bg-[#FAF8F5] border border-champagne/30 text-champagneDark font-medium">
+            公式：房屋評定現值 × 核定稅率 ＝ 獲利
+          </span>
         </div>
 
-        <!-- Tainan District Selector (Only needed for Standard Non-Luxury) -->
-        <div id="panel-tainan-district" class="grid grid-cols-1 sm:grid-cols-12 gap-5">
-          <div class="sm:col-span-7 space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label for="select-tainan-district" class="text-xs font-medium text-slateText tracking-wider">
-                臺南市 37 行政區核定稅率選單
-              </label>
-              <button type="button" onclick="openReferenceModal('tainan')" class="text-[11px] text-champagne hover:text-obsidian underline transition-colors">
-                完整行政區稅率表 (?)
-              </button>
-            </div>
-            <div class="luxury-input-wrap rounded-t-lg px-3.5 py-3 flex items-center">
-              <select id="select-tainan-district" onchange="onDistrictChange()"
-                class="w-full bg-transparent text-sm font-medium text-obsidian focus:outline-none cursor-pointer">
-                <optgroup label="① 核定稅率 32%">
-                  <option value="32" data-name="東區" selected>東區 — 房屋評定現值 × 32%</option>
-                </optgroup>
-                <optgroup label="② 核定稅率 30%">
-                  <option value="30" data-name="安南區">安南區 — 房屋評定現值 × 30%</option>
-                  <option value="30" data-name="北區">北區 — 房屋評定現值 × 30%</option>
-                  <option value="30" data-name="中西區">中西區 — 房屋評定現值 × 30%</option>
-                  <option value="30" data-name="安平區">安平區 — 房屋評定現值 × 30%</option>
-                </optgroup>
-                <optgroup label="③ 核定稅率 28%">
-                  <option value="28" data-name="永康區">永康區 — 房屋評定現值 × 28%</option>
-                  <option value="28" data-name="南區">南區 — 房屋評定現值 × 28%</option>
-                </optgroup>
-                <optgroup label="④ 核定稅率 26%">
-                  <option value="26" data-name="善化區">善化區 — 房屋評定現值 × 26%</option>
-                  <option value="26" data-name="新市區">新市區 — 房屋評定現值 × 26%</option>
-                </optgroup>
-                <optgroup label="⑤ 核定稅率 25%">
-                  <option value="25" data-name="歸仁區">歸仁區 — 房屋評定現值 × 25%</option>
-                  <option value="25" data-name="仁德區">仁德區 — 房屋評定現值 × 25%</option>
-                </optgroup>
-                <optgroup label="⑥ 核定稅率 24%">
-                  <option value="24" data-name="安定區">安定區 — 房屋評定現值 × 24%</option>
-                </optgroup>
-                <optgroup label="⑦ 核定稅率 21%">
-                  <option value="21" data-name="新營區">新營區 — 房屋評定現值 × 21%</option>
-                </optgroup>
-                <optgroup label="⑧ 核定稅率 20%">
-                  <option value="20" data-name="官田區">官田區 — 房屋評定現值 × 20%</option>
-                  <option value="20" data-name="西港區">西港區 — 房屋評定現值 × 20%</option>
-                </optgroup>
-                <optgroup label="⑨ 核定稅率 19%">
-                  <option value="19" data-name="麻豆區">麻豆區 — 房屋評定現值 × 19%</option>
-                  <option value="19" data-name="新化區">新化區 — 房屋評定現值 × 19%</option>
-                </optgroup>
-                <optgroup label="⑩ 核定稅率 18%">
-                  <option value="18" data-name="柳營區">柳營區 — 房屋評定現值 × 18%</option>
-                  <option value="18" data-name="佳里區">佳里區 — 房屋評定現值 × 18%</option>
-                </optgroup>
-                <optgroup label="⑪ 核定稅率 17%">
-                  <option value="17" data-name="關廟區">關廟區 — 房屋評定現值 × 17%</option>
-                </optgroup>
-                <optgroup label="⑫ 核定稅率 16%">
-                  <option value="16" data-name="鹽水區">鹽水區 — 房屋評定現值 × 16%</option>
-                  <option value="16" data-name="學甲區">學甲區 — 房屋評定現值 × 16%</option>
-                </optgroup>
-                <optgroup label="⑬ 核定稅率 15%">
-                  <option value="15" data-name="六甲區">六甲區 — 房屋評定現值 × 15%</option>
-                </optgroup>
-                <optgroup label="⑭ 核定稅率 14%">
-                  <option value="14" data-name="玉井區">玉井區 — 房屋評定現值 × 14%</option>
-                </optgroup>
-                <optgroup label="⑮ 核定稅率 12%">
-                  <option value="12" data-name="白河區">白河區 — 房屋評定現值 × 12%</option>
-                  <option value="12" data-name="後壁區">後壁區 — 房屋評定現值 × 12%</option>
-                  <option value="12" data-name="東山區">東山區 — 房屋評定現值 × 12%</option>
-                  <option value="12" data-name="下營區">下營區 — 房屋評定現值 × 12%</option>
-                  <option value="12" data-name="山上區">山上區 — 房屋評定現值 × 12%</option>
-                </optgroup>
-                <optgroup label="⑯ 核定稅率 11%">
-                  <option value="11" data-name="將軍區">將軍區 — 房屋評定現值 × 11%</option>
-                  <option value="11" data-name="七股區">七股區 — 房屋評定現值 × 11%</option>
-                </optgroup>
-                <optgroup label="⑰ 核定稅率 8%">
-                  <option value="8" data-name="龍崎區">龍崎區 — 房屋評定現值 × 8%</option>
-                  <option value="8" data-name="北門區">北門區 — 房屋評定現值 × 8%</option>
-                  <option value="8" data-name="左鎮區">左鎮區 — 房屋評定現值 × 8%</option>
-                  <option value="8" data-name="大內區">大內區 — 房屋評定現值 × 8%</option>
-                  <option value="8" data-name="楠西區">楠西區 — 房屋評定現值 × 8%</option>
-                  <option value="8" data-name="南化區">南化區 — 房屋評定現值 × 8%</option>
-                </optgroup>
-                <optgroup label="其他縣市自訂">
-                  <option value="custom" data-name="自訂稅率">手動輸入其他核定稅率 (%)</option>
-                </optgroup>
-              </select>
-            </div>
-          </div>
-
-          <div class="sm:col-span-5 space-y-1.5">
-            <label for="input-standard-rate" class="text-xs font-medium text-slateText tracking-wider block">
-              採用核定稅率 (%)
+        <!-- OPTION SET A: Old Regime Income Tax Bracket (標準認定 / 核實認定 顯示) -->
+        <div id="final-old-tax-selector" class="space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <label class="text-xs font-medium text-slateText">
+              請選擇「個人綜合所得稅」課稅級距（舊制財產交易所得併入年度綜所稅課稅，點選立即同步結果）：
             </label>
-            <div class="luxury-input-wrap rounded-t-lg px-4 py-2.5 flex items-baseline justify-between">
-              <input type="number" id="input-standard-rate" value="32" step="1" min="0" max="100"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-xl font-num font-semibold text-obsidian focus:outline-none" />
-              <span class="text-xs font-medium text-slateText ml-2">%</span>
-            </div>
           </div>
-        </div>
-      </div>
-
-      <!-- SUB-PANEL B: Assessed Values & Building-to-Land Ratio (房屋評定現值 & 土地公告現值 — Used in Standard & Actual) -->
-      <div id="panel-assessed-values" class="space-y-4 fade-enter">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <!-- House Assessed Value (房屋評定現值) -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label for="input-house-assessed" class="text-xs font-medium text-slateText tracking-wider">
-                房屋評定現值（依房屋稅單）
-              </label>
-              <span id="house-assessed-ntd-hint" class="text-[11px] font-num text-mist">NT$ 800,000</span>
-            </div>
-            <div class="luxury-input-wrap rounded-t-lg px-4 py-3 flex items-baseline justify-between">
-              <input type="number" id="input-house-assessed" value="80" step="1" min="0"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-2xl font-num font-semibold text-obsidian focus:outline-none" placeholder="0" />
-              <span class="text-xs font-medium text-slateText ml-2 shrink-0">萬元</span>
-            </div>
-            <!-- Smart unit conversion tip if user enters raw NTD > 20,000 -->
-            <div id="unit-warning-house" class="hidden text-[11px] text-champagneDark bg-champagneSoft px-2.5 py-1 rounded flex items-center justify-between">
-              <span>您輸入的似乎是「元」？</span>
-              <button type="button" onclick="convertUnitToWan('input-house-assessed')" class="underline font-semibold ml-2">點此轉為萬元</button>
-            </div>
-          </div>
-
-          <!-- Land Assessed Value (土地公告現值) -->
-          <div id="wrap-land-assessed" class="space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label for="input-land-assessed" class="text-xs font-medium text-slateText tracking-wider">
-                土地公告現值總額（計算房地比）
-              </label>
-              <span id="land-assessed-ntd-hint" class="text-[11px] font-num text-mist">NT$ 3,200,000</span>
-            </div>
-            <div class="luxury-input-wrap rounded-t-lg px-4 py-3 flex items-baseline justify-between">
-              <input type="number" id="input-land-assessed" value="320" step="5" min="0"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-2xl font-num font-semibold text-obsidian focus:outline-none" placeholder="0" />
-              <span class="text-xs font-medium text-slateText ml-2 shrink-0">萬元</span>
-            </div>
-            <div id="unit-warning-land" class="hidden text-[11px] text-champagneDark bg-champagneSoft px-2.5 py-1 rounded flex items-center justify-between">
-              <span>您輸入的似乎是「元」？</span>
-              <button type="button" onclick="convertUnitToWan('input-land-assessed')" class="underline font-semibold ml-2">點此轉為萬元</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Live Building-to-Land Ratio Bar (房地比即時顯示) -->
-        <div id="ratio-display-bar" class="rounded-xl bg-[#FAF9F7] border border-black/[0.05] px-4 py-3 flex flex-wrap items-center justify-between gap-2">
-          <div class="text-xs text-slateText">
-            <span class="font-medium text-obsidian">房地比公式：</span>
-            <span>房屋評定現值 ÷ (房屋評定現值 ＋ 土地公告現值)</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs text-mist">計算房地比：</span>
-            <span id="live-ratio-text" class="font-num text-sm font-semibold text-obsidian bg-white px-2.5 py-0.5 rounded border border-black/[0.06]">20.00%</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SUB-PANEL C: Cost & Transfer Expenses (取得成本與移轉費用 — Used in Actual 101~104 & New 105+) -->
-      <div id="panel-cost-expense" class="hidden space-y-5 fade-enter">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <!-- Acquisition Cost (取得成本) -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label for="input-acquisition-cost" class="text-xs font-medium text-slateText tracking-wider">
-                一、取得成本（購入價＋可列舉改良）
-              </label>
-              <button type="button" onclick="openReferenceModal('cost')" class="text-[11px] text-champagne hover:text-obsidian underline transition-colors">
-                可列舉 / 不可列舉 (?)
-              </button>
-            </div>
-            <div class="luxury-input-wrap rounded-t-lg px-4 py-3 flex items-baseline justify-between">
-              <input type="number" id="input-acquisition-cost" value="1800" step="10" min="0"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-2xl font-num font-semibold text-obsidian focus:outline-none" placeholder="0" />
-              <span class="text-xs font-medium text-slateText ml-2 shrink-0">萬元</span>
-            </div>
-            <p class="text-[11px] text-mist leading-relaxed">
-              含購入價額、契稅、印花稅、代書、買入仲介費、資本化裝修（<span class="text-dangerMuted">不含房貸利息、冷氣家具、日常修繕</span>）。
-            </p>
-          </div>
-
-          <!-- Transfer Expenses (移轉費用) -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label for="input-transfer-expense" class="text-xs font-medium text-slateText tracking-wider">
-                二、移轉費用（出售必要開銷）
-              </label>
-              <button type="button" onclick="openReferenceModal('expense')" class="text-[11px] text-champagne hover:text-obsidian underline transition-colors">
-                設算 3% vs 核實規定 (?)
-              </button>
-            </div>
-
-            <!-- Expense Mode Toggle: 3% Cap 30W vs Actual Receipts -->
-            <div class="flex rounded-lg bg-[#FAF9F7] p-0.5 border border-black/[0.06] mb-1.5">
-              <button type="button" id="btn-exp-deemed" onclick="setExpenseMode('deemed')"
-                class="flex-1 py-1 rounded-md text-[11px] font-medium transition-all bg-obsidian text-white">
-                設算認列（成交價 3%・上限 30萬）
-              </button>
-              <button type="button" id="btn-exp-actual" onclick="setExpenseMode('actual')"
-                class="flex-1 py-1 rounded-md text-[11px] font-medium transition-all text-slateText hover:text-obsidian">
-                核實認列（輸入單據總額）
-              </button>
-            </div>
-
-            <div class="luxury-input-wrap rounded-t-lg px-4 py-2.5 flex items-baseline justify-between">
-              <input type="number" id="input-transfer-expense" value="30" step="1" min="0" readonly
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-2xl font-num font-semibold text-obsidian focus:outline-none" placeholder="0" />
-              <span class="text-xs font-medium text-slateText ml-2 shrink-0">萬元</span>
-            </div>
-            <p id="expense-mode-hint" class="text-[11px] text-champagneDark">
-              系統自動按售價 3% 設算（77.4 萬），受法定上限 30 萬元限制，以 30 萬元認列。
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- SUB-PANEL D: New Regime Specifics (105/1/1+ 房地合一稅：土地漲價總數額 & 持有期間稅率 & 自住400萬免稅優惠) -->
-      <div id="panel-new-regime-extra" class="hidden space-y-5 pt-2 border-t border-black/[0.06] fade-enter">
-        <!-- Land Value Increment (土地漲價總數額) -->
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
-          <div class="sm:col-span-6 space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label for="input-land-increment" class="text-xs font-medium text-slateText tracking-wider">
-                土地漲價總數額（避免雙重課稅扣除）
-              </label>
-              <button type="button" onclick="openReferenceModal('land')" class="text-[11px] text-champagne hover:text-obsidian underline transition-colors">
-                上限公式說明 (?)
-              </button>
-            </div>
-            <div class="luxury-input-wrap rounded-t-lg px-4 py-3 flex items-baseline justify-between">
-              <input type="number" id="input-land-increment" value="40" step="5" min="0"
-                oninput="handleLiveInput()"
-                class="w-full bg-transparent text-2xl font-num font-semibold text-obsidian focus:outline-none" placeholder="0" />
-              <span class="text-xs font-medium text-slateText ml-2 shrink-0">萬元</span>
-            </div>
-            <p class="text-[11px] text-mist">
-              上限 ＝ 交易當年度公告土地現值 － 前次移轉現值（請注意：土地增值稅金本身不可列為費用）。
-            </p>
-          </div>
-
-          <!-- Quick Land Increment Calculator Helper -->
-          <div class="sm:col-span-6 rounded-xl bg-[#FAF9F7] border border-black/[0.05] p-3.5 space-y-2.5">
-            <div class="text-[11px] font-medium text-obsidian flex items-center justify-between">
-              <span>土地漲價總數額上限試算小幫手</span>
-              <span class="text-[10px] text-mist">輸入自動帶入左側</span>
-            </div>
-            <div class="grid grid-cols-2 gap-2.5">
-              <div>
-                <label class="text-[10px] text-mist block mb-0.5">當年度公告土地現值(萬)</label>
-                <input type="number" id="helper-land-current" placeholder="例: 320" oninput="calcLandIncrementHelper()"
-                  class="w-full bg-white border border-black/[0.08] rounded px-2.5 py-1.5 text-xs font-num text-obsidian focus:outline-none focus:border-champagne" />
-              </div>
-              <div>
-                <label class="text-[10px] text-mist block mb-0.5">前次移轉現值(萬)</label>
-                <input type="number" id="helper-land-prev" placeholder="例: 280" oninput="calcLandIncrementHelper()"
-                  class="w-full bg-white border border-black/[0.08] rounded px-2.5 py-1.5 text-xs font-num text-obsidian focus:outline-none focus:border-champagne" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Holding Period & Self-Use 4M Exemption Selector -->
-        <div class="space-y-3">
-          <div class="flex items-center justify-between">
-            <label class="text-xs font-medium text-slateText tracking-wider">房地合一稅・持有時間與自住優惠稅率</label>
-            <button type="button" onclick="openReferenceModal('newtax')" class="text-[11px] text-champagne hover:text-obsidian underline transition-colors">
-              自住滿 6 年條件 (?)
+          <div class="grid grid-cols-5 gap-2.5">
+            <button type="button" onclick="setIncomeBracket(5)" id="btn-inc-5" class="inc-btn p-3 rounded-xl border text-center transition-all">
+              <div class="text-[10px] text-mist">綜所稅率</div>
+              <div class="font-num text-lg font-semibold mt-0.5">5%</div>
+            </button>
+            <button type="button" onclick="setIncomeBracket(12)" id="btn-inc-12" class="inc-btn p-3 rounded-xl border text-center transition-all">
+              <div class="text-[10px] text-mist">綜所稅率</div>
+              <div class="font-num text-lg font-semibold mt-0.5">12%</div>
+            </button>
+            <button type="button" onclick="setIncomeBracket(20)" id="btn-inc-20" class="inc-btn p-3 rounded-xl border text-center transition-all">
+              <div class="text-[10px] text-mist">綜所稅率</div>
+              <div class="font-num text-lg font-semibold mt-0.5">20%</div>
+            </button>
+            <button type="button" onclick="setIncomeBracket(30)" id="btn-inc-30" class="inc-btn p-3 rounded-xl border text-center transition-all">
+              <div class="text-[10px] text-mist">綜所稅率</div>
+              <div class="font-num text-lg font-semibold mt-0.5">30%</div>
+            </button>
+            <button type="button" onclick="setIncomeBracket(40)" id="btn-inc-40" class="inc-btn p-3 rounded-xl border text-center transition-all">
+              <div class="text-[10px] text-mist">綜所稅率</div>
+              <div class="font-num text-lg font-semibold mt-0.5">40%</div>
             </button>
           </div>
+        </div>
 
+        <!-- OPTION SET B: New Regime Holding Period & Self-Use 4M Exemption (房地合一稅 顯示) -->
+        <div id="final-new-tax-selector" class="hidden space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <label class="text-xs font-medium text-slateText">
+              請選擇「房地合一稅」持有時間或自住滿 6 年優惠稅率（點選立即同步下方稅金）：
+            </label>
+            <button type="button" onclick="openReferenceModal('newtax')" class="text-xs text-champagne hover:text-obsidian underline">自住優惠條件說明 (?)</button>
+          </div>
           <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-            <button type="button" onclick="setHoldingRate('45')" id="btn-hold-45"
-              class="hold-btn p-3 rounded-xl border text-left transition-all">
-              <div class="text-[11px] text-mist">持有 2 年內</div>
-              <div class="font-num text-lg font-semibold text-obsidian mt-0.5">45%</div>
+            <button type="button" onclick="setHoldingRate('45')" id="btn-hold-45" class="hold-btn p-3.5 rounded-xl border text-left transition-all">
+              <div class="text-[11px] text-mist">持有未逾 2 年</div>
+              <div class="font-num text-xl font-semibold text-obsidian mt-0.5">45%</div>
             </button>
-            <button type="button" onclick="setHoldingRate('35')" id="btn-hold-35"
-              class="hold-btn p-3 rounded-xl border text-left transition-all">
-              <div class="text-[11px] text-mist">2 年 ～ 5 年</div>
-              <div class="font-num text-lg font-semibold text-obsidian mt-0.5">35%</div>
+            <button type="button" onclick="setHoldingRate('35')" id="btn-hold-35" class="hold-btn p-3.5 rounded-xl border text-left transition-all">
+              <div class="text-[11px] text-mist">2 年 ～ 未逾 5 年</div>
+              <div class="font-num text-xl font-semibold text-obsidian mt-0.5">35%</div>
             </button>
-            <button type="button" onclick="setHoldingRate('20')" id="btn-hold-20"
-              class="hold-btn p-3 rounded-xl border text-left transition-all">
-              <div class="text-[11px] text-mist">5 年 ～ 10 年</div>
-              <div class="font-num text-lg font-semibold text-obsidian mt-0.5">20%</div>
+            <button type="button" onclick="setHoldingRate('20')" id="btn-hold-20" class="hold-btn p-3.5 rounded-xl border text-left transition-all">
+              <div class="text-[11px] text-mist">5 年 ～ 未逾 10 年</div>
+              <div class="font-num text-xl font-semibold text-obsidian mt-0.5">20%</div>
             </button>
-            <button type="button" onclick="setHoldingRate('15')" id="btn-hold-15"
-              class="hold-btn p-3 rounded-xl border text-left transition-all">
-              <div class="text-[11px] text-mist">10 年以上</div>
-              <div class="font-num text-lg font-semibold text-obsidian mt-0.5">15%</div>
+            <button type="button" onclick="setHoldingRate('15')" id="btn-hold-15" class="hold-btn p-3.5 rounded-xl border text-left transition-all">
+              <div class="text-[11px] text-mist">超過 10 年</div>
+              <div class="font-num text-xl font-semibold text-obsidian mt-0.5">15%</div>
             </button>
-            <button type="button" onclick="setHoldingRate('self10')" id="btn-hold-self10"
-              class="hold-btn col-span-2 sm:col-span-1 p-3 rounded-xl border text-left transition-all">
-              <div class="text-[11px] text-champagneDark font-medium">自住滿 6 年優惠</div>
+            <button type="button" onclick="setHoldingRate('self10')" id="btn-hold-self10" class="hold-btn col-span-2 sm:col-span-1 p-3.5 rounded-xl border text-left transition-all">
+              <div class="text-[11px] text-champagneDark font-semibold">★ 自住滿 6 年設籍</div>
               <div class="font-num text-base font-semibold text-obsidian mt-0.5">10% <span class="text-[10px] font-normal text-champagneDark">(免稅400萬)</span></div>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- SUB-PANEL E: Old Regime Income Tax Bracket Estimator (舊制併入個人綜所稅率模擬) -->
-      <div id="panel-old-income-tax" class="pt-4 border-t border-black/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-3 fade-enter">
-        <div>
-          <div class="text-xs font-medium text-obsidian">舊制「併入個人綜合所得稅」稅率級距試算（選填）</div>
-          <p class="text-[11px] text-mist mt-0.5">舊制算出之結果為「財產交易所得（獲利）」，需併入年度個人綜所稅申報。點選級距可預估實際稅金：</p>
-        </div>
-        <div class="inline-flex rounded-lg bg-[#FAF9F7] p-1 border border-black/[0.06] shrink-0 self-start sm:self-center">
-          <button type="button" onclick="setIncomeBracket(5)" id="btn-inc-5" class="inc-btn px-2.5 py-1 rounded text-xs font-num transition-all">5%</button>
-          <button type="button" onclick="setIncomeBracket(12)" id="btn-inc-12" class="inc-btn px-2.5 py-1 rounded text-xs font-num transition-all">12%</button>
-          <button type="button" onclick="setIncomeBracket(20)" id="btn-inc-20" class="inc-btn px-2.5 py-1 rounded text-xs font-num transition-all">20%</button>
-          <button type="button" onclick="setIncomeBracket(30)" id="btn-inc-30" class="inc-btn px-2.5 py-1 rounded text-xs font-num transition-all">30%</button>
-          <button type="button" onclick="setIncomeBracket(40)" id="btn-inc-40" class="inc-btn px-2.5 py-1 rounded text-xs font-num transition-all">40%</button>
-        </div>
-      </div>
-    </section>
+      <!-- HERO RESULT CARD (黑金靜奢最終試算結果展示卡) -->
+      <div class="rounded-2xl bg-obsidian text-white p-6 sm:p-9 shadow-hero border border-champagne/30 relative overflow-hidden">
+        <div class="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full bg-champagne/15 blur-3xl"></div>
+        <div class="pointer-events-none absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-champagne/10 blur-3xl"></div>
 
-    <!-- MODULE 4: HERO RESULT CARD (靜奢黑金試算結果展示卡與一鍵複製 LINE 報告) -->
-    <section class="rounded-2xl bg-obsidian text-white p-6 sm:p-9 shadow-hero border border-champagne/30 relative overflow-hidden">
-      <!-- Subtle Luxury Ambient Glow -->
-      <div class="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full bg-champagne/15 blur-3xl"></div>
-      <div class="pointer-events-none absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-champagne/10 blur-3xl"></div>
-
-      <div class="relative z-10 space-y-6">
-        <!-- Top Row: Badge & Regime Tag -->
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#C5B8A8] live-dot"></span>
-            <span id="hero-regime-badge" class="font-serif text-xs tracking-[0.2em] uppercase text-[#C5B8A8]">
-              101/8/1 以前取得｜舊制・標準認定（非豪宅）
+        <div class="relative z-10 space-y-6">
+          <!-- Top Badge Row -->
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#C5B8A8] live-dot"></span>
+              <span id="hero-regime-badge" class="font-serif text-xs tracking-[0.18em] uppercase text-[#C5B8A8]">
+                101/8/1 以前取得｜舊制・標準認定（非豪宅）
+              </span>
+            </div>
+            <span id="hero-tax-type-tag" class="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/10">
+              併入個人綜合所得稅課稅
             </span>
           </div>
-          <span id="hero-tax-type-tag" class="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/10">
-            併入個人綜合所得稅課稅
-          </span>
-        </div>
 
-        <!-- Primary Hero Metrics Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end">
-          <!-- Metric 1: Taxable Profit / Property Transaction Income (獲利 / 課稅所得) -->
-          <div class="space-y-1.5">
-            <div id="hero-primary-label" class="text-xs text-white/65 tracking-wider">
-              計算得出之「財產交易所得（獲利）」
+          <!-- Primary Hero Numbers -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end">
+            <div class="space-y-1.5">
+              <div id="hero-primary-label" class="text-xs text-white/65 tracking-wider">
+                計算得出之「財產交易所得（獲利）」
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="hero-profit-wan" class="font-num text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+                  25.60
+                </span>
+                <span class="text-sm text-[#C5B8A8] font-medium">萬元</span>
+              </div>
+              <div id="hero-profit-ntd" class="text-xs font-num text-white/50">
+                折合新臺幣：NT$ 256,000 元
+              </div>
             </div>
-            <div class="flex items-baseline gap-2">
-              <span id="hero-profit-wan" class="font-num text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-                25.60
-              </span>
-              <span class="text-sm text-[#C5B8A8] font-medium">萬元</span>
-            </div>
-            <div id="hero-profit-ntd" class="text-xs font-num text-white/50">
-              折合新臺幣：NT$ 256,000 元
-            </div>
-          </div>
 
-          <!-- Metric 2: Estimated Tax Payable (應納稅金 / 綜所稅預估) -->
-          <div class="space-y-1.5 sm:border-l sm:border-white/10 sm:pl-6">
-            <div id="hero-secondary-label" class="text-xs text-[#C5B8A8] tracking-wider">
-              預估應繳納稅金（以綜所稅 20% 試算）
-            </div>
-            <div class="flex items-baseline gap-2">
-              <span id="hero-tax-wan" class="font-num text-3xl sm:text-4xl font-semibold tracking-tight text-[#C5B8A8]">
-                5.12
-              </span>
-              <span class="text-sm text-[#C5B8A8] font-medium">萬元</span>
-            </div>
-            <div id="hero-tax-ntd" class="text-xs font-num text-white/50">
-              折合新臺幣：NT$ 51,200 元
+            <div class="space-y-1.5 sm:border-l sm:border-white/10 sm:pl-6">
+              <div id="hero-secondary-label" class="text-xs text-[#C5B8A8] tracking-wider">
+                預估應繳納稅金（以綜所稅 20% 試算）
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="hero-tax-wan" class="font-num text-3xl sm:text-4xl font-semibold tracking-tight text-[#C5B8A8]">
+                  5.12
+                </span>
+                <span class="text-sm text-[#C5B8A8] font-medium">萬元</span>
+              </div>
+              <div id="hero-tax-ntd" class="text-xs font-num text-white/50">
+                折合新臺幣：NT$ 51,200 元
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Formula Breakdown Box -->
-        <div class="rounded-xl bg-white/[0.05] border border-white/10 p-4 space-y-2">
-          <div class="flex items-center justify-between text-[11px] text-[#C5B8A8] tracking-wider uppercase">
-            <span>Calculation Breakdown — 算式明細</span>
-            <span id="hero-district-or-rate-note">臺南市東區 32%</span>
+          <!-- Formula Breakdown Box -->
+          <div class="rounded-xl bg-white/[0.05] border border-white/10 p-4 space-y-2">
+            <div class="flex items-center justify-between text-[11px] text-[#C5B8A8] tracking-wider uppercase">
+              <span>Calculation Breakdown — 算式明細</span>
+              <span id="hero-district-or-rate-note">臺南市東區 32%</span>
+            </div>
+            <p id="hero-formula-detail" class="text-xs sm:text-sm font-num text-white/90 leading-relaxed whitespace-pre-line">
+              房屋評定現值 80.00 萬 × 核定稅率 32% ＝ 獲利 25.60 萬元
+            </p>
           </div>
-          <p id="hero-formula-detail" class="text-xs sm:text-sm font-num text-white/90 leading-relaxed whitespace-pre-line">
-            房屋評定現值 80.00 萬 × 核定稅率 32% ＝ 獲利 25.60 萬元（併入個人綜合所得稅，若按 20% 稅率約繳 5.12 萬元）
-          </p>
-        </div>
 
-        <!-- Key Secondary Indicators Strip (單坪拆算、房地比、豪宅判定) -->
-        <div class="grid grid-cols-3 gap-3 pt-1">
-          <div class="rounded-lg bg-white/[0.04] px-3.5 py-2.5 border border-white/[0.06]">
-            <div class="text-[10px] text-white/50 tracking-wider">不含車位單價</div>
-            <div id="hero-stat-unitprice" class="font-num text-sm sm:text-base font-medium text-white mt-0.5">48.00 萬/坪</div>
+          <!-- Action Buttons: Copy LINE Report + Navigation -->
+          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <button type="button" onclick="copyLineReport()"
+              class="flex-1 py-3.5 px-6 rounded-xl bg-[#C5B8A8] hover:bg-[#d4c8b8] active:scale-[0.99] text-obsidian font-medium text-sm tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+              </svg>
+              <span>一鍵複製試算結果（LINE 客戶專用排版）</span>
+            </button>
+
+            <button type="button" onclick="toggleLinePreview()"
+              class="py-3.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white/90 text-xs tracking-wider transition-all border border-white/15 shrink-0">
+              預覽報告文字
+            </button>
           </div>
-          <div class="rounded-lg bg-white/[0.04] px-3.5 py-2.5 border border-white/[0.06]">
-            <div class="text-[10px] text-white/50 tracking-wider">房地比 / 適用稅率</div>
-            <div id="hero-stat-ratio" class="font-num text-sm sm:text-base font-medium text-white mt-0.5">20.0% / 32%</div>
-          </div>
-          <div class="rounded-lg bg-white/[0.04] px-3.5 py-2.5 border border-white/[0.06]">
-            <div class="text-[10px] text-white/50 tracking-wider">豪宅門檻檢核</div>
-            <div id="hero-stat-luxury" class="text-xs sm:text-sm font-medium text-[#C5B8A8] mt-0.5 truncate">非豪宅標準</div>
+
+          <div id="line-preview-box" class="hidden pt-2">
+            <pre id="line-report-textarea" class="text-xs font-sans text-white/80 bg-black/40 border border-white/10 rounded-xl p-4 whitespace-pre-wrap leading-relaxed overflow-x-auto"></pre>
           </div>
         </div>
+      </div>
 
-        <!-- Action Buttons: One-Click Copy for LINE -->
-        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <button type="button" onclick="copyLineReport()"
-            class="flex-1 py-3.5 px-6 rounded-xl bg-[#C5B8A8] hover:bg-[#d4c8b8] active:scale-[0.99] text-obsidian font-medium text-sm tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-            </svg>
-            <span>一鍵複製試算結果（LINE 客戶專用排版）</span>
-          </button>
-
-          <button type="button" onclick="toggleLinePreview()"
-            class="py-3.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white/90 text-xs tracking-wider transition-all border border-white/15 shrink-0">
-            預覽報告文字
-          </button>
-        </div>
-
-        <!-- Collapsible LINE Report Text Preview -->
-        <div id="line-preview-box" class="hidden pt-2">
-          <pre id="line-report-textarea" class="text-xs font-sans text-white/80 bg-black/40 border border-white/10 rounded-xl p-4 whitespace-pre-wrap leading-relaxed overflow-x-auto"></pre>
-        </div>
+      <!-- Final Page Bottom Navigation -->
+      <div class="flex items-center justify-between pt-2">
+        <button type="button" onclick="goBackFromFinal()"
+          class="px-5 py-3 rounded-xl bg-white border border-black/[0.12] hover:border-obsidian text-slateText hover:text-obsidian text-xs sm:text-sm font-medium tracking-wider transition-all shadow-2xs">
+          ← 上一步（修改填寫資料）
+        </button>
+        <button type="button" onclick="restartWizard()"
+          class="px-6 py-3 rounded-xl bg-champagneSoft hover:bg-champagne/30 text-obsidian text-xs sm:text-sm font-medium tracking-wider transition-all border border-champagne/30">
+          ↺ 重新開始新試算（回第一頁）
+        </button>
       </div>
     </section>
-
-    <!-- Footer Signature -->
-    <footer class="pt-4 pb-8 text-center space-y-2 text-xs text-mist">
-      <div class="flex items-center justify-center gap-2 font-serif text-obsidian tracking-[0.2em]">
-        <span>台南看好房</span>
-        <span class="text-champagne">•</span>
-        <span>張英泓</span>
-        <span class="text-champagne">•</span>
-        <a href="tel:0962062425" class="font-num hover:text-champagne transition-colors">0962-062-425</a>
-      </div>
-      <p class="text-[11px] text-mist/80 max-w-md mx-auto">
-        本試算結果僅供不動產稅務規劃與實價拆算參考，實際應納稅額以國稅局及地方稅務局最終核定之稅單與申報憑證為準。
-      </p>
-    </footer>
 
   </main>
 
-  <!-- =========================================================================================
-       STANDALONE LUXURY REFERENCE & GLOSSARY MODAL (純查閱與名詞解釋彈窗，不更動背景試算結果)
-       Triggered from STEP 01 Top-Right Buttons & Inline (?) Badges
-  ========================================================================================== -->
+  <!-- Minimalist Footer -->
+  <footer class="py-5 text-center space-y-1.5 text-xs text-mist border-t border-black/[0.05]">
+    <div class="flex items-center justify-center gap-2 font-serif text-obsidian tracking-[0.2em]">
+      <span>永慶銘星</span>
+      <span class="text-champagne">•</span>
+      <span>張英泓</span>
+      <span class="text-champagne">•</span>
+      <a href="tel:0962062425" class="font-num hover:text-champagne transition-colors">0962-062-425</a>
+    </div>
+    <p class="text-[11px] text-mist/80">
+      本試算結果僅供不動產稅務規劃參考，實際應納稅額以國稅局及地方稅務局最終核定為準。
+    </p>
+  </footer>
+
+  <!-- =========================================================================
+       LUXURY VERDICT DIALOG MODAL (Step 2A 按下送出後跳出之「豪宅判定結果視窗」)
+  ========================================================================== -->
+  <div id="luxury-verdict-modal" onclick="closeLuxuryVerdictModal(event)"
+    class="fixed inset-0 z-50 bg-obsidian/60 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div onclick="event.stopPropagation()"
+      class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-hero border border-black/[0.08] space-y-5 step-animate">
+      <div class="text-center space-y-2">
+        <span class="text-[10px] font-serif uppercase tracking-[0.22em] text-champagne">Luxury Threshold Verdict</span>
+        <h3 class="font-serif text-xl font-semibold text-obsidian">舊制豪宅門檻・判定結果</h3>
+      </div>
+
+      <div id="verdict-card-box" class="rounded-xl p-5 border text-center space-y-2">
+        <div id="verdict-badge" class="inline-block text-xs font-semibold px-3 py-1 rounded-full">
+          認定結果：非豪宅
+        </div>
+        <div id="verdict-title" class="font-serif text-2xl font-bold text-obsidian">
+          適用「非豪宅」標準認定
+        </div>
+        <p id="verdict-desc" class="text-xs text-slateText leading-relaxed">
+          總價與拆算單坪皆未達豪宅認定門檻，下一頁將為您載入「非豪宅（房屋評定現值 × 核定稅率）」資料表單。
+        </p>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <button type="button" onclick="confirmVerdictAndProceed()"
+          class="w-full py-3.5 px-5 rounded-xl bg-obsidian hover:bg-obsidian/90 text-white text-sm font-medium tracking-wider transition-all shadow-md">
+          確認結果，進入下一頁填寫資料 →
+        </button>
+        <button type="button" onclick="overrideVerdictAndProceed()" id="verdict-override-btn"
+          class="w-full py-2.5 px-4 rounded-xl bg-[#FAF9F7] hover:bg-champagneSoft text-slateText hover:text-obsidian text-xs transition-all border border-black/[0.06]">
+          我想改用「豪宅」公式試算 →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       STANDALONE REFERENCE & GLOSSARY MODAL (頂部右上角雙按鈕彈窗，不影響背景試算)
+  ========================================================================== -->
   <div id="reference-modal-backdrop" onclick="closeReferenceModal(event)"
     class="fixed inset-0 z-50 bg-obsidian/55 backdrop-blur-xs hidden items-center justify-center p-3 sm:p-5">
     <div onclick="event.stopPropagation()"
-      class="bg-white rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-hero border border-black/[0.08] overflow-hidden fade-enter">
+      class="bg-white rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-hero border border-black/[0.08] overflow-hidden step-animate">
 
       <!-- Modal Header -->
       <div class="px-5 sm:px-7 py-4 bg-[#FAF9F7] border-b border-black/[0.06] flex items-center justify-between gap-3 shrink-0">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-[10px] font-serif uppercase tracking-[0.2em] text-champagne">Tax &amp; Legal Reference Atelier</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-champagneSoft text-champagneDark border border-champagne/20">純查閱模式・不影響背景試算數值</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-champagneSoft text-champagneDark border border-champagne/20">純查閱模式・不影響試算進度</span>
           </div>
           <h3 class="font-serif text-base sm:text-lg font-semibold text-obsidian tracking-wider mt-0.5">
             現在賣房怎麼算稅金？新舊制圖解與稅務名詞速查
@@ -928,56 +1243,29 @@
         </button>
       </div>
 
-      <!-- Modal Navigation Tabs (7 Tabs: Timeline + 6 Glossaries) -->
+      <!-- Modal Tabs -->
       <div class="px-5 sm:px-7 py-3 bg-white border-b border-black/[0.06] overflow-x-auto shrink-0">
-        <div class="flex items-center gap-1.5 min-w-max" role="tablist">
-          <button type="button" onclick="switchModalTab('timeline')" id="mtab-timeline"
-            class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">
-            📊 新舊制時間軸圖解
-          </button>
-          <button type="button" onclick="switchModalTab('tainan')" id="mtab-tainan"
-            class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">
-            ① 臺南市37區核定稅率
-          </button>
-          <button type="button" onclick="switchModalTab('luxury')" id="mtab-luxury"
-            class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">
-            ② 舊制豪宅認定標準
-          </button>
-          <button type="button" onclick="switchModalTab('newtax')" id="mtab-newtax"
-            class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">
-            ③ 房地合一稅率表
-          </button>
-          <button type="button" onclick="switchModalTab('cost')" id="mtab-cost"
-            class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">
-            ④ 取得成本認列規範
-          </button>
-          <button type="button" onclick="switchModalTab('expense')" id="mtab-expense"
-            class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">
-            ⑤ 移轉費用與不可列舉稅費
-          </button>
-          <button type="button" onclick="switchModalTab('land')" id="mtab-land"
-            class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">
-            ⑥ 土地漲價總數額定義
-          </button>
+        <div class="flex items-center gap-1.5 min-w-max">
+          <button type="button" onclick="switchModalTab('timeline')" id="mtab-timeline" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">📊 新舊制時間軸圖解</button>
+          <button type="button" onclick="switchModalTab('tainan')" id="mtab-tainan" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">① 臺南市37區核定稅率</button>
+          <button type="button" onclick="switchModalTab('luxury')" id="mtab-luxury" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">② 舊制豪宅認定標準</button>
+          <button type="button" onclick="switchModalTab('newtax')" id="mtab-newtax" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">③ 房地合一稅率表</button>
+          <button type="button" onclick="switchModalTab('cost')" id="mtab-cost" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">④ 取得成本認列規範</button>
+          <button type="button" onclick="switchModalTab('expense')" id="mtab-expense" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">⑤ 移轉費用與不可列舉稅費</button>
+          <button type="button" onclick="switchModalTab('land')" id="mtab-land" class="modal-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all border">⑥ 土地漲價總數額定義</button>
         </div>
       </div>
 
-      <!-- Modal Scrollable Content Body -->
+      <!-- Modal Body -->
       <div class="p-5 sm:p-7 overflow-y-auto space-y-5 flex-1">
-
-        <!-- MODAL PANEL 0: Timeline Flowchart (新舊制時間軸圖解 - 完整重現手繪架構圖) -->
-        <div id="mpanel-timeline" class="modal-panel space-y-5 fade-enter">
+        <!-- Panel: Timeline -->
+        <div id="mpanel-timeline" class="modal-panel space-y-5">
           <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.06] flex flex-wrap items-center justify-between gap-2">
-            <div class="text-xs text-slateText">
-              依不動產<strong class="text-obsidian">「取得時間點」</strong>決定適用舊制（財產交易所得稅）或新制（房地合一稅）：
-            </div>
-            <span class="text-[11px] font-serif text-champagneDark">台南看好房｜張英泓 整理製作</span>
+            <div class="text-xs text-slateText">依不動產<strong class="text-obsidian">「取得時間點」</strong>決定適用舊制（財產交易所得稅）或新制（房地合一稅）：</div>
+            <span class="text-[11px] font-serif text-champagneDark">永慶銘星｜張英泓 整理製作</span>
           </div>
 
-          <!-- Visual Timeline Steps -->
           <div class="relative pl-6 sm:pl-8 space-y-6 before:content-[''] before:absolute before:left-2.5 sm:before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-champagne/40">
-
-            <!-- Stage 1: Pre 101/8/1 -->
             <div class="relative bg-white rounded-xl p-4 sm:p-5 border border-black/[0.08] shadow-2xs space-y-3">
               <span class="absolute -left-[23px] sm:-left-[27px] top-5 w-3.5 h-3.5 rounded-full bg-[#D96B6B] ring-4 ring-white"></span>
               <div class="flex flex-wrap items-center justify-between gap-2">
@@ -991,23 +1279,14 @@
                 <div class="p-3 rounded-lg bg-[#FAF9F7] border border-black/[0.05]">
                   <div class="font-semibold text-obsidian mb-1">▪ 非豪宅算法</div>
                   <p class="font-num text-slateText">房屋評定現值 × 行政區核定稅率 ＝ 獲利</p>
-                  <p class="text-[11px] text-mist mt-1">（此獲利併入個人綜合所得稅課稅）</p>
                 </div>
                 <div class="p-3 rounded-lg bg-[#FAF9F7] border border-black/[0.05]">
                   <div class="font-semibold text-obsidian mb-1">▪ 豪宅算法</div>
                   <p class="font-num text-slateText">售價 × 房地比 × 20% ＝ 獲利</p>
-                  <p class="text-[11px] text-mist mt-1">房地比 ＝ 房屋評定現值 ÷ (房屋現值＋土地現值)</p>
                 </div>
               </div>
             </div>
 
-            <!-- Milestone Marker: 101/8/1 -->
-            <div class="relative flex items-center gap-2 text-xs font-num text-champagneDark font-medium py-0.5">
-              <span class="w-2 h-2 rounded-full bg-champagne -ml-[19px] sm:-ml-[23px]"></span>
-              <span>101 / 08 / 01 實價登錄正式上路</span>
-            </div>
-
-            <!-- Stage 2: 101/8/1 ~ 104/12/31 -->
             <div class="relative bg-white rounded-xl p-4 sm:p-5 border border-black/[0.08] shadow-2xs space-y-2.5">
               <span class="absolute -left-[23px] sm:-left-[27px] top-5 w-3.5 h-3.5 rounded-full bg-[#4E8C6F] ring-4 ring-white"></span>
               <div class="flex flex-wrap items-center justify-between gap-2">
@@ -1018,18 +1297,10 @@
                 <span class="text-[11px] text-mist">舊制・併入個人綜合所得稅課稅</span>
               </div>
               <div class="p-3 rounded-lg bg-[#FAF9F7] border border-black/[0.05] text-xs">
-                <div class="font-semibold text-obsidian mb-1">▪ 核實認定公式</div>
                 <p class="font-num text-slateText">(售價 － 取得成本 － 移轉費用) × 房地比 ＝ 獲利（併入個人綜合所得稅課稅）</p>
               </div>
             </div>
 
-            <!-- Milestone Marker: 105/1/1 -->
-            <div class="relative flex items-center gap-2 text-xs font-num text-champagneDark font-medium py-0.5">
-              <span class="w-2 h-2 rounded-full bg-champagne -ml-[19px] sm:-ml-[23px]"></span>
-              <span>105 / 01 / 01 房地合一稅正式上路</span>
-            </div>
-
-            <!-- Stage 3: Post 105/1/1 -->
             <div class="relative bg-white rounded-xl p-4 sm:p-5 border border-black/[0.08] shadow-2xs space-y-2.5">
               <span class="absolute -left-[23px] sm:-left-[27px] top-5 w-3.5 h-3.5 rounded-full bg-obsidian ring-4 ring-white"></span>
               <div class="flex flex-wrap items-center justify-between gap-2">
@@ -1040,253 +1311,114 @@
                 <span class="text-[11px] text-champagneDark font-medium">新制・過戶後30日內分離課稅</span>
               </div>
               <div class="p-3 rounded-lg bg-[#FAF9F7] border border-black/[0.05] text-xs space-y-1">
-                <div class="font-semibold text-obsidian">▪ 房地合一 2.0 / 3.0 公式</div>
-                <p class="font-num text-slateText">(售價 － 取得成本 － 移轉費用 － 土地漲價總數額) ＝ 獲利（課稅所得）</p>
-                <p class="font-num text-obsidian font-medium">獲利 × 房地合一持有期間稅率 ＝ 要繳的稅金（分離課稅）</p>
+                <p class="font-num text-slateText">(售價 － 取得成本 － 移轉費用 － 土地漲價總數額) ＝ 獲利</p>
+                <p class="font-num text-obsidian font-medium">獲利 × 房地合一稅率 ＝ 要繳的稅金（分離課稅）</p>
               </div>
             </div>
-
           </div>
         </div>
 
-        <!-- MODAL PANEL 1: Tainan 37 Districts Official Tax Rates (純查閱表，點擊不會改動計算機) -->
-        <div id="mpanel-tainan" class="modal-panel hidden space-y-4 fade-enter">
-          <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.05] text-xs text-slateText leading-relaxed">
+        <!-- Panel 1: Tainan 37 Districts -->
+        <div id="mpanel-tainan" class="modal-panel hidden space-y-4">
+          <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.05] text-xs text-slateText">
             <strong class="text-obsidian text-sm block mb-1">臺南市「標準認定－非豪宅」37 行政區核定稅率總表</strong>
-            適用 101/8/1 以前取得且未達豪宅門檻之案件，算法為：<strong class="text-obsidian">房屋評定現值 × 行政區核定稅率 ＝ 財產交易所得（獲利）</strong>。
+            算法：房屋評定現值 × 行政區核定稅率 ＝ 財產交易所得（獲利）。
           </div>
-
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">①</span><strong class="text-obsidian">東區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">32%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">②</span><strong class="text-obsidian">安南區、北區、中西區、安平區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">30%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">③</span><strong class="text-obsidian">永康區、南區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">28%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">④</span><strong class="text-obsidian">善化區、新市區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">26%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑤</span><strong class="text-obsidian">歸仁區、仁德區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">25%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑥</span><strong class="text-obsidian">安定區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">24%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑦</span><strong class="text-obsidian">新營區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">21%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑧</span><strong class="text-obsidian">官田區、西港區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">20%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑨</span><strong class="text-obsidian">麻豆區、新化區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">19%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑩</span><strong class="text-obsidian">柳營區、佳里區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">18%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑪</span><strong class="text-obsidian">關廟區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">17%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑫</span><strong class="text-obsidian">鹽水區、學甲區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">16%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑬</span><strong class="text-obsidian">六甲區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">15%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑭</span><strong class="text-obsidian">玉井區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">14%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑮</span><strong class="text-obsidian">白河、後壁、東山、下營、山上區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">12%</span>
-            </div>
-            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑯</span><strong class="text-obsidian">將軍區、七股區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">11%</span>
-            </div>
-            <div class="sm:col-span-2 p-3 rounded-xl border border-black/[0.06] bg-white flex items-center justify-between">
-              <div><span class="text-champagne font-num mr-1.5">⑰</span><strong class="text-obsidian">龍崎區、北門區、左鎮區、大內區、楠西區、南化區</strong></div>
-              <span class="font-num font-semibold text-obsidian bg-champagneSoft px-2.5 py-0.5 rounded">8%</span>
-            </div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>① 東區</span><strong class="font-num">32%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>② 安南、北區、中西、安平區</span><strong class="font-num">30%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>③ 永康區、南區</span><strong class="font-num">28%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>④ 善化區、新市區</span><strong class="font-num">26%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑤ 歸仁區、仁德區</span><strong class="font-num">25%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑥ 安定區</span><strong class="font-num">24%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑦ 新營區</span><strong class="font-num">21%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑧ 官田區、西港區</span><strong class="font-num">20%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑨ 麻豆區、新化區</span><strong class="font-num">19%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑩ 柳營區、佳里區</span><strong class="font-num">18%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑪ 關廟區</span><strong class="font-num">17%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑫ 鹽水區、學甲區</span><strong class="font-num">16%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑬ 六甲區</span><strong class="font-num">15%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑭ 玉井區</span><strong class="font-num">14%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑮ 白河、後壁、東山、下營、山上</span><strong class="font-num">12%</strong></div>
+            <div class="p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑯ 將軍區、七股區</span><strong class="font-num">11%</strong></div>
+            <div class="sm:col-span-2 p-3 rounded-xl border border-black/[0.06] bg-white flex justify-between"><span>⑰ 龍崎、北門、左鎮、大內、楠西、南化區</span><strong class="font-num">8%</strong></div>
           </div>
         </div>
 
-        <!-- MODAL PANEL 2: Old Regime Luxury Thresholds (舊制豪宅認定標準) -->
-        <div id="mpanel-luxury" class="modal-panel hidden space-y-4 fade-enter">
-          <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.05] space-y-2 text-xs text-slateText leading-relaxed">
-            <p class="font-semibold text-obsidian text-sm">舊制豪宅認定標準（總價或單坪擇一超過即認定）</p>
-            <p>如果有達成以下四點任意條件，則用豪宅標準計算：<strong class="text-obsidian">售價 × 房地比 × 20% ＝ 獲利</strong>（併入綜合所得稅課稅）。</p>
-            <p class="text-[11px] text-champagneDark">＊每坪單價定義：以「不含車位房地總成交金額」除以「不含車位房屋所有權登記總坪數」計算。</p>
+        <!-- Panel 2: Luxury Thresholds -->
+        <div id="mpanel-luxury" class="modal-panel hidden space-y-4">
+          <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.05] text-xs text-slateText space-y-1">
+            <strong class="text-obsidian text-sm block">舊制豪宅認定標準（總價或單坪擇一超過即認定）</strong>
+            <p>每坪單價定義：以「不含車位房地總成交金額」除以「不含車位房屋所有權登記總坪數」計算。</p>
           </div>
-
           <div class="overflow-x-auto rounded-xl border border-black/[0.06]">
             <table class="w-full text-left text-xs">
               <thead class="bg-[#FAF9F7] text-slateText border-b border-black/[0.06]">
-                <tr>
-                  <th class="py-3 px-4 font-medium">適用縣市區域</th>
-                  <th class="py-3 px-4 font-medium">房地總成交金額（含車位）</th>
-                  <th class="py-3 px-4 font-medium">不含車位每坪單價</th>
-                </tr>
+                <tr><th class="py-3 px-4">適用縣市區域</th><th class="py-3 px-4">含車位總成交金額</th><th class="py-3 px-4">不含車位每坪單價</th></tr>
               </thead>
               <tbody class="divide-y divide-black/[0.05] font-num">
-                <tr>
-                  <td class="py-3 px-4 font-sans font-medium text-obsidian">（一）臺北市</td>
-                  <td class="py-3 px-4">6,000 萬元以上</td>
-                  <td class="py-3 px-4 text-dangerMuted font-semibold">120 萬元以上</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-sans font-medium text-obsidian">（二）新北市</td>
-                  <td class="py-3 px-4">4,000 萬元以上</td>
-                  <td class="py-3 px-4 text-dangerMuted font-semibold">75 萬元以上</td>
-                </tr>
-                <tr class="bg-champagneSoft/40">
-                  <td class="py-3 px-4 font-sans font-medium text-obsidian">（三）桃園市、新竹縣、新竹市、臺中市、臺南市及高雄市</td>
-                  <td class="py-3 px-4 font-semibold">3,000 萬元以上</td>
-                  <td class="py-3 px-4 text-dangerMuted font-semibold">50 萬元以上</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-sans font-medium text-obsidian">（四）其他地區</td>
-                  <td class="py-3 px-4">2,200 萬元以上</td>
-                  <td class="py-3 px-4 text-dangerMuted font-semibold">35 萬元以上</td>
-                </tr>
+                <tr><td class="py-3 px-4 font-sans font-medium text-obsidian">（一）臺北市</td><td class="py-3 px-4">6,000 萬元以上</td><td class="py-3 px-4 text-dangerMuted font-semibold">120 萬元以上</td></tr>
+                <tr><td class="py-3 px-4 font-sans font-medium text-obsidian">（二）新北市</td><td class="py-3 px-4">4,000 萬元以上</td><td class="py-3 px-4 text-dangerMuted font-semibold">75 萬元以上</td></tr>
+                <tr class="bg-champagneSoft/40"><td class="py-3 px-4 font-sans font-medium text-obsidian">（三）桃園、新竹縣市、臺中、臺南、高雄市</td><td class="py-3 px-4 font-semibold">3,000 萬元以上</td><td class="py-3 px-4 text-dangerMuted font-semibold">50 萬元以上</td></tr>
+                <tr><td class="py-3 px-4 font-sans font-medium text-obsidian">（四）其他地區</td><td class="py-3 px-4">2,200 萬元以上</td><td class="py-3 px-4 text-dangerMuted font-semibold">35 萬元以上</td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- MODAL PANEL 3: House & Land Tax 2.0/3.0 Rates (房地合一稅率算法) -->
-        <div id="mpanel-newtax" class="modal-panel hidden space-y-4 fade-enter">
-          <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.05] space-y-2 text-xs text-slateText">
-            <p class="font-semibold text-obsidian text-sm">房地合一稅率算法（105/1/1 以後取得適用）</p>
-            <p>計算公式：<strong class="text-obsidian">(售價 － 成本 － 費用 － 土地漲價數額) ＝ 獲利</strong>，再以 <strong class="text-obsidian">獲利 × 房地合一稅率 ＝ 要繳的稅金</strong>（分離課稅）。</p>
-          </div>
-
+        <!-- Panel 3: House & Land Tax Rates -->
+        <div id="mpanel-newtax" class="modal-panel hidden space-y-4 text-xs">
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-            <div class="p-4 rounded-xl border border-black/[0.06] bg-white">
-              <div class="text-xs text-slateText">持有未逾 2 年</div>
-              <div class="font-num text-2xl font-semibold text-obsidian mt-1">45%</div>
-            </div>
-            <div class="p-4 rounded-xl border border-black/[0.06] bg-white">
-              <div class="text-xs text-slateText">持有 2 年未逾 5 年</div>
-              <div class="font-num text-2xl font-semibold text-obsidian mt-1">35%</div>
-            </div>
-            <div class="p-4 rounded-xl border border-black/[0.06] bg-white">
-              <div class="text-xs text-slateText">持有 5 年未逾 10 年</div>
-              <div class="font-num text-2xl font-semibold text-obsidian mt-1">20%</div>
-            </div>
-            <div class="p-4 rounded-xl border border-black/[0.06] bg-white">
-              <div class="text-xs text-slateText">持有超過 10 年</div>
-              <div class="font-num text-2xl font-semibold text-obsidian mt-1">15%</div>
-            </div>
+            <div class="p-4 rounded-xl border border-black/[0.06] bg-white"><div class="text-slateText">持有未逾 2 年</div><div class="font-num text-2xl font-semibold text-obsidian mt-1">45%</div></div>
+            <div class="p-4 rounded-xl border border-black/[0.06] bg-white"><div class="text-slateText">2 年未逾 5 年</div><div class="font-num text-2xl font-semibold text-obsidian mt-1">35%</div></div>
+            <div class="p-4 rounded-xl border border-black/[0.06] bg-white"><div class="text-slateText">5 年未逾 10 年</div><div class="font-num text-2xl font-semibold text-obsidian mt-1">20%</div></div>
+            <div class="p-4 rounded-xl border border-black/[0.06] bg-white"><div class="text-slateText">超過 10 年</div><div class="font-num text-2xl font-semibold text-obsidian mt-1">15%</div></div>
           </div>
-
-          <div class="p-4 rounded-xl bg-champagneSoft/70 border border-champagne/30 space-y-1.5 text-xs">
-            <div class="font-semibold text-obsidian flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded bg-obsidian text-white text-[10px]">自住優惠稅率</span>
-              <span>享有 400 萬免稅額 且超過部分 10% 優惠稅率</span>
-            </div>
-            <p class="text-slateText leading-relaxed">
-              適用條件：出售前連續自住滿 6 年，且本人或配偶或未成年子女設籍該址，無出租、無供營業登記使用。
-            </p>
+          <div class="p-4 rounded-xl bg-champagneSoft/70 border border-champagne/30 space-y-1">
+            <strong class="text-obsidian block">★ 自住優惠稅率（400 萬免稅額 ＋ 超過部分 10% 優惠稅率）</strong>
+            <p class="text-slateText">條件：連續自住滿 6 年且本人、配偶或未成年子女設籍該址，無出租、無營業登記使用。</p>
           </div>
         </div>
 
-        <!-- MODAL PANEL 4: Acquisition Cost Rules (一、取得成本) -->
-        <div id="mpanel-cost" class="modal-panel hidden space-y-4 fade-enter">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs leading-relaxed">
-            <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.06] space-y-2.5">
-              <div class="font-semibold text-successMuted text-sm flex items-center gap-1.5">
-                <span>✓ 一、取得成本（購入與重大改良支出）</span>
-              </div>
-              <p class="text-slateText">購入房屋土地時支付的價款，以及取得後能增加房屋價值或效能且年限超過 2 年的改良修繕支出：</p>
-              <ul class="list-disc pl-4 space-y-1 text-obsidian font-medium">
-                <li>購入價額</li>
-                <li>契稅、印花稅</li>
-                <li>代書費、公證費、鑑價費</li>
-                <li>仲介服務費</li>
-                <li>資本化裝修 / 改良費</li>
-              </ul>
-            </div>
-
-            <div class="p-4 rounded-xl bg-[#FDF8F8] border border-dangerMuted/20 space-y-2.5">
-              <div class="font-semibold text-dangerMuted text-sm flex items-center gap-1.5">
-                <span>✕ 成本「不得列舉」項目</span>
-              </div>
-              <ul class="list-disc pl-4 space-y-2 text-slateText">
-                <li><strong class="text-obsidian">房屋貸款利息：</strong>取得產權之後各期繳納的房屋貸款利息。</li>
-                <li><strong class="text-obsidian">家電、活動式家具：</strong>冷氣、電視、可移動衣櫃、沙發、窗簾等。</li>
-                <li><strong class="text-obsidian">消耗性日常修繕：</strong>例如油漆粉刷、壁紙更換、一般漏水防漏填縫、消耗品更換。</li>
-              </ul>
-            </div>
+        <!-- Panel 4: Acquisition Cost -->
+        <div id="mpanel-cost" class="modal-panel hidden grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs leading-relaxed">
+          <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.06] space-y-2">
+            <strong class="text-successMuted text-sm block">✓ 一、取得成本（可列舉項目）</strong>
+            <p class="text-slateText">購入價額、契稅、印花稅、代書費、公證費、鑑價費、仲介服務費、能增加房屋價值或效能且年限超過2年之資本化裝修/改良費。</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FDF8F8] border border-dangerMuted/20 space-y-2">
+            <strong class="text-dangerMuted text-sm block">✕ 成本「不得列舉」項目</strong>
+            <p class="text-slateText">1. 取得產權後繳納之房屋貸款利息。<br>2. 家電、活動式家具（冷氣、電視、衣櫃、沙發、窗簾）。<br>3. 消耗性日常修繕（油漆粉刷、壁紙、一般防漏填縫）。</p>
           </div>
         </div>
 
-        <!-- MODAL PANEL 5: Transfer Expenses & Non-Deductible Taxes (二、移轉費用) -->
-        <div id="mpanel-expense" class="modal-panel hidden space-y-4 fade-enter">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs leading-relaxed">
-            <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.06] space-y-2.5">
-              <div class="font-semibold text-obsidian text-sm">二、移轉費用（出售時產生之必要開銷）</div>
-              <p class="text-slateText">指交易過程中，為了完成出售、移轉不動產所直接支付的費用：<strong class="text-obsidian">仲介服務費、代書/地政士費、規費與登記費、搬遷費、合約載明由賣方負擔之騰空搬遷補償金</strong>。</p>
-              <div class="pt-2 border-t border-black/[0.06] space-y-1.5">
-                <div class="font-medium text-champagneDark">費用申報的兩種方式：</div>
-                <p><strong>1. 核實認列（列舉）：</strong>依上述合法憑證實報實銷，無金額上限（需全數附上單據與金流）。</p>
-                <p><strong>2. 設算認列（未提示憑證）：</strong>若無法提出憑證或單據不足，按<strong class="text-obsidian">成交價額的 3%</strong> 計算，最高以<strong class="text-obsidian">新臺幣 30 萬元</strong>為限。</p>
-              </div>
-            </div>
-
-            <div class="p-4 rounded-xl bg-[#FDF8F8] border border-dangerMuted/20 space-y-2.5">
-              <div class="font-semibold text-dangerMuted text-sm">✕ 不得列為成本或費用的常見稅費</div>
-              <ul class="list-disc pl-4 space-y-2 text-slateText">
-                <li><strong class="text-obsidian">持有期間稅費：</strong>房屋稅、地價稅、管理費、清潔費、公共水電瓦斯費。</li>
-                <li><strong class="text-obsidian">土地增值稅：</strong>土地增值稅不可列入費用，但繳納時所扣除的「土地漲價總數額」已直接自課稅所得中扣除（避免雙重課稅）。</li>
-                <li><strong class="text-obsidian">延遲利息與罰鍰：</strong>違約金、滯納金或罰鍰等非必要支出。</li>
-              </ul>
-            </div>
+        <!-- Panel 5: Transfer Expenses -->
+        <div id="mpanel-expense" class="modal-panel hidden grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs leading-relaxed">
+          <div class="p-4 rounded-xl bg-[#FAF9F7] border border-black/[0.06] space-y-2">
+            <strong class="text-obsidian text-sm block">二、移轉費用（出售必要開銷）</strong>
+            <p class="text-slateText">含出售仲介費、代書費、規費與登記費、搬遷費、賣方負擔之騰空補償金。<br><strong>1. 核實認列：</strong>依憑證實報實銷無上限。<br><strong>2. 設算認列：</strong>未提示憑證按成交價 3% 計算（上限 30 萬元）。</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#FDF8F8] border border-dangerMuted/20 space-y-2">
+            <strong class="text-dangerMuted text-sm block">✕ 不得列為成本或費用的常見稅費</strong>
+            <p class="text-slateText">1. 持有期間之房屋稅、地價稅、管理費、水電瓦斯費。<br>2. 土地增值稅（不可列費用，但土地漲價總數額可自獲利扣除）。<br>3. 違約金、滯納金或罰鍰。</p>
           </div>
         </div>
 
-        <!-- MODAL PANEL 6: Land Value Increment Definition (土地漲價總數額) -->
-        <div id="mpanel-land" class="modal-panel hidden space-y-3 fade-enter text-xs leading-relaxed">
-          <div class="p-5 rounded-xl bg-[#FAF9F7] border border-black/[0.06] space-y-3">
-            <div class="font-serif text-sm font-semibold text-obsidian">土地漲價總數額定義與上限公式</div>
-            <p class="text-slateText">
-              <strong class="text-obsidian">土地漲價總數額</strong>是指土地在所有權移轉時，扣除前次移轉現值（或原規定地價）及相關改良、重劃費用後的增值差額，但設有上限值：
-            </p>
-            <div class="p-3.5 rounded-lg bg-white border border-champagne/30 font-medium text-obsidian">
+        <!-- Panel 6: Land Increment -->
+        <div id="mpanel-land" class="modal-panel hidden text-xs leading-relaxed">
+          <div class="p-5 rounded-xl bg-[#FAF9F7] border border-black/[0.06] space-y-2">
+            <strong class="text-obsidian text-sm block">土地漲價總數額定義與上限</strong>
+            <p class="text-slateText">指土地所有權移轉時，扣除前次移轉現值及相關改良費用後的增值差額。</p>
+            <div class="p-3 rounded-lg bg-white border border-champagne/30 font-medium text-obsidian">
               房地合一稅之土地漲價總數額上限 ＝ 交易當年度公告土地現值 － 前次移轉現值
             </div>
-            <p class="text-mist">
-              備註：此項目僅於「新制・房地合一稅」計算課稅所得時減除，目的在於避免同一筆土地增值同時被課徵「土地增值稅」與「房地合一稅」。
-            </p>
           </div>
         </div>
-
       </div>
 
-      <!-- Modal Footer -->
       <div class="px-5 sm:px-7 py-3.5 bg-[#FAF9F7] border-t border-black/[0.06] flex items-center justify-between shrink-0">
-        <span class="text-[11px] text-mist">提示：點選上方分頁標籤可隨時切換查閱，關閉視窗即可回到原本試算進度</span>
-        <button type="button" onclick="closeReferenceModal()"
-          class="px-5 py-2 rounded-xl bg-obsidian hover:bg-obsidian/90 text-white text-xs font-medium tracking-wider transition-all">
-          關閉查閱視窗
-        </button>
+        <span class="text-[11px] text-mist">關閉此視窗即可回到原本填寫進度</span>
+        <button type="button" onclick="closeReferenceModal()" class="px-5 py-2 rounded-xl bg-obsidian text-white text-xs font-medium">關閉視窗</button>
       </div>
     </div>
   </div>
@@ -1300,28 +1432,72 @@
     </div>
   </div>
 
-  <!-- APPLICATION LOGIC (Pure Vanilla JS) -->
+  <!-- =========================================================================
+       WIZARD & CALCULATION ENGINE (Pure Vanilla JS)
+  ========================================================================== -->
   <script>
-    // --- Application State ---
+    // Central State
     const state = {
-      regime: 'standard',           // 'standard' (101/8/1以前), 'actual' (101/8/1~104/12/31), 'new' (105/1/1以後)
-      standardSubMode: 'auto',      // 'auto', 'normal' (非豪宅), 'luxury' (豪宅)
-      resolvedStandardMode: 'normal',
-      expenseMode: 'deemed',        // 'deemed' (設算3%上限30萬), 'actual' (核實輸入)
-      holdingRateKey: '20',         // '45', '35', '20', '15', 'self10'
-      incomeBracket: 20,            // 5, 12, 20, 30, 40 (%)
-      selectedDistrictName: '東區'
+      currentStep: '1',          // '1', '2a', '3a', '2b', '2c', 'final'
+      regime: 'standard',        // 'standard' | 'actual' | 'new'
+      standardCategory: 'normal',// 'normal' (非豪宅) | 'luxury' (豪宅)
+      selectedDistrictName: '東區',
+      incomeBracket: 20,         // 5, 12, 20, 30, 40 (%)
+      holdingRateKey: '20',      // '45', '35', '20', '15', 'self10'
+      salePriceWan: 2580,
+      costWan: 1800,
+      expenseWan: 30,
+      houseAssessedWan: 80,
+      landAssessedWan: 320,
+      landPing: 10
     };
 
-    // Region Luxury Thresholds (總價萬元, 單坪萬元)
     const LUXURY_THRESHOLDS = {
       tainan_major: { label: '桃竹中南高', totalWan: 3000, unitWan: 50 },
       taipei:       { label: '臺北市',     totalWan: 6000, unitWan: 120 },
       new_taipei:   { label: '新北市',     totalWan: 4000, unitWan: 75 },
-      other:        { label: '其他縣市',   totalWan: 2200, unitWan: 35 }
+      other:        { label: '其他地區',   totalWan: 2200, unitWan: 35 }
     };
 
-    // Format Helpers
+    // Glossary Content Dictionary for Side-by-Side Contextual Panels
+    const GLOSSARY_HTML = {
+      cost: `
+        <div class="p-3 rounded-lg bg-white border border-black/[0.05] space-y-1.5">
+          <strong class="text-successMuted block">✓ 一、取得成本（可列舉項目）</strong>
+          <p>購入價額、契稅、印花稅、代書費、公證費、鑑價費、買入仲介服務費、資本化裝修/改良費（效能超過2年）。</p>
+        </div>
+        <div class="p-3 rounded-lg bg-[#FDF8F8] border border-dangerMuted/20 space-y-1">
+          <strong class="text-dangerMuted block">✕ 成本不得列舉項目</strong>
+          <p>• 取得產權後各期房貸利息<br>• 冷氣、電視、活動衣櫃、沙發、窗簾等家電家具<br>• 油漆粉刷、壁紙更換、日常防漏填縫等消耗修繕</p>
+        </div>
+      `,
+      expense: `
+        <div class="p-3 rounded-lg bg-white border border-black/[0.05] space-y-1.5">
+          <strong class="text-obsidian block">✓ 二、移轉費用（兩種申報方式擇一）</strong>
+          <p><strong>1. 核實認列：</strong>出售仲介費、代書費、規費、搬遷費、賣方負擔之騰空補償金（憑證實報實銷無上限）。<br>
+          <strong>2. 設算認列：</strong>未提示憑證時，按<strong>成交價額 3%</strong> 設算（最高以 <strong>30 萬元</strong>為限）。</p>
+        </div>
+        <div class="p-3 rounded-lg bg-[#FDF8F8] border border-dangerMuted/20 space-y-1">
+          <strong class="text-dangerMuted block">✕ 不得列為費用之項目</strong>
+          <p>• 持有期間房屋稅、地價稅、管理費、水電瓦斯<br>• 土地增值稅金本身、違約金、滯納金</p>
+        </div>
+      `,
+      ratio: `
+        <div class="p-3 rounded-lg bg-white border border-black/[0.05] space-y-1.5">
+          <strong class="text-obsidian block">▪ 房地比公式與現值查閱</strong>
+          <p class="font-medium text-obsidian">房地比 ＝ 房屋評定現值 ÷ (房屋評定現值 ＋ 土地公告現值)</p>
+          <p>• <strong>房屋評定現值：</strong>見每年 5 月房屋稅單或契稅單。<br>• <strong>土地公告現值總額：</strong>土地謄本每平方公尺公告現值 × 土地總平方公尺（或每坪現值 × 土地持分坪數）。</p>
+        </div>
+      `,
+      land: `
+        <div class="p-3 rounded-lg bg-white border border-black/[0.05] space-y-1.5">
+          <strong class="text-obsidian block">▪ 土地漲價總數額（避免雙重課稅）</strong>
+          <p>土地增值稅本身不可列為費用，但計徵土增稅時的「土地漲價總數額」可直接自房地合一獲利中減除。</p>
+          <p class="p-2 rounded bg-champagneSoft text-obsidian font-medium">上限 ＝ 交易當年度公告土地現值 － 前次移轉現值</p>
+        </div>
+      `
+    };
+
     function fmtNum(val, decimals = 2) {
       if (isNaN(val) || !isFinite(val)) return '0.00';
       return Number(val).toLocaleString('zh-TW', {
@@ -1335,405 +1511,501 @@
       return Math.round(val).toLocaleString('zh-TW');
     }
 
-    // --- Regime Switching ---
-    function setRegime(regime) {
+    // --- Step 1 Selection ---
+    function selectRegimeOnStep1(regime) {
       state.regime = regime;
-      if (regime === 'standard') {
-        state.standardSubMode = 'auto';
-      }
-      updateRegimeUI();
-      handleLiveInput();
-    }
-
-    function setStandardSubMode(mode) {
-      state.standardSubMode = mode; // 'normal' or 'luxury'
-      document.getElementById('auto-detect-tag').textContent = '手動指定模式';
-      document.getElementById('auto-detect-tag').className = 'text-[10px] px-2 py-0.5 rounded bg-champagne text-white font-normal';
-      handleLiveInput();
-    }
-
-    function setExpenseMode(mode) {
-      state.expenseMode = mode;
-      const expInput = document.getElementById('input-transfer-expense');
-      const btnDeemed = document.getElementById('btn-exp-deemed');
-      const btnActual = document.getElementById('btn-exp-actual');
-
-      if (mode === 'deemed') {
-        expInput.readOnly = true;
-        btnDeemed.className = 'flex-1 py-1 rounded-md text-[11px] font-medium transition-all bg-obsidian text-white';
-        btnActual.className = 'flex-1 py-1 rounded-md text-[11px] font-medium transition-all text-slateText hover:text-obsidian';
-      } else {
-        expInput.readOnly = false;
-        expInput.focus();
-        btnActual.className = 'flex-1 py-1 rounded-md text-[11px] font-medium transition-all bg-obsidian text-white';
-        btnDeemed.className = 'flex-1 py-1 rounded-md text-[11px] font-medium transition-all text-slateText hover:text-obsidian';
-      }
-      handleLiveInput();
-    }
-
-    function setHoldingRate(rateKey) {
-      state.holdingRateKey = rateKey;
-      const keys = ['45', '35', '20', '15', 'self10'];
-      keys.forEach(k => {
-        const btn = document.getElementById('btn-hold-' + k);
-        if (!btn) return;
-        if (k === rateKey) {
-          btn.className = 'hold-btn p-3 rounded-xl border border-obsidian bg-champagneSoft/70 text-left transition-all shadow-2xs ring-1 ring-obsidian/20 ' + (k === 'self10' ? 'col-span-2 sm:col-span-1' : '');
+      const items = ['standard', 'actual', 'new'];
+      items.forEach(r => {
+        const card = document.getElementById('card-regime-' + r);
+        const dot = document.getElementById('dot-regime-' + r);
+        if (r === regime) {
+          card.className = 'text-left p-5 sm:p-6 rounded-2xl border-2 border-obsidian bg-[#FAF8F5] transition-all flex flex-col justify-between group relative shadow-md';
+          dot.className = 'w-3.5 h-3.5 rounded-full border-2 border-obsidian bg-obsidian';
         } else {
-          btn.className = 'hold-btn p-3 rounded-xl border border-black/[0.08] bg-white hover:border-champagne text-left transition-all ' + (k === 'self10' ? 'col-span-2 sm:col-span-1' : '');
+          card.className = 'text-left p-5 sm:p-6 rounded-2xl border border-black/[0.08] bg-white hover:border-champagne transition-all flex flex-col justify-between group relative';
+          dot.className = 'w-3 h-3 rounded-full border border-black/25 bg-transparent';
         }
       });
-      handleLiveInput();
+      updateProgressBar();
     }
 
+    function goNextFromStep1() {
+      if (state.regime === 'standard') {
+        goToStep('2a');
+      } else if (state.regime === 'actual') {
+        goToStep('2b');
+      } else {
+        goToStep('2c');
+      }
+    }
+
+    function goBackFromFinal() {
+      if (state.regime === 'standard') {
+        goToStep('3a');
+      } else if (state.regime === 'actual') {
+        goToStep('2b');
+      } else {
+        goToStep('2c');
+      }
+    }
+
+    function restartWizard() {
+      goToStep('1');
+    }
+
+    // --- Navigate Between Wizard Pages ---
+    function goToStep(stepId) {
+      state.currentStep = String(stepId);
+      const pages = ['1', '2a', '3a', '2b', '2c', 'final'];
+      pages.forEach(p => {
+        const el = document.getElementById('page-step-' + p);
+        if (el) {
+          if (p === state.currentStep) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+      });
+
+      updateProgressBar();
+      calculateAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProgressBar() {
+      const label = document.getElementById('wizard-progress-label');
+      const pill = document.getElementById('wizard-regime-pill');
+      const barsContainer = document.getElementById('wizard-progress-bars');
+
+      let totalSteps = state.regime === 'standard' ? 4 : 3;
+      let currentIdx = 1;
+      let stepTitle = '選擇取得時間與稅制';
+
+      if (state.regime === 'standard') {
+        pill.textContent = '標準認定（101/8/1 以前取得）';
+        if (state.currentStep === '1') { currentIdx = 1; stepTitle = '選擇取得時間與稅制'; }
+        else if (state.currentStep === '2a') { currentIdx = 2; stepTitle = '豪宅門檻判定（選填）'; }
+        else if (state.currentStep === '3a') { currentIdx = 3; stepTitle = state.standardCategory === 'normal' ? '填寫非豪宅課稅資料' : '填寫豪宅課稅資料'; }
+        else if (state.currentStep === 'final') { currentIdx = 4; stepTitle = '選擇綜所稅級距與試算結果'; }
+      } else if (state.regime === 'actual') {
+        pill.textContent = '核實認定（101/8/1 ~ 104/12/31 取得）';
+        if (state.currentStep === '1') { currentIdx = 1; stepTitle = '選擇取得時間與稅制'; }
+        else if (state.currentStep === '2b') { currentIdx = 2; stepTitle = '填寫核實認定資料'; }
+        else if (state.currentStep === 'final') { currentIdx = 3; stepTitle = '選擇綜所稅級距與試算結果'; }
+      } else {
+        pill.textContent = '房地合一稅 3.0（105/1/1 以後取得）';
+        if (state.currentStep === '1') { currentIdx = 1; stepTitle = '選擇取得時間與稅制'; }
+        else if (state.currentStep === '2c') { currentIdx = 2; stepTitle = '填寫房地合一稅資料'; }
+        else if (state.currentStep === 'final') { currentIdx = 3; stepTitle = '選擇持有期間稅率與試算結果'; }
+      }
+
+      label.textContent = `STEP 0${currentIdx} / 0${totalSteps} — ${stepTitle}`;
+      barsContainer.className = `grid grid-cols-${totalSteps} gap-2`;
+      let barsHtml = '';
+      for (let i = 1; i <= totalSteps; i++) {
+        barsHtml += `<div class="h-1.5 rounded-full transition-all ${i <= currentIdx ? 'bg-obsidian' : 'bg-black/10'}"></div>`;
+      }
+      barsContainer.innerHTML = barsHtml;
+    }
+
+    // --- Step 2A: Luxury Threshold Live Check & Verdict Modal ---
+    function updateStep2ALive() {
+      const priceWan = Math.max(0, parseFloat(document.getElementById('s2a-sale-price').value) || 0);
+      const regionKey = document.getElementById('s2a-region').value;
+      const totalPing = Math.max(0, parseFloat(document.getElementById('s2a-total-ping').value) || 0);
+      const parkPrice = Math.max(0, parseFloat(document.getElementById('s2a-parking-price').value) || 0);
+      const parkPing = Math.max(0, parseFloat(document.getElementById('s2a-parking-ping').value) || 0);
+
+      document.getElementById('s2a-price-hint').textContent = priceWan > 0 ? `NT$ ${fmtInt(priceWan * 10000)}` : '選填';
+
+      const netPrice = Math.max(0, priceWan - parkPrice);
+      const netPing = Math.max(0, totalPing - parkPing);
+      const unitPrice = netPing > 0 ? (netPrice / netPing) : 0;
+
+      document.getElementById('s2a-net-price').textContent = fmtNum(netPrice, 1);
+      document.getElementById('s2a-net-ping').textContent = fmtNum(netPing, 2);
+      document.getElementById('s2a-unit-price').textContent = netPing > 0 ? fmtNum(unitPrice, 2) : '0.00';
+
+      const threshold = LUXURY_THRESHOLDS[regionKey] || LUXURY_THRESHOLDS.tainan_major;
+      const isTotalLux = priceWan >= threshold.totalWan;
+      const isUnitLux = netPing > 0 && unitPrice >= threshold.unitWan;
+      const isLuxury = isTotalLux || isUnitLux;
+
+      const badge = document.getElementById('s2a-live-verdict-badge');
+      if (isLuxury) {
+        badge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-[#FDECEC] text-[#8B3A3A]';
+        badge.textContent = `目前預判：豪宅（達${threshold.label}門檻）`;
+      } else {
+        badge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-[#EAF4EF] text-[#2E624A]';
+        badge.textContent = `目前預判：非豪宅（未達${threshold.label}門檻）`;
+      }
+
+      return { priceWan, netPrice, netPing, unitPrice, threshold, isTotalLux, isUnitLux, isLuxury };
+    }
+
+    function submitLuxuryCheck() {
+      const check = updateStep2ALive();
+      state.standardCategory = check.isLuxury ? 'luxury' : 'normal';
+
+      // Populate Verdict Modal
+      const modal = document.getElementById('luxury-verdict-modal');
+      const cardBox = document.getElementById('verdict-card-box');
+      const badge = document.getElementById('verdict-badge');
+      const title = document.getElementById('verdict-title');
+      const desc = document.getElementById('verdict-desc');
+      const overrideBtn = document.getElementById('verdict-override-btn');
+
+      if (check.isLuxury) {
+        let reasons = [];
+        if (check.isTotalLux) reasons.push(`含車總價 ${fmtNum(check.priceWan, 0)} 萬 ≥ 門檻 ${fmtInt(check.threshold.totalWan)} 萬`);
+        if (check.isUnitLux) reasons.push(`拆算單坪 ${fmtNum(check.unitPrice, 2)} 萬 ≥ 門檻 ${check.threshold.unitWan} 萬`);
+        cardBox.className = 'rounded-xl p-5 border border-[#8B3A3A]/30 bg-[#FDF8F8] text-center space-y-2';
+        badge.className = 'inline-block text-xs font-semibold px-3 py-1 rounded-full bg-[#8B3A3A] text-white';
+        badge.textContent = `判定結果：符合「豪宅」標準`;
+        title.textContent = '本案認定為「豪宅」';
+        desc.textContent = `原因：${reasons.join('、')}。下一頁將為您開啟「豪宅標準認定（售價、房屋現值、土地現值、土地坪數）」表單。`;
+        overrideBtn.textContent = '我想手動改用「非豪宅」公式填寫 →';
+      } else {
+        cardBox.className = 'rounded-xl p-5 border border-[#2E624A]/25 bg-[#F4F9F6] text-center space-y-2';
+        badge.className = 'inline-block text-xs font-semibold px-3 py-1 rounded-full bg-[#2E624A] text-white';
+        badge.textContent = `判定結果：屬「非豪宅」標準`;
+        title.textContent = '本案認定為「非豪宅」';
+        desc.textContent = `未達${check.threshold.label}豪宅門檻（總價 ${fmtInt(check.threshold.totalWan)} 萬或單坪 ${check.threshold.unitWan} 萬）。下一頁將為您開啟「非豪宅（房屋評定現值 × 核定稅率）」表單。`;
+        overrideBtn.textContent = '我想手動改用「豪宅」公式填寫 →';
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLuxuryVerdictModal(e) {
+      if (e && e.target !== document.getElementById('luxury-verdict-modal')) return;
+      const modal = document.getElementById('luxury-verdict-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function confirmVerdictAndProceed() {
+      closeLuxuryVerdictModal();
+      setStandardCategory(state.standardCategory);
+      goToStep('3a');
+    }
+
+    function overrideVerdictAndProceed() {
+      closeLuxuryVerdictModal();
+      const nextCat = state.standardCategory === 'normal' ? 'luxury' : 'normal';
+      setStandardCategory(nextCat);
+      goToStep('3a');
+    }
+
+    // --- Step 3A: Switch between 非豪宅 and 豪宅 ---
+    function setStandardCategory(cat) {
+      state.standardCategory = cat;
+      const formNormal = document.getElementById('s3a-form-normal');
+      const formLuxury = document.getElementById('s3a-form-luxury');
+      const btnNormal = document.getElementById('s3a-switch-normal');
+      const btnLuxury = document.getElementById('s3a-switch-luxury');
+      const title = document.getElementById('s3a-title');
+
+      if (cat === 'normal') {
+        formNormal.classList.remove('hidden');
+        formLuxury.classList.add('hidden');
+        btnNormal.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition-all bg-obsidian text-white shadow-2xs';
+        btnLuxury.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slateText hover:text-obsidian';
+        title.textContent = '標準認定（非豪宅）・填寫課稅資料';
+      } else {
+        formNormal.classList.add('hidden');
+        formLuxury.classList.remove('hidden');
+        btnLuxury.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition-all bg-obsidian text-white shadow-2xs';
+        btnNormal.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slateText hover:text-obsidian';
+        title.textContent = '標準認定（豪宅）・填寫課稅資料';
+      }
+      updateProgressBar();
+      calculateAll();
+    }
+
+    function onDistrictChange() {
+      const sel = document.getElementById('s3a-district-select');
+      const opt = sel.options[sel.selectedIndex];
+      state.selectedDistrictName = opt.getAttribute('data-name') || '自訂';
+      if (sel.value !== 'custom') {
+        document.getElementById('s3a-standard-rate').value = sel.value;
+      }
+      calculateAll();
+    }
+
+    // --- Field Synchronization Across Steps ---
+    function syncSalePrice(source) {
+      let val = 0;
+      if (source === 's2a') {
+        val = parseFloat(document.getElementById('s2a-sale-price').value) || 0;
+        updateStep2ALive();
+      } else if (source === 's3a-lux') {
+        val = parseFloat(document.getElementById('s3a-lux-price').value) || 0;
+      } else if (source === 's2b') {
+        val = parseFloat(document.getElementById('s2b-price').value) || 0;
+      } else if (source === 's2c') {
+        val = parseFloat(document.getElementById('s2c-price').value) || 0;
+      }
+
+      if (val > 0) {
+        state.salePriceWan = val;
+        ['s3a-lux-price', 's2b-price', 's2c-price'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = val;
+        });
+      }
+      calculateAll();
+    }
+
+    function syncField(fieldKey, rawVal) {
+      const val = Math.max(0, parseFloat(rawVal) || 0);
+      if (fieldKey === 'houseAssessed') {
+        state.houseAssessedWan = val;
+        ['s3a-normal-house', 's3a-lux-house', 's2b-house'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = val;
+        });
+      } else if (fieldKey === 'landAssessed') {
+        state.landAssessedWan = val;
+        ['s3a-lux-land', 's2b-land'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = val;
+        });
+      } else if (fieldKey === 'landPing') {
+        state.landPing = val;
+        ['s3a-lux-land-ping', 's2b-land-ping'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = val;
+        });
+      } else if (fieldKey === 'cost') {
+        state.costWan = val;
+        ['s2b-cost', 's2c-cost'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = val;
+        });
+      } else if (fieldKey === 'expense') {
+        state.expenseWan = val;
+        ['s2b-expense', 's2c-expense'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = val;
+        });
+      }
+      calculateAll();
+    }
+
+    function applyDeemed3Percent() {
+      const price = state.salePriceWan || 0;
+      const deemed = Math.min(price * 0.03, 30);
+      const formatted = Number(deemed.toFixed(2));
+      syncField('expense', formatted);
+      document.getElementById('s2b-expense').value = formatted;
+      document.getElementById('s2c-expense').value = formatted;
+      showToast(`已套用 3% 設算移轉費用（法定上限 30 萬元）：${formatted} 萬元`);
+    }
+
+    function calcLandIncHelper() {
+      const cur = parseFloat(document.getElementById('s2c-helper-cur').value) || 0;
+      const prev = parseFloat(document.getElementById('s2c-helper-prev').value) || 0;
+      if (cur > 0 || prev > 0) {
+        const diff = Math.max(0, cur - prev);
+        document.getElementById('s2c-land-inc').value = Number(diff.toFixed(2));
+        calculateAll();
+      }
+    }
+
+    // --- Side-by-Side Glossary Switcher ---
+    function setSideGlossary(stepKey, tabKey) {
+      const contentBox = document.getElementById(`gbox-${stepKey}-content`);
+      if (contentBox && GLOSSARY_HTML[tabKey]) {
+        contentBox.innerHTML = GLOSSARY_HTML[tabKey];
+      }
+      const tabs = stepKey === '2b' ? ['cost', 'expense', 'ratio'] : ['cost', 'expense', 'land'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`gbtn-${stepKey}-${t}`);
+        if (!btn) return;
+        if (t === tabKey) {
+          btn.className = 'px-2 py-1 rounded text-[11px] bg-obsidian text-white font-medium transition-all';
+        } else {
+          btn.className = 'px-2 py-1 rounded text-[11px] bg-white text-slateText border border-black/[0.08] hover:border-obsidian transition-all';
+        }
+      });
+    }
+
+    // --- Final Page Tax Rate Controls ---
     function setIncomeBracket(rate) {
       state.incomeBracket = rate;
       [5, 12, 20, 30, 40].forEach(r => {
         const btn = document.getElementById('btn-inc-' + r);
         if (!btn) return;
         if (r === rate) {
-          btn.className = 'inc-btn px-2.5 py-1 rounded text-xs font-num transition-all bg-obsidian text-white font-semibold';
+          btn.className = 'inc-btn p-3 rounded-xl border-2 border-obsidian bg-[#FAF8F5] text-obsidian text-center transition-all shadow-2xs';
         } else {
-          btn.className = 'inc-btn px-2.5 py-1 rounded text-xs font-num transition-all text-slateText hover:text-obsidian';
+          btn.className = 'inc-btn p-3 rounded-xl border border-black/[0.08] bg-white hover:border-champagne text-slateText text-center transition-all';
         }
       });
-      handleLiveInput();
+      calculateAll();
     }
 
-    function onDistrictChange() {
-      const sel = document.getElementById('select-tainan-district');
-      const opt = sel.options[sel.selectedIndex];
-      const val = sel.value;
-      const districtName = opt.getAttribute('data-name') || '自訂';
-      state.selectedDistrictName = districtName;
-
-      const rateInput = document.getElementById('input-standard-rate');
-      if (val !== 'custom') {
-        rateInput.value = val;
-      } else {
-        rateInput.focus();
-      }
-      handleLiveInput();
-    }
-
-    // Convert raw NTD to Wan if user accidentally entered e.g. 800000 instead of 80
-    function convertUnitToWan(inputId) {
-      const el = document.getElementById(inputId);
-      const val = parseFloat(el.value) || 0;
-      if (val >= 10000) {
-        el.value = (val / 10000).toFixed(2).replace(/\.00$/, '');
-        handleLiveInput();
-      }
-    }
-
-    // Quick helper for Land Value Increment
-    function calcLandIncrementHelper() {
-      const cur = parseFloat(document.getElementById('helper-land-current').value) || 0;
-      const prev = parseFloat(document.getElementById('helper-land-prev').value) || 0;
-      if (cur > 0 || prev > 0) {
-        const diff = Math.max(0, cur - prev);
-        document.getElementById('input-land-increment').value = diff.toFixed(2).replace(/\.00$/, '');
-        handleLiveInput();
-      }
-    }
-
-    // Update Active Regime Buttons & Panel Visibility
-    function updateRegimeUI() {
-      const regimes = ['standard', 'actual', 'new'];
-      regimes.forEach(r => {
-        const btn = document.getElementById('btn-regime-' + r);
-        const dot = btn.querySelector('.regime-indicator');
-        if (r === state.regime) {
-          btn.className = 'regime-btn text-left p-4 rounded-xl border-2 border-obsidian bg-[#FAF8F5] transition-all relative overflow-hidden shadow-2xs';
-          dot.className = 'w-2.5 h-2.5 rounded-full bg-obsidian regime-indicator';
+    function setHoldingRate(rateKey) {
+      state.holdingRateKey = rateKey;
+      ['45', '35', '20', '15', 'self10'].forEach(k => {
+        const btn = document.getElementById('btn-hold-' + k);
+        if (!btn) return;
+        const spanClass = k === 'self10' ? 'col-span-2 sm:col-span-1 ' : '';
+        if (k === rateKey) {
+          btn.className = spanClass + 'hold-btn p-3.5 rounded-xl border-2 border-obsidian bg-[#FAF8F5] text-left transition-all shadow-2xs';
         } else {
-          btn.className = 'regime-btn text-left p-4 rounded-xl border border-black/[0.08] bg-white hover:border-champagne transition-all relative overflow-hidden';
-          dot.className = 'w-2 h-2 rounded-full bg-black/15 regime-indicator';
+          btn.className = spanClass + 'hold-btn p-3.5 rounded-xl border border-black/[0.08] bg-white hover:border-champagne text-left transition-all';
         }
       });
-
-      const panelStdMode = document.getElementById('panel-standard-mode');
-      const panelAssessed = document.getElementById('panel-assessed-values');
-      const panelCostExp = document.getElementById('panel-cost-expense');
-      const panelNewExtra = document.getElementById('panel-new-regime-extra');
-      const panelOldInc = document.getElementById('panel-old-income-tax');
-
-      if (state.regime === 'standard') {
-        panelStdMode.classList.remove('hidden');
-        panelAssessed.classList.remove('hidden');
-        panelCostExp.classList.add('hidden');
-        panelNewExtra.classList.add('hidden');
-        panelOldInc.classList.remove('hidden');
-      } else if (state.regime === 'actual') {
-        panelStdMode.classList.add('hidden');
-        panelAssessed.classList.remove('hidden');
-        panelCostExp.classList.remove('hidden');
-        panelNewExtra.classList.add('hidden');
-        panelOldInc.classList.remove('hidden');
-      } else {
-        panelStdMode.classList.add('hidden');
-        panelAssessed.classList.add('hidden');
-        panelCostExp.classList.remove('hidden');
-        panelNewExtra.classList.remove('hidden');
-        panelOldInc.classList.add('hidden');
-      }
+      calculateAll();
     }
 
-    // --- Core Live Calculation Engine ---
-    function handleLiveInput() {
-      // 1. Read Valuation & Split Inputs
-      const salePriceWan = Math.max(0, parseFloat(document.getElementById('input-sale-price').value) || 0);
-      const regionKey = document.getElementById('select-region').value;
-      const totalPing = Math.max(0, parseFloat(document.getElementById('input-total-ping').value) || 0);
-      const parkingPriceWan = Math.max(0, parseFloat(document.getElementById('input-parking-price').value) || 0);
-      const parkingPing = Math.max(0, parseFloat(document.getElementById('input-parking-ping').value) || 0);
+    // --- Master Calculation Engine ---
+    function calculateAll() {
+      const houseWan = state.houseAssessedWan;
+      const landWan = state.landAssessedWan;
+      const totalAssessed = houseWan + landWan;
+      const ratio = totalAssessed > 0 ? (houseWan / totalAssessed) : 0;
 
-      document.getElementById('sale-price-ntd-hint').textContent = `NT$ ${fmtInt(salePriceWan * 10000)}`;
+      // Update Step 3A & 2B & 2C Live Previews
+      document.getElementById('s3a-normal-house-ntd').textContent = `NT$ ${fmtInt(houseWan * 10000)} 元`;
+      document.getElementById('s3a-lux-ratio').textContent = `${fmtNum(ratio * 100, 2)}%`;
 
-      // Calculate Unit Price Ex-Parking
-      const netPriceWan = Math.max(0, salePriceWan - parkingPriceWan);
-      const netPing = Math.max(0, totalPing - parkingPing);
-      const unitPriceWan = netPing > 0 ? (netPriceWan / netPing) : 0;
-
-      document.getElementById('summary-net-price').textContent = fmtNum(netPriceWan, 1);
-      document.getElementById('summary-net-ping').textContent = fmtNum(netPing, 2);
-      document.getElementById('live-unit-price-badge').textContent = netPing > 0 ? fmtNum(unitPriceWan, 2) : '—';
-
-      // 2. Check Luxury Threshold (豪宅認定標準)
-      const threshold = LUXURY_THRESHOLDS[regionKey] || LUXURY_THRESHOLDS.tainan_major;
-      const isTotalLuxury = salePriceWan >= threshold.totalWan;
-      const isUnitLuxury = netPing > 0 && unitPriceWan >= threshold.unitWan;
-      const isLuxuryTriggered = isTotalLuxury || isUnitLuxury;
-
-      const luxuryBadge = document.getElementById('luxury-status-badge');
-      const luxuryReason = document.getElementById('luxury-reason-text');
-
-      let luxuryTriggerReasons = [];
-      if (isTotalLuxury) luxuryTriggerReasons.push(`總價滿 ${fmtInt(threshold.totalWan)} 萬`);
-      if (isUnitLuxury) luxuryTriggerReasons.push(`單坪滿 ${threshold.unitWan} 萬`);
-
-      if (isLuxuryTriggered) {
-        luxuryBadge.className = 'flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border border-champagne bg-obsidian text-white transition-all shadow-2xs';
-        luxuryBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#C5B8A8]"></span><span>已達${threshold.label}豪宅標準（點此看標準）</span>`;
-        luxuryReason.textContent = `觸發條件：${luxuryTriggerReasons.join('、')} → 符合舊制「豪宅」認定標準`;
-        luxuryReason.className = 'text-[11px] text-dangerMuted font-semibold';
-      } else {
-        luxuryBadge.className = 'flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border border-black/[0.08] bg-[#FAF9F7] text-slateText transition-all';
-        luxuryBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-successMuted"></span><span>未達${threshold.label}豪宅門檻（點此看標準）</span>`;
-        luxuryReason.textContent = `總價未滿 ${fmtInt(threshold.totalWan)} 萬 且 單坪未滿 ${threshold.unitWan} 萬 → 屬「非豪宅」標準`;
-        luxuryReason.className = 'text-[11px] text-champagneDark font-medium';
-      }
-
-      // 3. Determine Standard Sub-Mode (Non-Luxury vs Luxury)
-      if (state.standardSubMode === 'auto') {
-        state.resolvedStandardMode = isLuxuryTriggered ? 'luxury' : 'normal';
-        document.getElementById('auto-detect-tag').textContent = '系統依門檻自動判別';
-        document.getElementById('auto-detect-tag').className = 'text-[10px] px-2 py-0.5 rounded bg-obsidian text-white font-normal';
-      } else {
-        state.resolvedStandardMode = state.standardSubMode;
-      }
-
-      const btnStdNormal = document.getElementById('btn-std-normal');
-      const btnStdLuxury = document.getElementById('btn-std-luxury');
-      const panelTainanDistrict = document.getElementById('panel-tainan-district');
-
-      if (state.resolvedStandardMode === 'normal') {
-        btnStdNormal.className = 'px-3.5 py-1.5 rounded-md text-xs font-medium transition-all bg-obsidian text-white shadow-2xs';
-        btnStdLuxury.className = 'px-3.5 py-1.5 rounded-md text-xs font-medium transition-all text-slateText hover:text-obsidian';
-        panelTainanDistrict.classList.remove('hidden');
-      } else {
-        btnStdLuxury.className = 'px-3.5 py-1.5 rounded-md text-xs font-medium transition-all bg-obsidian text-white shadow-2xs';
-        btnStdNormal.className = 'px-3.5 py-1.5 rounded-md text-xs font-medium transition-all text-slateText hover:text-obsidian';
-        panelTainanDistrict.classList.add('hidden');
-      }
-
-      // 4. Read Assessed Values & Ratio (房屋評定現值 & 土地公告現值)
-      const houseAssessedWan = Math.max(0, parseFloat(document.getElementById('input-house-assessed').value) || 0);
-      const landAssessedWan = Math.max(0, parseFloat(document.getElementById('input-land-assessed').value) || 0);
-
-      document.getElementById('house-assessed-ntd-hint').textContent = `NT$ ${fmtInt(houseAssessedWan * 10000)}`;
-      document.getElementById('land-assessed-ntd-hint').textContent = `NT$ ${fmtInt(landAssessedWan * 10000)}`;
-
-      document.getElementById('unit-warning-house').classList.toggle('hidden', houseAssessedWan < 20000);
-      document.getElementById('unit-warning-land').classList.toggle('hidden', landAssessedWan < 50000);
-
-      const totalAssessedWan = houseAssessedWan + landAssessedWan;
-      const buildingLandRatio = totalAssessedWan > 0 ? (houseAssessedWan / totalAssessedWan) : 0;
-      document.getElementById('live-ratio-text').textContent = `${fmtNum(buildingLandRatio * 100, 2)}%`;
-
-      // 5. Read Cost & Transfer Expense
-      const costWan = Math.max(0, parseFloat(document.getElementById('input-acquisition-cost').value) || 0);
-      const expInput = document.getElementById('input-transfer-expense');
-      const expHint = document.getElementById('expense-mode-hint');
-
-      let transferExpenseWan = 0;
-      if (state.expenseMode === 'deemed') {
-        const rawThreePercent = salePriceWan * 0.03;
-        transferExpenseWan = Math.min(rawThreePercent, 30);
-        expInput.value = fmtNum(transferExpenseWan, 2).replace(/\.00$/, '');
-        if (rawThreePercent > 30) {
-          expHint.textContent = `售價 3% 為 ${fmtNum(rawThreePercent, 1)} 萬，受法定上限 30 萬元限制，以 30 萬元認列。`;
-        } else {
-          expHint.textContent = `系統自動按成交價 3% 設算認列（${fmtNum(transferExpenseWan, 2)} 萬元）。`;
-        }
-      } else {
-        transferExpenseWan = Math.max(0, parseFloat(expInput.value) || 0);
-        expHint.textContent = `目前採用「核實認列」，須檢附完整合法單據與金流證明（無金額上限）。`;
-      }
-
-      // 6. Calculate Final Profit & Tax according to Active Regime
       let profitWan = 0;
       let estimatedTaxWan = 0;
-      let bannerFormula = '';
-      let bannerMethod = '';
       let heroBadgeText = '';
       let heroTaxTag = '';
       let heroPrimaryLabel = '';
       let heroSecondaryLabel = '';
       let heroNoteRight = '';
       let heroFormulaDetail = '';
-      let heroRatioStat = '';
+      let finalFormulaPillText = '';
 
       if (state.regime === 'standard') {
-        bannerMethod = '隔年5月併入個人綜所稅申報';
+        document.getElementById('final-old-tax-selector').classList.remove('hidden');
+        document.getElementById('final-new-tax-selector').classList.add('hidden');
         heroTaxTag = '併入個人綜合所得稅課稅';
-        heroPrimaryLabel = '計算得出之「財產交易所得（獲利）」';
-        heroSecondaryLabel = `預估綜所稅應納稅額（按 ${state.incomeBracket}% 稅率級距試算）`;
+        heroPrimaryLabel = '計算得出之「財產交易所得（課稅獲利）」';
+        heroSecondaryLabel = `預估應納綜所稅金（按 ${state.incomeBracket}% 稅率級距試算）`;
 
-        if (state.resolvedStandardMode === 'normal') {
-          const stdRate = Math.max(0, parseFloat(document.getElementById('input-standard-rate').value) || 0);
-          profitWan = houseAssessedWan * (stdRate / 100);
+        if (state.standardCategory === 'normal') {
+          const stdRate = Math.max(0, parseFloat(document.getElementById('s3a-standard-rate').value) || 0);
+          profitWan = houseWan * (stdRate / 100);
           estimatedTaxWan = profitWan * (state.incomeBracket / 100);
 
-          bannerFormula = '【非豪宅】房屋評定現值 × 行政區核定稅率 ＝ 財產交易所得（獲利）';
+          finalFormulaPillText = '公式：房屋評定現值 × 核定稅率 ＝ 獲利';
           heroBadgeText = '101/8/1 以前取得｜舊制・標準認定（非豪宅）';
           heroNoteRight = `臺南市${state.selectedDistrictName}・核定稅率 ${stdRate}%`;
-          heroFormulaDetail = `房屋評定現值 ${fmtNum(houseAssessedWan, 2)} 萬 × 核定稅率 ${stdRate}% ＝ 財產交易所得（獲利）${fmtNum(profitWan, 2)} 萬元\n（此獲利併入個人綜合所得稅課稅，若按 ${state.incomeBracket}% 級距試算，預估稅金約 ${fmtNum(estimatedTaxWan, 2)} 萬元）`;
-          heroRatioStat = `核定稅率 ${stdRate}%`;
+          heroFormulaDetail = `房屋評定現值 ${fmtNum(houseWan, 2)} 萬 × 核定稅率 ${stdRate}% ＝ 課稅獲利 ${fmtNum(profitWan, 2)} 萬元\n併入個人綜所稅（按 ${state.incomeBracket}% 級距試算）：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 預估稅金 ${fmtNum(estimatedTaxWan, 2)} 萬元`;
         } else {
-          profitWan = salePriceWan * buildingLandRatio * 0.20;
+          const luxPrice = Math.max(0, parseFloat(document.getElementById('s3a-lux-price').value) || 0);
+          profitWan = luxPrice * ratio * 0.20;
           estimatedTaxWan = profitWan * (state.incomeBracket / 100);
 
-          bannerFormula = '【豪宅認定】售價 × 房地比 × 20% ＝ 財產交易所得（獲利）';
+          finalFormulaPillText = '公式：售價 × 房地比 × 20% ＝ 獲利';
           heroBadgeText = '101/8/1 以前取得｜舊制・標準認定（豪宅）';
-          heroNoteRight = `房地比 ${fmtNum(buildingLandRatio * 100, 2)}% × 法定 20%`;
-          heroFormulaDetail = `售價 ${fmtNum(salePriceWan, 1)} 萬 × 房地比 ${fmtNum(buildingLandRatio * 100, 2)}% [${fmtNum(houseAssessedWan, 1)}÷(${fmtNum(houseAssessedWan, 1)}+${fmtNum(landAssessedWan, 1)})] × 20% ＝ 財產交易所得（獲利）${fmtNum(profitWan, 2)} 萬元\n（此獲利併入個人綜合所得稅課稅，若按 ${state.incomeBracket}% 級距試算，預估稅金約 ${fmtNum(estimatedTaxWan, 2)} 萬元）`;
-          heroRatioStat = `房地比 ${fmtNum(buildingLandRatio * 100, 1)}%`;
+          heroNoteRight = `房地比 ${fmtNum(ratio * 100, 2)}%｜土地 ${fmtNum(state.landPing, 2)} 坪`;
+          heroFormulaDetail = `售價 ${fmtNum(luxPrice, 1)} 萬 × 房地比 ${fmtNum(ratio * 100, 2)}% [${fmtNum(houseWan, 1)}÷(${fmtNum(houseWan, 1)}+${fmtNum(landWan, 1)})] × 20% ＝ 課稅獲利 ${fmtNum(profitWan, 2)} 萬元\n併入個人綜所稅（按 ${state.incomeBracket}% 級距試算）：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 預估稅金 ${fmtNum(estimatedTaxWan, 2)} 萬元`;
         }
+
+        document.getElementById('s3a-lux-profit-preview').textContent = fmtNum(profitWan, 2);
+        document.getElementById('s3a-side-profit').textContent = `${fmtNum(profitWan, 2)} 萬元`;
+
       } else if (state.regime === 'actual') {
-        const rawGainWan = Math.max(0, salePriceWan - costWan - transferExpenseWan);
-        profitWan = rawGainWan * buildingLandRatio;
+        document.getElementById('final-old-tax-selector').classList.remove('hidden');
+        document.getElementById('final-new-tax-selector').classList.add('hidden');
+
+        const price = Math.max(0, parseFloat(document.getElementById('s2b-price').value) || 0);
+        const cost = Math.max(0, parseFloat(document.getElementById('s2b-cost').value) || 0);
+        const exp = Math.max(0, parseFloat(document.getElementById('s2b-expense').value) || 0);
+
+        const rawDiff = Math.max(0, price - cost - exp);
+        profitWan = rawDiff * ratio;
         estimatedTaxWan = profitWan * (state.incomeBracket / 100);
 
-        bannerFormula = '【核實認定】(售價 － 取得成本 － 移轉費用) × 房地比 ＝ 財產交易所得（獲利）';
-        bannerMethod = '隔年5月併入個人綜所稅申報';
+        document.getElementById('s2b-live-ratio').textContent = `${fmtNum(ratio * 100, 2)}%`;
+        document.getElementById('s2b-live-profit').textContent = `${fmtNum(profitWan, 2)} 萬元`;
+
+        finalFormulaPillText = '公式：(售價 － 成本 － 費用) × 房地比 ＝ 獲利';
         heroBadgeText = '101/8/1 ~ 104/12/31 取得｜舊制・核實認定';
         heroTaxTag = '併入個人綜合所得稅課稅';
-        heroPrimaryLabel = '計算得出之「財產交易所得（獲利）」';
-        heroSecondaryLabel = `預估綜所稅應納稅額（按 ${state.incomeBracket}% 稅率級距試算）`;
-        heroNoteRight = `房地比 ${fmtNum(buildingLandRatio * 100, 2)}%`;
-        heroFormulaDetail = `(售價 ${fmtNum(salePriceWan, 1)} 萬 － 成本 ${fmtNum(costWan, 1)} 萬 － 費用 ${fmtNum(transferExpenseWan, 2)} 萬) × 房地比 ${fmtNum(buildingLandRatio * 100, 2)}% ＝ 財產交易所得（獲利）${fmtNum(profitWan, 2)} 萬元\n（此獲利併入個人綜合所得稅課稅，若按 ${state.incomeBracket}% 級距試算，預估稅金約 ${fmtNum(estimatedTaxWan, 2)} 萬元）`;
-        heroRatioStat = `房地比 ${fmtNum(buildingLandRatio * 100, 1)}%`;
-      } else {
-        const landIncWan = Math.max(0, parseFloat(document.getElementById('input-land-increment').value) || 0);
-        profitWan = Math.max(0, salePriceWan - costWan - transferExpenseWan - landIncWan);
+        heroPrimaryLabel = '計算得出之「財產交易所得（課稅獲利）」';
+        heroSecondaryLabel = `預估應納綜所稅金（按 ${state.incomeBracket}% 稅率級距試算）`;
+        heroNoteRight = `房地比 ${fmtNum(ratio * 100, 2)}%｜土地 ${fmtNum(state.landPing, 2)} 坪`;
+        heroFormulaDetail = `(售價 ${fmtNum(price, 1)} 萬 － 成本 ${fmtNum(cost, 1)} 萬 － 費用 ${fmtNum(exp, 2)} 萬) × 房地比 ${fmtNum(ratio * 100, 2)}% ＝ 課稅獲利 ${fmtNum(profitWan, 2)} 萬元\n併入個人綜所稅（按 ${state.incomeBracket}% 級距試算）：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 預估稅金 ${fmtNum(estimatedTaxWan, 2)} 萬元`;
 
-        bannerFormula = '【房地合一】(售價 － 成本 － 費用 － 土地漲價數額) × 稅率 ＝ 應納稅額';
-        bannerMethod = '過戶完成次日起 30 日內分離課稅申報';
-        heroBadgeText = '105/1/1 以後取得｜新制・房地合一稅';
-        heroTaxTag = '分離課稅（過戶後30日內申報）';
+      } else {
+        document.getElementById('final-old-tax-selector').classList.add('hidden');
+        document.getElementById('final-new-tax-selector').classList.remove('hidden');
+
+        const price = Math.max(0, parseFloat(document.getElementById('s2c-price').value) || 0);
+        const cost = Math.max(0, parseFloat(document.getElementById('s2c-cost').value) || 0);
+        const exp = Math.max(0, parseFloat(document.getElementById('s2c-expense').value) || 0);
+        const landInc = Math.max(0, parseFloat(document.getElementById('s2c-land-inc').value) || 0);
+
+        profitWan = Math.max(0, price - cost - exp - landInc);
+        document.getElementById('s2c-live-profit').textContent = `${fmtNum(profitWan, 2)} 萬元`;
+
+        finalFormulaPillText = '公式：(售價 － 成本 － 費用 － 土地漲價數額) × 稅率';
+        heroBadgeText = '105/1/1 以後取得｜新制・房地合一稅 3.0';
+        heroTaxTag = '分離課稅（過戶完成次日起 30 日內申報）';
         heroPrimaryLabel = '課稅所得（扣除成本、費用與土增數額後獲利）';
 
         if (state.holdingRateKey === 'self10') {
-          const taxableAfterExemption = Math.max(0, profitWan - 400);
-          estimatedTaxWan = taxableAfterExemption * 0.10;
-          heroSecondaryLabel = '房地合一應納稅金（自住滿6年享400萬免稅＋10%）';
-          heroNoteRight = '自住優惠：免稅 400 萬・稅率 10%';
-          heroFormulaDetail = `課稅所得：售價 ${fmtNum(salePriceWan, 1)} 萬 － 成本 ${fmtNum(costWan, 1)} 萬 － 費用 ${fmtNum(transferExpenseWan, 2)} 萬 － 土地漲價數額 ${fmtNum(landIncWan, 1)} 萬 ＝ ${fmtNum(profitWan, 2)} 萬元\n自住優惠稅金：(${fmtNum(profitWan, 2)} 萬 － 免稅額 400 萬) × 10% ＝ 應繳稅金 ${fmtNum(estimatedTaxWan, 2)} 萬元`;
-          heroRatioStat = '自住 10% (免稅400萬)';
+          const taxableAfter400 = Math.max(0, profitWan - 400);
+          estimatedTaxWan = taxableAfter400 * 0.10;
+          heroSecondaryLabel = '房地合一應納稅金（自住滿 6 年享 400 萬免稅＋10%）';
+          heroNoteRight = '自住優惠：免稅 400 萬・超過部分 10%';
+          heroFormulaDetail = `課稅獲利：售價 ${fmtNum(price, 1)} 萬 － 成本 ${fmtNum(cost, 1)} 萬 － 費用 ${fmtNum(exp, 2)} 萬 － 土地漲價數額 ${fmtNum(landInc, 1)} 萬 ＝ ${fmtNum(profitWan, 2)} 萬元\n應納稅金：(${fmtNum(profitWan, 2)} 萬 － 自住免稅額 400 萬) × 10% ＝ 應繳稅金 ${fmtNum(estimatedTaxWan, 2)} 萬元`;
         } else {
-          const rateNum = parseFloat(state.holdingRateKey) || 20;
-          estimatedTaxWan = profitWan * (rateNum / 100);
-          heroSecondaryLabel = `房地合一應納稅金（持有期間稅率 ${rateNum}%）`;
-          heroNoteRight = `持有期間適用稅率 ${rateNum}%`;
-          heroFormulaDetail = `課稅所得：售價 ${fmtNum(salePriceWan, 1)} 萬 － 成本 ${fmtNum(costWan, 1)} 萬 － 費用 ${fmtNum(transferExpenseWan, 2)} 萬 － 土地漲價數額 ${fmtNum(landIncWan, 1)} 萬 ＝ ${fmtNum(profitWan, 2)} 萬元\n應納稅金：獲利 ${fmtNum(profitWan, 2)} 萬 × 稅率 ${rateNum}% ＝ 應繳稅金 ${fmtNum(estimatedTaxWan, 2)} 萬元`;
-          heroRatioStat = `合一稅率 ${rateNum}%`;
+          const rNum = parseFloat(state.holdingRateKey) || 20;
+          estimatedTaxWan = profitWan * (rNum / 100);
+          heroSecondaryLabel = `房地合一應納稅金（持有期間稅率 ${rNum}%）`;
+          heroNoteRight = `持有期間適用稅率 ${rNum}%`;
+          heroFormulaDetail = `課稅獲利：售價 ${fmtNum(price, 1)} 萬 － 成本 ${fmtNum(cost, 1)} 萬 － 費用 ${fmtNum(exp, 2)} 萬 － 土地漲價數額 ${fmtNum(landInc, 1)} 萬 ＝ ${fmtNum(profitWan, 2)} 萬元\n應納稅金：課稅獲利 ${fmtNum(profitWan, 2)} 萬 × 稅率 ${rNum}% ＝ 應繳稅金 ${fmtNum(estimatedTaxWan, 2)} 萬元`;
         }
       }
 
-      // 7. Update Banner & Hero Card DOM
-      document.getElementById('banner-formula-text').textContent = bannerFormula;
-      document.getElementById('banner-tax-method').textContent = bannerMethod;
-
+      // Update Final Step Hero Card
+      document.getElementById('final-formula-pill').textContent = finalFormulaPillText;
       document.getElementById('hero-regime-badge').textContent = heroBadgeText;
       document.getElementById('hero-tax-type-tag').textContent = heroTaxTag;
       document.getElementById('hero-primary-label').textContent = heroPrimaryLabel;
       document.getElementById('hero-secondary-label').textContent = heroSecondaryLabel;
-
       document.getElementById('hero-profit-wan').textContent = fmtNum(profitWan, 2);
       document.getElementById('hero-profit-ntd').textContent = `折合新臺幣：NT$ ${fmtInt(profitWan * 10000)} 元`;
-
       document.getElementById('hero-tax-wan').textContent = fmtNum(estimatedTaxWan, 2);
       document.getElementById('hero-tax-ntd').textContent = `折合新臺幣：NT$ ${fmtInt(estimatedTaxWan * 10000)} 元`;
-
       document.getElementById('hero-district-or-rate-note').textContent = heroNoteRight;
       document.getElementById('hero-formula-detail').textContent = heroFormulaDetail;
 
-      document.getElementById('hero-stat-unitprice').textContent = netPing > 0 ? `${fmtNum(unitPriceWan, 2)} 萬/坪` : '未填坪數';
-      document.getElementById('hero-stat-ratio').textContent = heroRatioStat;
-      document.getElementById('hero-stat-luxury').textContent = isLuxuryTriggered ? `達${threshold.label}豪宅門檻` : '非豪宅標準';
-
       // Update LINE Report Text
-      const reportText = generateLineReportText({
-        heroBadgeText,
-        salePriceWan,
-        totalPing,
-        parkingPriceWan,
-        parkingPing,
-        netPriceWan,
-        netPing,
-        unitPriceWan,
-        threshold,
-        isLuxuryTriggered,
-        profitWan,
-        estimatedTaxWan,
-        heroPrimaryLabel,
-        heroSecondaryLabel,
-        heroFormulaDetail
-      });
-      document.getElementById('line-report-textarea').textContent = reportText;
-    }
-
-    // Generate Formatted LINE Client Report
-    function generateLineReportText(data) {
-      const unitSplitLine = data.netPing > 0
-        ? `▪ 權狀總坪：${fmtNum(data.totalPing, 2)} 坪（車位 ${fmtNum(data.parkingPing, 2)} 坪 / ${fmtNum(data.parkingPriceWan, 1)} 萬）\n▪ 拆算單坪：${fmtNum(data.unitPriceWan, 2)} 萬/坪（不含車位淨價 ${fmtNum(data.netPriceWan, 1)} 萬 ÷ ${fmtNum(data.netPing, 2)} 坪）`
-        : `▪ 權狀坪數：未輸入細項拆算`;
-
-      return [
+      const lineText = [
         `━━━━━━━━━━━━━━━`,
-        `🏛️ 台南看好房｜售屋稅金與單價試算報告`,
+        `🏛️ 永慶銘星｜售屋稅金試算報告`,
         `━━━━━━━━━━━━━━━`,
-        `【適用制度】${data.heroBadgeText}`,
-        `【成交總價】${fmtNum(data.salePriceWan, 1)} 萬元（NT$ ${fmtInt(data.salePriceWan * 10000)} 元）`,
-        unitSplitLine,
-        `▪ 豪宅檢核：${data.isLuxuryTriggered ? `已達${data.threshold.label}豪宅認定門檻` : `未達${data.threshold.label}豪宅門檻（非豪宅）`}`,
+        `【適用制度】${heroBadgeText}`,
+        `【算式基準】${heroNoteRight}`,
         `───────────────`,
         `📊 【核心試算結果】`,
-        `▸ ${data.heroPrimaryLabel}：`,
-        `   ${fmtNum(data.profitWan, 2)} 萬元（NT$ ${fmtInt(data.profitWan * 10000)} 元）`,
-        `▸ ${data.heroSecondaryLabel}：`,
-        `   ${fmtNum(data.estimatedTaxWan, 2)} 萬元（NT$ ${fmtInt(data.estimatedTaxWan * 10000)} 元）`,
+        `▸ ${heroPrimaryLabel}：`,
+        `   ${fmtNum(profitWan, 2)} 萬元（NT$ ${fmtInt(profitWan * 10000)} 元）`,
+        `▸ ${heroSecondaryLabel}：`,
+        `   ${fmtNum(estimatedTaxWan, 2)} 萬元（NT$ ${fmtInt(estimatedTaxWan * 10000)} 元）`,
         `───────────────`,
         `📝 【算式明細】`,
-        `${data.heroFormulaDetail}`,
+        `${heroFormulaDetail}`,
         `━━━━━━━━━━━━━━━`,
-        `🏡 台南看好房｜張英泓 0962-062-425`,
+        `🏡 永慶銘星｜張英泓 0962-062-425`,
         `（本試算僅供稅務規劃參考，實際稅額以稅捐機關核定為準）`
       ].join('\n');
+
+      document.getElementById('line-report-textarea').textContent = lineText;
     }
 
-    // Copy to Clipboard (Iframe safe via execCommand fallback)
     function copyLineReport() {
       const text = document.getElementById('line-report-textarea').textContent;
       const tempArea = document.createElement('textarea');
@@ -1752,8 +2024,7 @@
     }
 
     function toggleLinePreview() {
-      const box = document.getElementById('line-preview-box');
-      box.classList.toggle('hidden');
+      document.getElementById('line-preview-box').classList.toggle('hidden');
     }
 
     function showToast(msg) {
@@ -1768,44 +2039,7 @@
       }, 2800);
     }
 
-    // Quick Demo Presets
-    function loadPreset(presetKey) {
-      if (presetKey === 'standard_normal') {
-        document.getElementById('input-sale-price').value = 2580;
-        document.getElementById('select-region').value = 'tainan_major';
-        document.getElementById('input-total-ping').value = 60;
-        document.getElementById('input-parking-price').value = 180;
-        document.getElementById('input-parking-ping').value = 10;
-        document.getElementById('input-house-assessed').value = 80;
-        document.getElementById('input-land-assessed').value = 320;
-        setRegime('standard');
-        showToast('已載入範例：101/8/1 以前取得（臺南非豪宅標準認定）');
-      } else if (presetKey === 'standard_luxury') {
-        document.getElementById('input-sale-price').value = 3500;
-        document.getElementById('select-region').value = 'tainan_major';
-        document.getElementById('input-total-ping').value = 68;
-        document.getElementById('input-parking-price').value = 250;
-        document.getElementById('input-parking-ping').value = 10;
-        document.getElementById('input-house-assessed').value = 150;
-        document.getElementById('input-land-assessed').value = 450;
-        setRegime('standard');
-        showToast('已載入範例：101/8/1 以前取得（總價突破 3,000 萬舊制豪宅）');
-      } else if (presetKey === 'new_self') {
-        document.getElementById('input-sale-price').value = 2480;
-        document.getElementById('select-region').value = 'tainan_major';
-        document.getElementById('input-total-ping').value = 52;
-        document.getElementById('input-parking-price').value = 180;
-        document.getElementById('input-parking-ping').value = 9;
-        document.getElementById('input-acquisition-cost').value = 1650;
-        setExpenseMode('deemed');
-        document.getElementById('input-land-increment').value = 35;
-        setRegime('new');
-        setHoldingRate('self10');
-        showToast('已載入範例：105/1/1 以後取得（房地合一自住滿6年優惠）');
-      }
-    }
-
-    // --- Pure Reference Modal Controls (Does NOT modify any calculator state) ---
+    // --- Reference Modal Controls ---
     function openReferenceModal(initialTab = 'timeline') {
       const backdrop = document.getElementById('reference-modal-backdrop');
       backdrop.classList.remove('hidden');
@@ -1836,19 +2070,23 @@
       });
     }
 
-    // Close modal on Escape key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeReferenceModal();
+        closeLuxuryVerdictModal();
       }
     });
 
-    // Initialize Application on Load
+    // Initialize Wizard on Load
     window.addEventListener('DOMContentLoaded', () => {
-      updateRegimeUI();
-      setHoldingRate('20');
+      selectRegimeOnStep1('standard');
+      setStandardCategory('normal');
+      setSideGlossary('2b', 'cost');
+      setSideGlossary('2c', 'cost');
       setIncomeBracket(20);
-      handleLiveInput();
+      setHoldingRate('20');
+      updateStep2ALive();
+      calculateAll();
     });
   </script>
 </body>
