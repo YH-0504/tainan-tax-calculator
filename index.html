@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>永慶銘星｜不動產售屋稅務與單價拆算系統 — 張英泓</title>
+  <title>永慶銘星｜不動產售屋稅務系統 — 張英泓</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Cinzel, Playfair Display, Noto Serif TC, Inter, Montserrat, Noto Sans TC -->
@@ -430,14 +430,13 @@
             <!-- 1. 房屋評定現值 -->
             <div>
               <div class="flex items-center justify-between mb-1">
-                <label class="text-[11px] font-medium text-obsidian">1. 房屋評定現值（萬元）</label>
-                <span id="s3a-normal-house-ntd" class="text-[10px] font-num text-mist">請輸入稅單現值</span>
+                <label class="text-[11px] font-medium text-obsidian">1. 房屋評定現值</label>
+                <span id="s3a-normal-house-ntd" class="text-[10px] font-num text-mist">請直接輸入現值數字</span>
               </div>
               <div class="luxury-input-wrap rounded-md px-3 h-9 flex items-center justify-between">
-                <input type="number" inputmode="decimal" id="s3a-normal-house" value="" placeholder="請輸入房屋評定現值" step="any" min="0"
+                <input type="number" inputmode="decimal" id="s3a-normal-house" value="" placeholder="例: 123456" step="any" min="0"
                   oninput="syncField('houseAssessed', this.value)"
                   class="w-full bg-transparent text-sm font-num font-semibold text-obsidian focus:outline-none" />
-                <span class="text-[11px] text-mist ml-2 shrink-0">萬元</span>
               </div>
             </div>
 
@@ -568,10 +567,9 @@
             <div>
               <label class="text-[11px] font-medium text-obsidian block mb-0.5">2. 房屋評定現值</label>
               <div class="luxury-input-wrap rounded-md px-2.5 h-8 flex items-center justify-between">
-                <input type="number" inputmode="decimal" id="s3a-lux-house" value="" placeholder="輸入房屋現值" step="any" min="0"
+                <input type="number" inputmode="decimal" id="s3a-lux-house" value="" placeholder="例: 123456" step="any" min="0"
                   oninput="syncField('houseAssessed', this.value)"
                   class="w-full bg-transparent text-sm font-num font-semibold text-obsidian focus:outline-none" />
-                <span class="text-[10px] text-mist ml-1">萬</span>
               </div>
             </div>
 
@@ -579,10 +577,9 @@
             <div>
               <label class="text-[11px] font-medium text-obsidian block mb-0.5">3. 土地公告現值</label>
               <div class="luxury-input-wrap rounded-md px-2.5 h-8 flex items-center justify-between">
-                <input type="number" inputmode="decimal" id="s3a-lux-land" value="" placeholder="輸入公告現值" step="any" min="0"
+                <input type="number" inputmode="decimal" id="s3a-lux-land" value="" placeholder="例: 5911" step="any" min="0"
                   oninput="syncField('landAssessed', this.value)"
                   class="w-full bg-transparent text-sm font-num font-semibold text-obsidian focus:outline-none" />
-                <span class="text-[10px] text-mist ml-1">萬</span>
               </div>
             </div>
 
@@ -719,10 +716,9 @@
           <div>
             <label class="text-[11px] font-medium text-obsidian block mb-0.5">4. 房屋評定現值</label>
             <div class="luxury-input-wrap rounded-md px-2.5 h-8 flex items-center justify-between">
-              <input type="number" inputmode="decimal" id="s2b-house" value="" placeholder="輸入房屋現值" step="any" min="0"
+              <input type="number" inputmode="decimal" id="s2b-house" value="" placeholder="例: 123456" step="any" min="0"
                 oninput="syncField('houseAssessed', this.value)"
                 class="w-full bg-transparent text-sm font-num font-semibold text-obsidian focus:outline-none" />
-              <span class="text-[10px] text-mist ml-1">萬</span>
             </div>
           </div>
 
@@ -730,10 +726,9 @@
           <div>
             <label class="text-[11px] font-medium text-obsidian block mb-0.5">5. 土地公告現值</label>
             <div class="luxury-input-wrap rounded-md px-2.5 h-8 flex items-center justify-between">
-              <input type="number" inputmode="decimal" id="s2b-land" value="" placeholder="輸入公告現值" step="any" min="0"
+              <input type="number" inputmode="decimal" id="s2b-land" value="" placeholder="例: 5911" step="any" min="0"
                 oninput="syncField('landAssessed', this.value)"
                 class="w-full bg-transparent text-sm font-num font-semibold text-obsidian focus:outline-none" />
-              <span class="text-[10px] text-mist ml-1">萬</span>
             </div>
           </div>
 
@@ -885,10 +880,9 @@
                 <div>
                   <label class="text-[10px] font-medium text-obsidian block mb-0.5">土地公告現值</label>
                   <div class="luxury-input-wrap rounded-md px-2 h-8 flex items-center justify-between bg-white">
-                    <input type="number" inputmode="decimal" id="s2c-cur-land" value="" placeholder="當期現值" step="any" min="0"
+                    <input type="number" inputmode="decimal" id="s2c-cur-land" value="" placeholder="例: 5911" step="any" min="0"
                       oninput="calculateAll()"
                       class="w-full bg-transparent text-xs font-num font-semibold text-obsidian focus:outline-none" />
-                    <span class="text-[9px] text-mist ml-0.5">萬</span>
                   </div>
                 </div>
 
@@ -896,10 +890,9 @@
                 <div>
                   <label class="text-[10px] font-medium text-obsidian block mb-0.5">前次公告現值</label>
                   <div class="luxury-input-wrap rounded-md px-2 h-8 flex items-center justify-between bg-white">
-                    <input type="number" inputmode="decimal" id="s2c-prev-land" value="" placeholder="前次現值" step="any" min="0"
+                    <input type="number" inputmode="decimal" id="s2c-prev-land" value="" placeholder="例: 4200" step="any" min="0"
                       oninput="calculateAll()"
                       class="w-full bg-transparent text-xs font-num font-semibold text-obsidian focus:outline-none" />
-                    <span class="text-[9px] text-mist ml-0.5">萬</span>
                   </div>
                 </div>
 
@@ -1725,19 +1718,19 @@
 
     // --- Master Calculation Engine ---
     function calculateAll() {
-      const houseWan = state.houseAssessedWan;
-      const landUnitWan = state.landAssessedWan;
+      const houseVal = state.houseAssessedWan; // 直接帶入原始輸入數值 (例: 123456)
+      const landUnitVal = state.landAssessedWan; // 直接帶入原始輸入數值 (例: 5911)
       const landArea = state.landAreaSqm;
       const shareRatio = getShareRatio();
       const shareText = getShareText();
 
-      // 訂正後房地比公式：房屋評定現值 ÷ (房屋評定現值 ＋ 土地公告現值 × 土地面積(㎡) × 權利範圍)
-      const effectiveLandTotal = landUnitWan * landArea * shareRatio;
-      const totalAssessed = houseWan + effectiveLandTotal;
-      const ratio = totalAssessed > 0 ? (houseWan / totalAssessed) : 0;
+      // 房地比公式：房屋評定現值 ÷ (房屋評定現值 ＋ 土地公告現值 × 土地面積(㎡) × 權利範圍)
+      const effectiveLandTotal = landUnitVal * landArea * shareRatio;
+      const totalAssessed = houseVal + effectiveLandTotal;
+      const ratio = totalAssessed > 0 ? (houseVal / totalAssessed) : 0;
 
       // Update UI hints
-      document.getElementById('s3a-normal-house-ntd').textContent = houseWan > 0 ? `NT$ ${fmtInt(houseWan * 10000)} 元` : '請輸入稅單現值';
+      document.getElementById('s3a-normal-house-ntd').textContent = houseVal > 0 ? `已輸入：${fmtInt(houseVal)}` : '請直接輸入現值數字';
       document.getElementById('s3a-lux-share-display').textContent = `持分：${shareText} (${fmtNum(shareRatio * 100, 2)}%)`;
       document.getElementById('s3a-lux-ratio').textContent = state.standardCategory === 'luxury' ? `(房地比 ${fmtNum(ratio * 100, 2)}%)` : '';
 
@@ -1759,12 +1752,16 @@
 
         if (state.standardCategory === 'normal') {
           const stdRate = Math.max(0, parseFloat(document.getElementById('s3a-standard-rate').value) || 0);
-          profitWan = houseWan * (stdRate / 100);
-          estimatedTaxWan = profitWan * (state.incomeBracket / 100);
+          // 房屋評定現值直接乘上核定稅率 (例: 123456 * 28% = 34,568 元 = 3.46 萬)
+          const rawProfit = houseVal * (stdRate / 100);
+          const rawTax = rawProfit * (state.incomeBracket / 100);
+          profitWan = rawProfit / 10000;
+          estimatedTaxWan = rawTax / 10000;
 
           heroBadgeText = '101/8/1 以前｜標準認定 (非豪宅)';
           heroNoteRight = `${state.selectedDistrictName}・稅率 ${stdRate}%`;
-          heroFormulaDetail = `房屋評定現值 ${fmtNum(houseWan, 2)} 萬 × 核定稅率 ${stdRate}% ＝ 獲利 ${fmtNum(profitWan, 2)} 萬\n併入綜所稅 (${state.incomeBracket}% 試算)：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 稅金 ${fmtNum(estimatedTaxWan, 2)} 萬`;
+          heroFormulaDetail = `房屋評定現值 ${fmtInt(houseVal)} × 核定稅率 ${stdRate}% ＝ 獲利 ${fmtInt(rawProfit)} 元（${fmtNum(profitWan, 2)} 萬）\n併入綜所稅 (${state.incomeBracket}% 試算)：${fmtInt(rawProfit)} × ${state.incomeBracket}% ＝ 稅金 ${fmtInt(rawTax)} 元（${fmtNum(estimatedTaxWan, 2)} 萬）`;
+          document.getElementById('s3a-side-profit').textContent = `${fmtInt(rawProfit)} 元（${fmtNum(profitWan, 2)} 萬）`;
         } else {
           const luxPrice = Math.max(0, parseFloat(document.getElementById('s3a-lux-price').value) || 0);
           profitWan = luxPrice * ratio * 0.20;
@@ -1772,10 +1769,9 @@
 
           heroBadgeText = '101/8/1 以前｜標準認定 (豪宅)';
           heroNoteRight = `房地比 ${fmtNum(ratio * 100, 2)}%｜面積 ${fmtNum(landArea, 2)}㎡`;
-          heroFormulaDetail = `房地比：${fmtNum(houseWan, 2)} ÷ (${fmtNum(houseWan, 2)} ＋ ${fmtNum(landUnitWan, 2)} × ${fmtNum(landArea, 2)}㎡ × ${shareText}) ＝ ${fmtNum(ratio * 100, 2)}%\n獲利：售價 ${fmtNum(luxPrice, 1)} 萬 × 房地比 ${fmtNum(ratio * 100, 2)}% × 20% ＝ ${fmtNum(profitWan, 2)} 萬\n綜所稅 (${state.incomeBracket}%)：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 稅金 ${fmtNum(estimatedTaxWan, 2)} 萬`;
+          heroFormulaDetail = `房地比：${fmtInt(houseVal)} ÷ (${fmtInt(houseVal)} ＋ ${fmtInt(landUnitVal)} × ${fmtNum(landArea, 2)}㎡ × ${shareText}) ＝ ${fmtNum(ratio * 100, 2)}%\n獲利：售價 ${fmtNum(luxPrice, 1)} 萬 × 房地比 ${fmtNum(ratio * 100, 2)}% × 20% ＝ ${fmtNum(profitWan, 2)} 萬\n綜所稅 (${state.incomeBracket}%)：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 稅金 ${fmtNum(estimatedTaxWan, 2)} 萬`;
+          document.getElementById('s3a-side-profit').textContent = `${fmtNum(profitWan, 2)} 萬元`;
         }
-
-        document.getElementById('s3a-side-profit').textContent = `${fmtNum(profitWan, 2)} 萬元`;
 
       } else if (state.regime === 'actual') {
         document.getElementById('final-old-tax-selector').classList.remove('hidden');
@@ -1797,7 +1793,7 @@
         heroPrimaryLabel = '財產交易所得 (獲利)';
         heroSecondaryLabel = `預估綜所稅金 (${state.incomeBracket}%)`;
         heroNoteRight = `房地比 ${fmtNum(ratio * 100, 2)}%｜面積 ${fmtNum(landArea, 2)}㎡`;
-        heroFormulaDetail = `房地比：${fmtNum(houseWan, 2)} ÷ (${fmtNum(houseWan, 2)} ＋ ${fmtNum(landUnitWan, 2)} × ${fmtNum(landArea, 2)}㎡ × ${shareText}) ＝ ${fmtNum(ratio * 100, 2)}%\n獲利：(售價 ${fmtNum(price, 1)} － 成本 ${fmtNum(cost, 1)} － 費用 ${fmtNum(exp, 2)}) × 房地比 ${fmtNum(ratio * 100, 2)}% ＝ ${fmtNum(profitWan, 2)} 萬\n綜所稅 (${state.incomeBracket}%)：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 稅金 ${fmtNum(estimatedTaxWan, 2)} 萬`;
+        heroFormulaDetail = `房地比：${fmtInt(houseVal)} ÷ (${fmtInt(houseVal)} ＋ ${fmtInt(landUnitVal)} × ${fmtNum(landArea, 2)}㎡ × ${shareText}) ＝ ${fmtNum(ratio * 100, 2)}%\n獲利：(售價 ${fmtNum(price, 1)} － 成本 ${fmtNum(cost, 1)} － 費用 ${fmtNum(exp, 2)}) × 房地比 ${fmtNum(ratio * 100, 2)}% ＝ ${fmtNum(profitWan, 2)} 萬\n綜所稅 (${state.incomeBracket}%)：${fmtNum(profitWan, 2)} 萬 × ${state.incomeBracket}% ＝ 稅金 ${fmtNum(estimatedTaxWan, 2)} 萬`;
 
       } else {
         document.getElementById('final-old-tax-selector').classList.add('hidden');
@@ -1807,19 +1803,21 @@
         const cost = Math.max(0, parseFloat(document.getElementById('s2c-cost').value) || 0);
         const exp = Math.max(0, parseFloat(document.getElementById('s2c-expense').value) || 0);
 
-        // 房地合一稅 2.0 土地漲價總數額 = (土地公告現值 - 前次公告現值) * 土地面積(㎡) * 權利範圍
-        let landInc = 0;
-        let landIncFormulaNote = '未填列 (0 萬)';
+        // 房地合一稅 2.0 土地漲價總數額 = (土地公告現值 - 前次公告現值) * 土地面積(㎡) * 權利範圍 (直接帶入數字計算)
+        let landIncRaw = 0;
+        let landIncWan = 0;
+        let landIncFormulaNote = '未填列 (0)';
         if (state.useLandIncSubform) {
           const curLand = Math.max(0, parseFloat(document.getElementById('s2c-cur-land').value) || 0);
           const prevLand = Math.max(0, parseFloat(document.getElementById('s2c-prev-land').value) || 0);
           const areaSqm = Math.max(0, parseFloat(document.getElementById('s2c-land-area').value) || 0);
-          landInc = Math.max(0, (curLand - prevLand) * areaSqm * shareRatio);
-          landIncFormulaNote = `(${fmtNum(curLand, 2)}－${fmtNum(prevLand, 2)})×${fmtNum(areaSqm, 2)}㎡×${shareText} ＝ ${fmtNum(landInc, 2)}萬`;
+          landIncRaw = Math.max(0, (curLand - prevLand) * areaSqm * shareRatio);
+          landIncWan = landIncRaw / 10000;
+          landIncFormulaNote = `(${fmtInt(curLand)}－${fmtInt(prevLand)})×${fmtNum(areaSqm, 2)}㎡×${shareText} ＝ ${fmtInt(landIncRaw)} 元（${fmtNum(landIncWan, 2)} 萬）`;
         }
-        document.getElementById('s2c-calc-landinc').textContent = `${fmtNum(landInc, 2)} 萬元`;
+        document.getElementById('s2c-calc-landinc').textContent = `${fmtInt(landIncRaw)} 元（${fmtNum(landIncWan, 2)} 萬）`;
 
-        profitWan = Math.max(0, price - cost - exp - landInc);
+        profitWan = Math.max(0, price - cost - exp - landIncWan);
         document.getElementById('s2c-live-profit').textContent = `${fmtNum(profitWan, 2)} 萬元`;
 
         heroBadgeText = '105/1/1 以後｜房地合一稅 2.0';
@@ -1831,13 +1829,13 @@
           estimatedTaxWan = taxableAfter400 * 0.10;
           heroSecondaryLabel = '應納稅金 (自住免稅400萬+10%)';
           heroNoteRight = '自住滿6年優惠 (免稅400萬・10%)';
-          heroFormulaDetail = `土地漲價總數額：${landIncFormulaNote}\n獲利：售價 ${fmtNum(price, 1)} － 成本 ${fmtNum(cost, 1)} － 費用 ${fmtNum(exp, 2)} － 土增總數額 ${fmtNum(landInc, 2)} ＝ ${fmtNum(profitWan, 2)} 萬\n稅金：(獲利 ${fmtNum(profitWan, 2)} 萬 － 免稅額 400 萬) × 10% ＝ ${fmtNum(estimatedTaxWan, 2)} 萬`;
+          heroFormulaDetail = `土地漲價總數額：${landIncFormulaNote}\n獲利：售價 ${fmtNum(price, 1)} － 成本 ${fmtNum(cost, 1)} － 費用 ${fmtNum(exp, 2)} － 土增總數額 ${fmtNum(landIncWan, 2)} 萬 ＝ ${fmtNum(profitWan, 2)} 萬\n稅金：(獲利 ${fmtNum(profitWan, 2)} 萬 － 免稅額 400 萬) × 10% ＝ ${fmtNum(estimatedTaxWan, 2)} 萬`;
         } else {
           const rNum = parseFloat(state.holdingRateKey) || 20;
           estimatedTaxWan = profitWan * (rNum / 100);
           heroSecondaryLabel = `應納稅金 (稅率 ${rNum}%)`;
           heroNoteRight = `持有期間稅率 ${rNum}%`;
-          heroFormulaDetail = `土地漲價總數額：${landIncFormulaNote}\n獲利：售價 ${fmtNum(price, 1)} － 成本 ${fmtNum(cost, 1)} － 費用 ${fmtNum(exp, 2)} － 土增總數額 ${fmtNum(landInc, 2)} ＝ ${fmtNum(profitWan, 2)} 萬\n稅金：獲利 ${fmtNum(profitWan, 2)} 萬 × 稅率 ${rNum}% ＝ ${fmtNum(estimatedTaxWan, 2)} 萬`;
+          heroFormulaDetail = `土地漲價總數額：${landIncFormulaNote}\n獲利：售價 ${fmtNum(price, 1)} － 成本 ${fmtNum(cost, 1)} － 費用 ${fmtNum(exp, 2)} － 土增總數額 ${fmtNum(landIncWan, 2)} 萬 ＝ ${fmtNum(profitWan, 2)} 萬\n稅金：獲利 ${fmtNum(profitWan, 2)} 萬 × 稅率 ${rNum}% ＝ ${fmtNum(estimatedTaxWan, 2)} 萬`;
         }
       }
 
